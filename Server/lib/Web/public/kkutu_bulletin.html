@@ -25,9 +25,8 @@ html, body{
 }
 
 .notice-container{
-	height: 100%;
-	padding: 15px;
-	box-sizing: border-box;
+	margin-top: 60px;
+	height: calc(100vh - 60px);
 	overflow-y: auto;
 }
 
@@ -87,9 +86,18 @@ html, body{
 	text-decoration: underline;
 }
 .notice-tabs{
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+
+	z-index: 1000;
+
 	display: flex;
 	padding: 12px 12px 0;
 	gap: 4px;
+
+	background: #f5f6fa;
 }
 
 .notice-tabs button{
@@ -323,6 +331,13 @@ function buildToc(){
 </div>
 
 <div id="devlog" class="notice-container tab-content" style="display:none;">
+
+	<div class="notice-card">
+		<h3 class="notice-title">2026년 6월 7일</h3>
+		<ul>
+			<li>뭐많이했다재밌다</li>
+		</ul>
+	</div>
 
 	<div class="notice-card">
 		<h3 class="notice-title">2026년 5월 31일</h3>
