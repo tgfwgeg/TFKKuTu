@@ -1,0 +1,14 @@
+Client/node_modules
+Server/run.bat
+Server/node_modules
+Server/lib/node_modules
+Server/lib/Web/public/js/**
+!Server/lib/Web/public/js/jquery.js
+Server/lib/sub/auth.json
+Server/lib/sub/global.json
+.vscode
+Server/ktma.py
+Server/config.txt
+Server/끄투서버매니저.desktop
+Server/lib/KKUTU_ERROR.log
+db.sql

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+Mono+TC&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Myeongjo:800" rel="stylesheet">
+<meta charset="utf-8">
+<title>끄투 공지사항</title>
+
+<style>
+html, body{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-family: 
+		"LXGW WenKai Mono TC",
+		"Pretendard",
+		"Noto Sans KR",
+		"Malgun Gothic",
+		sans-serif;
+	background: #f5f6fa;
+}
+
+.notice-container{
+	height: 100%;
+	padding: 15px;
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+
+/* 스크롤바 */
+.notice-container::-webkit-scrollbar{
+	width: 8px;
+}
+.notice-container::-webkit-scrollbar-thumb{
+	background: #b8b8b8;
+	border-radius: 10px;
+}
+.notice-container::-webkit-scrollbar-thumb:hover{
+	background: #999;
+}
+
+/* 카드 */
+.notice-card{
+	font-family: 'Nanum Myeongjo', serif;
+	background: #fff;
+	border: 1px solid #e5e5e5;
+	border-radius: 12px;
+	padding: 15px 18px;
+	margin-bottom: 12px;
+	transition: all 0.2s ease;
+	box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+/* 마우스 올렸을 때 */
+.notice-card:hover{
+	transform: translateY(-4px);
+	box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+	border-color: #c8d6ff;
+}
+
+.notice-title{
+	margin: 0 0 10px;
+	font-size: 18px;
+	color: #2f77d9;
+}
+
+.notice-card ul{
+	margin: 0;
+	padding-left: 18px;
+}
+
+.notice-card li{
+	font-size: 13px;
+	line-height: 1.6;
+}
+
+.notice-card a{
+	color: #2f77d9;
+	text-decoration: none;
+}
+
+.notice-card a:hover{
+	text-decoration: underline;
+}
+.notice-tabs{
+	display: flex;
+	padding: 12px 12px 0;
+	gap: 4px;
+}
+
+.notice-tabs button{
+	border: none;
+	background: #e7e7e7;
+	color: #555;
+	padding: 12px 20px;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 600;
+	border-radius: 10px 10px 0 0;
+
+	transition: all .25s ease;
+}
+
+.notice-tabs button:hover{
+	background: #444;
+	color: #eee;
+	transform: translateY(-2px);
+}
+
+.notice-tabs button.active{
+	background: #111;
+	color: #fff;
+}
+.toc-btn{
+	margin-left:auto;
+	width:42px;
+	padding:12px 0 !important;
+	font-size:18px;
+	font-weight:bold;
+}
+
+.toc-menu{
+	position:fixed;
+	top:60px;
+	right:10px;
+
+	width:250px;
+	max-height:400px;
+
+	overflow-y:auto;
+
+	background:white;
+	border-radius:12px;
+
+	box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+	display:none;
+	z-index:9999;
+}
+
+.toc-menu.show{
+	display:block;
+}
+
+.toc-item{
+	padding:12px 15px;
+	cursor:pointer;
+	border-bottom:1px solid #eee;
+
+	transition:.2s;
+}
+
+.toc-item:hover{
+	background:#f5f5f5;
+}
+</style>
+</head>
+
+<body>
+	<div class="notice-tabs">
+		<button class="active" onclick="openTab('patch', this)">패치</button>
+		<button onclick="openTab('etc', this)">이딴게있음</button>
+		<button onclick="openTab('todo', this)">고칠 것</button>
+		<button onclick="openTab('devlog', this)">개발자 일기장</button>
+
+		<button class="toc-btn" onclick="toggleToc()">☰</button>
+	</div>
+
+	<div id="tocMenu" class="toc-menu"></div>
+<div id="patch" class="notice-container tab-content active">
+
+	<div class="notice-card">
+		<h3 class="notice-title">0.0.5 [260607]</h3>
+		<ul>
+			<li>볼륨조절구현성공</li>
+			<li>kkutu_bulletin.html손보는거미루다가이제함</li>
+		</ul>
+	</div>
+
+	<div class="notice-card">
+		<h3 class="notice-title">0.0.4 [260606]</h3>
+		<ul>
+			<li>구글캡챠씀손님한테만씀</li>
+		</ul>
+	</div>
+
+	<div class="notice-card">
+		<h3 class="notice-title">0.0.3 [260605]</h3>
+		<ul>
+			<li>grunt버리고Webpack씀</li>
+			<li>볼륨조절구현했느데실패</li>
+			<li>리눅스로돌리는게너무불편해서서버여는프로그램만듦</li>
+			<li>WAF씀</li>
+		</ul>
+	</div>
+
+	<div class="notice-card">
+		<h3 class="notice-title">0.0.2 [260601]</h3>
+		<ul>
+			<li>서버를손봄</li>
+			<li>http-->https</li>
+		</ul>
+	</div>
+
+	<div class="notice-card">
+		<h3 class="notice-title">0.0.1 [260531]</h3>
+		<ul>
+			<li>티에프끄투 파일이 2번째싹다날아가서코드다시작성함,</li>
+			<li>닉네임버녀경구현함,.</li>
+		</ul>
+	</div>
+
+	<div class="notice-card">
+		<h3 class="notice-title">0.0.0 [171218]</h3>
+		<ul>
+			<li>[by <a href="https://github.com/small-sunshines" target="_blank">small-sunshines</a>] 끄투 서버가 보안 연결을 지원하도록 설정했습니다.</li>
+			<li>[by <a href="https://github.com/horyu1234" target="_blank">horyu1234</a>] 자동 입력 방지를 위한 시스템을 도입했습니다.</li>
+		</ul>
+	</div>
+
+	<div class="notice-card">
+		<h3 class="notice-title">-0.0.1 [170214]</h3>
+		<ul>
+			<li>글자로 놀자! 끄투 온라인 프리 서버가 공개되었습니다.</li>
+		</ul>
+	</div>
+
+</div>
+<script>
+function openTab(id, btn){
+
+	document.querySelectorAll('.tab-content').forEach(tab=>{
+		tab.style.display='none';
+	});
+
+	document.querySelectorAll('.notice-tabs button').forEach(button=>{
+		button.classList.remove('active');
+	});
+
+	document.getElementById(id).style.display='block';
+
+	if(btn.classList.contains('toc-btn')) return;
+
+	btn.classList.add('active');
+
+	const menu=document.getElementById('tocMenu');
+	menu.classList.remove('show');
+}
+
+function toggleToc(){
+
+	const menu=document.getElementById('tocMenu');
+
+	if(menu.classList.contains('show')){
+		menu.classList.remove('show');
+		return;
+	}
+
+	buildToc();
+	menu.classList.add('show');
+}
+
+function buildToc(){
+
+	const menu=document.getElementById('tocMenu');
+
+	menu.innerHTML='';
+
+	const activeTab=[
+		...document.querySelectorAll('.tab-content')
+	].find(tab=>tab.style.display!=='none');
+
+	if(!activeTab) return;
+
+	activeTab.querySelectorAll('.notice-card').forEach(card=>{
+
+		const title=
+			card.querySelector('.notice-title').innerText;
+
+		const item=document.createElement('div');
+
+		item.className='toc-item';
+		item.innerText=title;
+
+		item.onclick=()=>{
+
+			card.scrollIntoView({
+				behavior:'smooth',
+				block:'start'
+			});
+
+			menu.classList.remove('show');
+		};
+
+		menu.appendChild(item);
+	});
+}
+</script>
+<div id="etc" class="notice-container tab-content" style="display:none;">
+
+	<div class="notice-card">
+		<h3 class="notice-title">이딴게있음</h3>
+		<ul>
+			<li>아직이딴거없음</li>
+		</ul>
+	</div>
+
+</div>
+
+<div id="todo" class="notice-container tab-content" style="display:none;">
+
+	<div class="notice-card">
+		<h3 class="notice-title">고칠 것</h3>
+		<ul>
+			<li>ㅇ나고쳐</li>
+		</ul>
+	</div>
+
+</div>
+
+<div id="devlog" class="notice-container tab-content" style="display:none;">
+
+	<div class="notice-card">
+		<h3 class="notice-title">2026년 5월 31일</h3>
+		<ul>
+			<li>내티에프끄투파일이2번째날아갔다씨발개좆같다ㅗㅗㅗㅗㅗㅗㅗㅗㅗㅗㅗㅗㅗㅗ</li>
+		</ul>
+	</div>
+</div>
+</body>
+</html>
