@@ -55,8 +55,6 @@
 .x-indigo_name{ color: #1C18B9; }
 .x-purple_name{ color: #A939CC; }
 .x-pink_name{ color: #F15F9A; } */
-
-/* ===== GM 닉네임 (거의 모든 경우 커버) ===== */
 .x-gm .ellipse,
 .chat-head.ellipse.x-gm {
 
@@ -73,9 +71,6 @@
 
     animation: rainbowMove 3s linear infinite;
 }
-
-
-/* ===== 앞 칭호 ===== */
 .x-gm .ellipse::before,
 .chat-head.ellipse.x-gm::before {
 
@@ -91,9 +86,6 @@
 
     animation: rainbowMove 3s linear infinite;
 }
-
-
-/* ===== 애니메이션 ===== */
 @keyframes rainbowMove {
     0% { background-position: 0% 50%; }
     100% { background-position: 300% 50%; }
