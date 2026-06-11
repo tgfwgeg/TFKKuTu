@@ -1,19 +1,22 @@
 //-
 	Rule the words! KKuTu Online
 	Copyright (C) 2017 JJoriping(op@jjo.kr)
-
+	
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
 	the Free Software Foundation, either version 3 of the License, or
 	(at your option) any later version.
-
+	
 	This program is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 	GNU General Public License for more details.
-
+	
 	You should have received a copy of the GNU General Public License
 	along with this program. If not, see <http://www.gnu.org/licenses/>.
+//-
+	볕뉘 수정사항:
+	* Login 을 Passport 로 수행하기 위한 수정
 -
 	const MENU = [
 		{ key: 'HOME', href: "http://jjo.kr/" },
@@ -30,39 +33,42 @@
 		{ key: 'GALLERY', href: "http://jjo.kr/gallery" }
 	];
 	const PUBLIC = locals.published;
-
+	
 	var DATA = locals.data || {};
 	var LANG = locals.locale;
 	var SESSION = locals.session;
 
 	function L(id){
 		var R = LANG[id] || "(L#"+id+")", i;
-
+		
 		R = R.toString();
 		for(i=1; arguments[i]; i++) R = R.replace(new RegExp("{V"+i+"}", 'g'), arguments[i]);
 		return R.replace(/FA\{[^\}]+\}/g, _L_Replace);
 	}
 	function _L_Replace(seq){ return "<i class='fa fa-"+seq.slice(3, seq.length-1)+"'></i>"; }
-
+	
 	function zeroPadding(num, len){ var s = num.toString(); return "000000000000000".slice(0, Math.max(0, len - s.length)) + s; }
 	function strcmp(s1, s2){ return (s1 == s2) ? 0 : ((s1 > s2) ? 1 : -1); }
 	Date.prototype.toYYYYMMDD = function(){
 		var i, res = [this.getFullYear(), this.getMonth() + 1, this.getDate()];
-
+		
 		for(i in res) res[i] = ((res[i] < 10) ? "0" : "") + res[i];
 		return res.join("").toString();
 	};
 
 mixin Menu()
 	div.Menu
-		div#menu-title(onclick='location.href = "/";', style='cursor: pointer;')
-			div#title-logo
-				//- 로고 이미지를 바꾸고 싶으시다면 아래의 이미지 경로를 수정하시거나 .../img/kkutu/logo.png 이미지를 변경해주세요.
-				img(src='/img/kkutu/logo.png' style='width: 40px; height: 40px;')
-			//- ko_KR.json의 TITLE_NAME을 본인의 끄투 서버 이름으로 수정해주세요.
-			div#title-name= L('TITLE_NAME')
-		//- 출처 표시입니다. 지우지 말아주세요.
-		div#menu-license(onclick='window.open("https://daldal.so/w/참나무/도토리디자인");')= '도토리 디자인'
+		- for(i in MENU)
+			- if(MENU[i].href)
+				button.menu-btn(id='menu-item-'+MENU[i].key, onclick='location.href = "'+MENU[i].href+'";')!= L(MENU[i].key)
+			- else if(MENU[i].sub)
+				div.menu-btn(id='menu-item-'+MENU[i].key)!= L(MENU[i].key)
+					div.menu-sub-separator
+					- for(j in MENU[i].sub)
+						div.menu-sub-btn(onclick='location.href = "'+MENU[i].sub[j].href+'";')!= L(MENU[i].sub[j].key)
+		div#quick-search
+			input#quick-search-tf(placeholder=L('QUICK_HOLDER'))
+			button#quick-search-btn!= L('QUICK_BTN')
 		div#account
 			span#profile= SESSION.profile ? JSON.stringify(SESSION.profile) : '{}'
 			div#account-info
@@ -92,7 +98,7 @@ mixin FA(id)
 
 mixin separator(len)
 	div(style="float: left; width: 100%; margin: "+len+"px 0px;")
-
+	
 mixin PageHead(min)
 	if !min
 		link(rel='stylesheet', href=(locals.mobile && !locals.as_pc) ? '/css/m_style.css' : '/css/style.css')
@@ -100,7 +106,7 @@ mixin PageHead(min)
 		link(rel='stylesheet', href='/css/expl.css')
 	script(type='text/javascript', src='/js/jquery.js')
 	script(type='text/javascript', src='/language/'+locals.page.replace("/", "_")+'/'+locals.lang)
-
+	
 	if PUBLIC && !SESSION.admin
 		//script(type='text/javascript', src='/js/google.js')
 	script(type='text/javascript', src='/js/global.min.js')
@@ -110,7 +116,7 @@ mixin PageHead(min)
 		block
 	link(rel='stylesheet', href='/css/in_'+locals.page.replace("/", "_")+'.css')
 	script(type='text/javascript', src='/js/in_'+locals.page.replace("/", "_")+'.min.js')
-
+	
 mixin SearchBox(arg1, arg2)
 	meta(name='description', content=L('meta_desc', arg1, arg2))
 	meta(name='keywords', content=L('meta_keys', arg1, arg2))
@@ -124,7 +130,7 @@ mixin Expl(text, width)
 			h5= text
 
 mixin Product(id)
-	div(class=id+'Box Product', style='display: ' + (id === 'AD' ? 'block' : 'none'))
+	div(class=id+'Box Product')
 		h5.product-title!= L(id)
 		div.product-body
 			if block
@@ -139,10 +145,10 @@ mixin GraphBar(c, min, val, max, bgc)
 mixin ChartBar(c, data)
 	-
 		var i, sum = 0, total = 100;
-
+		
 		for(i in data) sum += data[i].value;
 		data[data.length - 1].last = true;
-
+	
 	div(class='chart '+c)
 		- for(i in data)
 			- var r = data[i].last ? total : (data[i].value / sum * 100);
