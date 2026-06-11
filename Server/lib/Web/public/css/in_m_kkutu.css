@@ -61,10 +61,25 @@ equ{
 	background-color: #FFFFFF;
 	background-image: none;
 }
-#Top .menu-btn{
-	color: #111111;
-	background-color: #7CC4F8;
-	background-image: none;
+#Top .menu-btn {
+  float: left;
+  padding: 7px 5px 5px 5px;
+  border: none;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: 100px;
+  height: 18px;
+  font-size: 15px;
+  text-align: center;
+  color: #000000;
+  background-color: #FFFFFF;
+  transition: all 200ms ease;
+}
+
+#Top .menu-btn:hover {
+  cursor: pointer;
 }
 #Top .menu-sub-btn{ color: #222222; }
 #Bottom .bottom-text{ display: none; }
@@ -308,7 +323,7 @@ iframe{
 			.rooms-gaming .rooms-number{ border-color: #CC9999; }
 		.rooms-item:hover{ background-color: #F4F4F4; }
 			.rooms-gaming:hover{ background-color: #FFCCCC; }
-			.rooms-create:hover{ background-color: #F4F4F4; }
+			.rooms-create:hover{ background-color: #f5f5f5; }
 		.rooms-number{ padding-top: 16px; border-right: 1px solid #CCCCCC; margin-right: 4px; width: 49px; height: 46px; font-size: 24px; text-align: center; }
 		.rooms-title{ padding-top: 4px; width: calc(100% - 95px); height: 20px; font-size: 16px; font-weight: bold; }
 		.rooms-limit{ padding-top: 7px; width: 40px; height: 17px; text-align: center; }

@@ -55,13 +55,28 @@ equ{
 	z-index: 5;
 }
 #Top{
-	background-color: #7CC4F8;
+	background-color: #FFFFFF;
 	background-image: none;
 }
-#Top .menu-btn{
-	color: #111111;
-	background-color: #7CC4F8;
-	background-image: none;
+#Top .menu-btn {
+  float: left;
+  padding: 7px 5px 5px 5px;
+  border: none;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  width: 100px;
+  height: 18px;
+  font-size: 15px;
+  text-align: center;
+  color: #000000;
+  background-color: #FFFFFF;
+  transition: all 200ms ease;
+}
+
+#Top .menu-btn:hover {
+  cursor: pointer;
 }
 #Top .menu-sub-btn{ color: #222222; }
 #Bottom .bottom-text{ display: none; }
@@ -106,26 +121,80 @@ iframe{
 	width: 1010px;
 	height: 30px;
 }
-.kkutu-menu button{
-	float: left;
-	border: none;
-	border-bottom-left-radius: 0px;
-	border-bottom-right-radius: 0px;
-	width: 100px;
-	height: 20px;
+.kkutu-menu {
+    float: left;
+    width: 1010px;
+    height: 30px;
 }
-	.kkutu-menu button:hover{
-		margin-top: -5px;
-		height: 25px;
-	}
-	.kkutu-menu .toggled{
-		margin-top: 5px !important;
-		color: #EEEEEE;
-		background-color: #444444 !important;
-	}
-	.tiny-menu{
-		width: 20px !important;
-	}
+
+    .kkutu-menu button {
+        float: left;
+        width: 98px;
+        height: 20px;
+
+        border: none;
+        border-radius: 10px 10px 0 0;
+
+        font-weight: bold;
+        cursor: pointer;
+
+        position: relative;
+        overflow: hidden;
+
+        transition: all 0.2s ease;
+        box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    /* 아이콘 버튼 */
+    .kkutu-menu .tiny-menu {
+        width: 20px !important;
+    }
+
+        .kkutu-menu button:hover {
+            margin-top: -5px;
+            height: 25px;
+
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+            filter: brightness(1.05);
+        }
+
+        .kkutu-menu button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 rgba(0, 0, 0, 0.2);
+        }
+
+    .kkutu-menu .toggled {
+        margin-top: 5px !important;
+        color: #EEEEEE;
+        background-color: #444444 !important;
+
+        box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    .kkutu-menu button::after {
+        content: "";
+        position: absolute;
+
+        top: 0;
+        left: -75%;
+
+        width: 50%;
+        height: 100%;
+
+        background: linear-gradient(
+            120deg,
+            transparent,
+            rgba(255, 255, 255, 0.4),
+            transparent
+        );
+
+        transform: skewX(-20deg);
+    }
+
+        .kkutu-menu button:hover::after {
+            left: 125%;
+            transition: 0.6s;
+        }
 .dialog{
 	display: none;
 	position: fixed;
@@ -247,8 +316,8 @@ iframe{
 		background-color: #E4E4E4;
 		transition: all 300ms ease;
 	}
-		.rooms-create{ background-color: #8EC0F3; }
-		.rooms-create>div{ float: none; padding: 20px 0px; text-align: center; font-size: 15px; font-weight: bold; }
+		.rooms-create{ background-color: #FFFFFF; }
+		.rooms-create>div{ float: none; padding: 이카리 신지px 0px; text-align: center; font-size: 60px; font-weight: bold; }
 		.rooms-channel{ position: relative; width: 10px; height: 10px; border-radius: 5px; margin-right: -10px; }
 			.rooms-channel:hover{ width: 8px; height: 8px; border: 1px solid #000; }
 			.channel-1{ background-color: #F99; }
@@ -259,7 +328,7 @@ iframe{
 			.rooms-gaming .rooms-number{ border-color: #CC9999; }
 		.rooms-item:hover{ background-color: #F4F4F4; }
 			.rooms-gaming:hover{ background-color: #FFCCCC; }
-			.rooms-create:hover{ background-color: #AADDFF; }
+			.rooms-create:hover{ background-color: #f5f5f5; }
 		.rooms-number{ padding-top: 18px; border-right: 1px solid #CCCCCC; margin-right: 4px; width: 49px; height: 46px; font-size: 24px; }
 		.rooms-title{ padding-top: 4px; width: 270px; height: 20px; font-size: 16px; font-weight: bold; }
 		.rooms-limit{ padding-top: 7px; width: 39px; height: 17px; text-align: center; }
