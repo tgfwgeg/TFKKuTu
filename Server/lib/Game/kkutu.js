@@ -1259,6 +1259,12 @@ exports.Room = function(room, channel){
 		delete my.game.seq;
 		delete my.game.wordLength;
 		delete my.game.dic;
+
+		// 다음 라운드로 진행
+		if(++my.game.round < my.round){
+			setTimeout(my.roundReady, 3000);
+			my.gaming = true;
+		}
 	};
 	my.byMaster = function(type, data, nob){
 		if(DIC[my.master]) DIC[my.master].publish(type, data, nob);
