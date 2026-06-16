@@ -1,17 +1,17 @@
 /**
  * Rule the words! KKuTu Online
  * Copyright (C) 2017 JJoriping(op@jjo.kr)
- *
+ * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -49,7 +49,7 @@ exports.MOREMI_PART = [ 'back', 'eye', 'mouth', 'shoes', 'clothes', 'head', 'lha
 exports.CATEGORIES = [ "all", "spec", "skin", "badge", "head", "eye", "mouth", "clothes", "hs", "back" ];
 exports.AVAIL_EQUIP = [
 	"NIK", "BDG1", "BDG2", "BDG3", "BDG4",
-"Mhead", "Meye", "Mmouth", "Mhand", "Mclothes", "Mshoes", "Mback"
+	"Mhead", "Meye", "Mmouth", "Mhand", "Mclothes", "Mshoes", "Mback"
 ];
 exports.GROUPS = {
 	'spec': [ "PIX", "PIY", "PIZ", "CNS" ],
@@ -63,15 +63,15 @@ exports.GROUPS = {
 	'back': [ "Mback", "Mfront" ]
 };
 exports.RULE = {
-	/*
-	 유 *형: { lang: 언어,
-	 rule: 이름,
-	 opts: [ 추가 규칙 ],
-	 time: 시간 상수,
-	 ai: AI 가능?,
-	 big: 큰 화면?,
-	 ewq: 현재 턴 나가면 라운드 종료?
-}
+/*
+	유형: { lang: 언어,
+		rule: 이름,
+		opts: [ 추가 규칙 ],
+		time: 시간 상수,
+		ai: AI 가능?,
+		big: 큰 화면?,
+		ewq: 현재 턴 나가면 라운드 종료?
+	}
 */
 	'EKT': { lang: "en",
 		rule: "Classic",
@@ -212,26 +212,26 @@ exports.MISSION_en = [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l
 
 exports.KO_INJEONG = [
 	"IMS", "VOC", "KRR", "KTV", "KEM",
-"NSK", "KOT", "DOT", "DRR", "DGM", "RAG", "LVL",
-"LOL", "MRN", "MMM", "MAP", "MKK", "MNG",
-"MOB", "BLA", "HYK", "CYP", "HRH", "STA", "OIJ",
-"KGR", "ESB", "ELW", "OIM", "OVW", "NEX", /*"WOW",*/
-"YRY", "KPO", "JLN", "JAN", "ZEL", "TFG", "POK", "HAI",
-"HSS", "KMV", "HDC", "HOS"
+	"NSK", "KOT", "DOT", "DRR", "DGM", "RAG", "LVL",
+	"LOL", "MRN", "MMM", "MAP", "MKK", "MNG",
+	"MOB", "BLA", "HYK", "CYP", "HRH", "STA", "OIJ",
+	"KGR", "ESB", "ELW", "OIM", "OVW", "NEX", /*"WOW",*/
+	"YRY", "KPO", "JLN", "JAN", "ZEL", "TFG", "POK", "HAI",
+	"HSS", "KMV", "HDC", "HOS"
 ];
 exports.EN_INJEONG = [
 	"LOL"
 ];
 exports.KO_THEME = [
 	"30", "40", "60", "80", "90",
-"140", "150", "160", "170", "190",
-"220", "230", "240", "270", "310",
-"320", "350", "360", "420", "430",
-"450", "490", "530", "1001"
+	"140", "150", "160", "170", "190",
+	"220", "230", "240", "270", "310",
+	"320", "350", "360", "420", "430",
+	"450", "490", "530", "1001"
 ];
 exports.EN_THEME = [
 	"e05", "e08", "e12", "e13", "e15",
-"e18", "e20", "e43"
+	"e18", "e20", "e43"
 ];
 exports.IJP_EXCEPT = [
 	"OIJ"

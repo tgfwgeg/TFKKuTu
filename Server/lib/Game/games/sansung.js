@@ -4,214 +4,239 @@
  * 경로: Server/lib/Game/games/sansung.js
  */
 
+var Lizard = require('../../sub/lizard');
 var DB;
 var DIC;
 
+var SCAN_INTERVAL       = 300;
+var POOL_SIZE           = 200;
 var SPAWN_INTERVAL_INIT = 4000;
 var SPAWN_INTERVAL_MIN  = 1000;
-var SPEED_RATE          = 0.97;
 var FALL_DURATION_INIT  = 8000;
 var FALL_DURATION_MIN   = 3000;
-var SCORE_HIT_MIN  = 10;
-var SCORE_HIT_MAX  = 20;
-var SCORE_MISS_MIN = 1;
-var SCORE_MISS_MAX = 10;
-var WORD_POOL_SIZE    = 150;
-var MAX_WORDS_SCREEN  = 8;
-var TICK_MS           = 300;
+var SPEED_RATE          = 0.97;
+var MAX_WORDS_SCREEN    = 8;
+var SCORE_HIT_MIN       = 10;
+var SCORE_HIT_MAX       = 20;
 
-// kkutu.js 의 Rule 초기화 시 호출됨
-exports.init = function(_DB, _DIC) {
-    DB  = _DB;
-    DIC = _DIC;
+var CIRCLE_NUMS = '①②③④⑤⑥⑦⑧⑨⑩';
+
+exports.init = function (_DB, _DIC) {
+	DB  = _DB;
+	DIC = _DIC;
 };
 
-// ── Room.roundReady() → my.route("roundReady") 로 호출됨 ─────────
-exports.roundReady = function() {
-    var my = this; // Room 객체
-    var gs;
+// getTitle: 단어 풀 로드 후 "①②③..." 단일 문자열 반환
+exports.getTitle = function () {
+	var R  = new Lizard.Tail();
+	var my = this;
+	var isEn   = my.rule.lang === 'en';
+	var table  = isEn ? 'kkutu_en' : 'kkutu_ko';
+	var filter = isEn ? "_id ~ '^[a-z]+$'" : "_id ~ '^[가-힣]+$'";
+	var lens   = isEn ? [3, 4, 5] : [2, 3, 4];
+	var pool   = [];
+	var pending = lens.length;
 
-    my.game.sansung = gs = {
-        words:         {},
-        wordPool:      [],
-        wordIdCounter: 0,
-        spawnInterval: SPAWN_INTERVAL_INIT,
-        fallDuration:  FALL_DURATION_INIT,
-        lastSpawnTime: 0,
-        scores:        {},
-        tick:          null,
-        running:       false
-    };
+	lens.forEach(function (len) {
+		var sql = 'SELECT _id FROM ' + table +
+			' WHERE LENGTH(_id) = ' + len +
+			' AND hit >= 1 AND ' + filter +
+			' ORDER BY RANDOM() LIMIT ' + Math.floor(POOL_SIZE / lens.length);
+		DB.kkutu[isEn ? 'en' : 'ko'].direct(sql, function (err, res) {
+			if (!err && res && res.rows) {
+				res.rows.forEach(function (r) { pool.push(r._id); });
+			}
+			if (--pending === 0) {
+				pool.sort(function () { return Math.random() - 0.5; });
+				my.game.wordPool = pool;
+				R.go(CIRCLE_NUMS);
+			}
+		});
+	});
 
-    // 플레이어 점수 초기화
-    my.game.seq.forEach(function(id) {
-        gs.scores[typeof id === 'object' ? id.id : id] = 0;
-    });
-
-    _loadWordPool(my, function() {
-        _startGame(my);
-    });
+	return R;
 };
 
-// ── 채팅 입력 처리: kkutu.js 의 onClientMessage 에서 talk 수신 시 호출 ─
-// ready.js 에서 sansung:true 플래그를 붙여서 보내면
-// kkutu.js 의 onClientMessage 에서 아래처럼 분기:
-//
-//   case 'talk':
-//     if(data.sansung && room && room.game && room.game.sansung){
-//       Rule['Sansung'].submit.call(room, client, data.value);
-//       return;
-//     }
-//     ... 기존 talk 처리 ...
-//
-exports.submit = function(client, text) {
-    var my = this;
-    var gs = my.game.sansung;
-    if (!gs || !gs.running) return;
+// roundReady: 매 라운드 시작
+exports.roundReady = function () {
+	var my = this;
 
-    var word = (text || '').trim();
-    if (!word) return;
+	_clearTimers(my);
 
-    // 화면에 있는 단어와 매칭
-    var matchId = null;
-    var ids = Object.keys(gs.words);
-    for (var i = 0; i < ids.length; i++) {
-        if (gs.words[ids[i]].word === word) { matchId = ids[i]; break; }
-    }
-    if (matchId === null) return;
+	// seq를 별도 변수에 저장 (turnEnd 시점에 my.game.seq가 사라져도 안전하게)
+	my.game._ssSeq = (my.game.seq || []).slice();
 
-    var matched = gs.words[matchId];
-    delete gs.words[matchId];
+	my.game.words         = {};
+	my.game.wordIdCounter = 0;
+	my.game.spawnInterval = SPAWN_INTERVAL_INIT;
+	my.game.fallDuration  = FALL_DURATION_INIT;
+	my.game.lastSpawnTime = 0;
+	my.game.scores        = my.game.scores || {};
+	my.game.late          = false;
 
-    var score = Math.floor(Math.random() * (SCORE_HIT_MAX - SCORE_HIT_MIN + 1)) + SCORE_HIT_MIN;
-    if (!gs.scores[client.id]) gs.scores[client.id] = 0;
-    gs.scores[client.id] += score;
+	_eachPlayer(my, function (pid, o) {
+		if (o) o.game.score = 0;
+	});
 
-    _publish(my, 'sansung-hit', {
-        id:       Number(matchId),
-             word:     matched.word,
-             score:    score,
-             playerId: client.id,
-             scores:   gs.scores
-    });
+	_publish(my, 'roundReady', { round: my.game.round });
+
+	my.game._rrt = setTimeout(function () {
+		my.game._rrt = null;
+		my.turnStart();
+	}, 2000);
 };
 
-// ── 라운드/게임 종료 시 호출 ──────────────────────────────────────
-exports.roundEnd = function() { _endGame(this); };
-exports.turnEnd  = function() { _endGame(this); };
+// turnStart: 게임 루프 시작
+exports.turnStart = function () {
+	var my = this;
+	if (!my.gaming || !my.game || my.game.late) return;
 
-// ── KKuTu Room 이 필요로 하는 나머지 스텁 ────────────────────────
-exports.getTitle   = function() { return Promise.resolve(['산성비']); };
-exports.turnStart  = function() {};
-exports.turnHint   = function() {};
-exports.readyRobot = function() {};
-exports.turnRobot  = function() {};
-exports.getScore   = function() { return 0; };
+	my.game.late          = false;
+	my.game.lastSpawnTime = Date.now();
 
-// ─────────────────────────────────────────────────────────────────
-// 내부 함수
-// ─────────────────────────────────────────────────────────────────
+	_spawnWord(my);
 
-function _loadWordPool(room, cb) {
-    var gs = room.game.sansung;
-    // KKuTu DB는 Lizard ORM: DB.kkutu_ko.find()
-    DB.kkutu_ko
-    .find({ _cond: ['length(_id) BETWEEN 1 AND 6'] })
-    .limit(['_id', true])
-    .on(function(rows) {
-        if (!rows || !rows.length) {
-            gs.wordPool = ['사과','바나나','포도','딸기','수박','멜론','복숭아','하늘','바람','구름'];
-        } else {
-            // 전체 중 랜덤으로 WORD_POOL_SIZE개 선택
-            var pool = rows.map(function(r) { return r._id; });
-            pool.sort(function() { return Math.random() - 0.5; });
-            gs.wordPool = pool.slice(0, WORD_POOL_SIZE);
-        }
-        cb();
-    });
+	my.game.scanTimer = setInterval(function () {
+		if (!my.gaming || !my.game || my.game.late) {
+			clearInterval(my.game.scanTimer);
+			my.game.scanTimer = null;
+			return;
+		}
+
+		var now = Date.now();
+
+		if (now - my.game.lastSpawnTime >= my.game.spawnInterval
+				&& Object.keys(my.game.words).length < MAX_WORDS_SCREEN) {
+			my.game.lastSpawnTime = now;
+			my.game.spawnInterval = Math.max(SPAWN_INTERVAL_MIN,
+				Math.floor(my.game.spawnInterval * SPEED_RATE));
+			my.game.fallDuration  = Math.max(FALL_DURATION_MIN,
+				Math.floor(my.game.fallDuration  * SPEED_RATE));
+			_spawnWord(my);
+		}
+
+		Object.keys(my.game.words).forEach(function (id) {
+			if (now >= my.game.words[id].fallEndTime) {
+				var word = my.game.words[id].word;
+				delete my.game.words[id];
+				_publish(my, 'turnEnd', { wordId: Number(id), word: word, ok: false });
+			}
+		});
+	}, SCAN_INTERVAL);
+
+	// my.time(초) → ms 변환
+	var roundMs = my.time * 1000;
+	my.game._turnEndTimer = setTimeout(function () {
+		my.game._turnEndTimer = null;
+		exports.turnEnd.call(my);
+	}, roundMs);
+
+	_publish(my, 'turnStart', { roundTime: roundMs });
+};
+
+// submit: 단어 입력
+exports.submit = function (client, text) {
+	var my = this;
+	if (!my.game || my.game.late) return;
+
+	var word = (text || '').trim();
+	if (!word) return;
+
+	var matchId = null;
+	Object.keys(my.game.words).forEach(function (id) {
+		if (my.game.words[id].word === word) matchId = id;
+	});
+	if (matchId === null) return;
+
+	delete my.game.words[matchId];
+
+	var score = Math.floor(Math.random() * (SCORE_HIT_MAX - SCORE_HIT_MIN + 1)) + SCORE_HIT_MIN;
+	if (!my.game.scores[client.id]) my.game.scores[client.id] = 0;
+	my.game.scores[client.id] += score;
+	if (DIC[client.id]) DIC[client.id].game.score = my.game.scores[client.id];
+
+	_publish(my, 'turnEnd', {
+		wordId:   Number(matchId),
+		word:     word,
+		ok:       true,
+		score:    score,
+		playerId: client.id,
+		scores:   my.game.scores
+	});
+};
+
+// turnEnd: 라운드 시간 종료 (여기서 forEach 에러 발생했었음 → seq 안전 참조로 수정)
+exports.turnEnd = function () {
+	var my = this;
+	if (!my.game) return;
+
+	my.game.late = true;
+	_clearTimers(my);
+
+	// my.game.seq가 사라졌어도 _ssSeq로 안전하게 처리
+	var seq = my.game.seq || my.game._ssSeq || [];
+	seq.forEach(function (sid) {
+		var pid = typeof sid === 'object' ? sid.id : sid;
+		var o   = DIC[pid];
+		if (o) o.game.score = (my.game.scores || {})[pid] || 0;
+	});
+
+	_publish(my, 'turnEnd', { ok: false });
+
+	my.game._rrt = setTimeout(function () {
+		my.game._rrt = null;
+		my.roundEnd();
+	}, 3000);
+};
+
+exports.turnHint   = function () {};
+exports.readyRobot = function () {};
+exports.turnRobot  = function () {};
+exports.getScore   = function () { return 0; };
+
+// ── 내부 함수 ─────────────────────────────────────────
+
+function _clearTimers(my) {
+	if (!my.game) return;
+	if (my.game.scanTimer)     { clearInterval(my.game.scanTimer);    my.game.scanTimer     = null; }
+	if (my.game._rrt)          { clearTimeout(my.game._rrt);          my.game._rrt          = null; }
+	if (my.game._turnEndTimer) { clearTimeout(my.game._turnEndTimer); my.game._turnEndTimer = null; }
 }
 
-function _startGame(room) {
-    var gs = room.game.sansung;
-    gs.running       = true;
-    gs.lastSpawnTime = Date.now();
-
-    _spawnWord(room);
-
-    gs.tick = setInterval(function() {
-        if (!gs.running) { clearInterval(gs.tick); return; }
-
-        var now = Date.now();
-
-        // 단어 생성
-        if (now - gs.lastSpawnTime >= gs.spawnInterval
-            && Object.keys(gs.words).length < MAX_WORDS_SCREEN) {
-            gs.lastSpawnTime = now;
-        gs.spawnInterval = Math.max(SPAWN_INTERVAL_MIN, Math.floor(gs.spawnInterval * SPEED_RATE));
-        gs.fallDuration  = Math.max(FALL_DURATION_MIN,  Math.floor(gs.fallDuration  * SPEED_RATE));
-        _spawnWord(room);
-            }
-
-            // 바닥 도달 체크
-            Object.keys(gs.words).forEach(function(id) {
-                if (now >= gs.words[id].fallEndTime) {
-                    var word    = gs.words[id].word;
-                    var penalty = Math.floor(Math.random() * (SCORE_MISS_MAX - SCORE_MISS_MIN + 1)) + SCORE_MISS_MIN;
-                    delete gs.words[id];
-
-                    Object.keys(gs.scores).forEach(function(pid) {
-                        gs.scores[pid] = Math.max(0, gs.scores[pid] - penalty);
-                    });
-
-                    _publish(room, 'sansung-miss', {
-                        id:      Number(id),
-                             word:    word,
-                             penalty: penalty,
-                             scores:  gs.scores
-                    });
-                }
-            });
-    }, TICK_MS);
+// seq는 항상 my.game.seq를 우선, 없으면 _ssSeq를 사용하는 안전한 헬퍼
+function _eachPlayer(my, cb) {
+	var seq = (my.game && (my.game.seq || my.game._ssSeq)) || [];
+	seq.forEach(function (sid) {
+		var pid = typeof sid === 'object' ? sid.id : sid;
+		cb(pid, DIC[pid]);
+	});
 }
 
-function _spawnWord(room) {
-    var gs   = room.game.sansung;
-    var pool = gs.wordPool;
-    if (!pool.length) { _loadWordPool(room, function() { _spawnWord(room); }); return; }
+function _spawnWord(my) {
+	var pool = my.game.wordPool;
+	if (!pool || !pool.length) return;
 
-    // 이미 화면에 있는 단어 제외
-    var onScreen = Object.keys(gs.words).map(function(id) { return gs.words[id].word; });
-    var candidates = pool.filter(function(w) { return onScreen.indexOf(w) === -1; });
-    if (!candidates.length) candidates = pool;
+	var onScreen   = Object.keys(my.game.words).map(function (id) { return my.game.words[id].word; });
+	var candidates = pool.filter(function (w) { return onScreen.indexOf(w) === -1; });
+	if (!candidates.length) candidates = pool;
 
-    var word = candidates[Math.floor(Math.random() * candidates.length)];
-    var idx  = pool.indexOf(word);
-    if (idx !== -1) pool.splice(idx, 1);
-    if (pool.length < 20) _loadWordPool(room, function() {});
+	var word = candidates[Math.floor(Math.random() * candidates.length)];
+	var id   = ++my.game.wordIdCounter;
+	var now  = Date.now();
 
-    var id  = ++gs.wordIdCounter;
-    var now = Date.now();
-    gs.words[id] = { word: word, fallEndTime: now + gs.fallDuration };
+	my.game.words[id] = { word: word, fallEndTime: now + my.game.fallDuration };
 
-    _publish(room, 'sansung-spawn', {
-        id:           id,
-        word:         word,
-        fallDuration: gs.fallDuration
-    });
+	_eachPlayer(my, function (pid) {
+		if (DIC[pid]) DIC[pid].send('sansung-word', {
+			wordId:       id,
+			word:         word,
+			fallDuration: my.game.fallDuration
+		});
+	});
 }
 
-function _endGame(room) {
-    var gs = room.game.sansung;
-    if (!gs) return;
-    gs.running = false;
-    if (gs.tick) { clearInterval(gs.tick); gs.tick = null; }
-    _publish(room, 'sansung-end', { scores: gs.scores });
-    room.game.sansung = null;
-}
-
-function _publish(room, type, data) {
-    room.game.seq.forEach(function(id) {
-        var pid = typeof id === 'object' ? id.id : id;
-        if (DIC[pid]) DIC[pid].send(type, data);
-    });
+function _publish(my, type, data) {
+	_eachPlayer(my, function (pid) {
+		if (DIC[pid]) DIC[pid].send(type, data);
+	});
 }

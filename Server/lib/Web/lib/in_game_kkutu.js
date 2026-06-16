@@ -19,31 +19,31 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 /**
  * Rule the words! KKuTu Online
  * Copyright (C) 2017 JJoriping(op@jjo.kr)
- *
+ * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 var MODE;
 var BEAT = [ null,
-"10000000",
-"10001000",
-"10010010",
-"10011010",
-"11011010",
-"11011110",
-"11011111",
-"11111111"
+	"10000000",
+	"10001000",
+	"10010010",
+	"10011010",
+	"11011010",
+	"11011110",
+	"11011111",
+	"11111111"
 ];
 var NULL_USER = {
 	profile: { title: L['null'] },
@@ -71,28 +71,27 @@ var audioContext = window.hasOwnProperty("AudioContext") ? (new AudioContext()) 
 var _WebSocket = window['WebSocket'];
 var _setInterval = setInterval;
 var _setTimeout = setTimeout;
-
 /**
  * Rule the words! KKuTu Online
  * Copyright (C) 2017 JJoriping(op@jjo.kr)
- *
+ * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 $(document).ready(function(){
 	var i;
-
+	
 	$data.PUBLIC = $("#PUBLIC").html() == "true";
 	$data.URL = $("#URL").html();
 	$data.ROOM_PORT = $("#ROOM_PORT").html();
@@ -118,122 +117,122 @@ $(document).ready(function(){
 	EXP.push(Infinity);
 	$stage = {
 		loading: $("#Loading"),
-				  lobby: {
-					  userListTitle: $(".UserListBox .product-title"),
-				  userList: $(".UserListBox .product-body"),
-				  roomListTitle: $(".RoomListBox .product-title"),
-				  roomList: $(".RoomListBox .product-body"),
-				  createBanner: $("<div>").addClass("rooms-item rooms-create").append($("<div>").html(L['newRoom']))
-				  },
-				  chat: $("#Chat"),
-				  chatLog: $("#chat-log-board"),
-				  talk: $("#Talk"),
-				  chatBtn: $("#ChatBtn"),
-				  menu: {
-					  help: $("#HelpBtn"),
-				  setting: $("#SettingBtn"),
-				  community: $("#CommunityBtn"),
-				  newRoom: $("#NewRoomBtn"),
-				  setRoom: $("#SetRoomBtn"),
-				  quickRoom: $("#QuickRoomBtn"),
-				  spectate: $("#SpectateBtn"),
-				  shop: $("#ShopBtn"),
-				  dict: $("#DictionaryBtn"),
-				  wordPlus: $("#WordPlusBtn"),
-				  invite: $("#InviteBtn"),
-				  practice: $("#PracticeBtn"),
-				  ready: $("#ReadyBtn"),
-				  start: $("#StartBtn"),
-				  exit: $("#ExitBtn"),
-				  notice: $("#NoticeBtn"),
-				  replay: $("#ReplayBtn"),
-				  leaderboard: $("#LeaderboardBtn")
-				  },
-				  dialog: {
-					  setting: $("#SettingDiag"),
-				  settingServer: $("#setting-server"),
-				  settingOK: $("#setting-ok"),
-				  community: $("#CommunityDiag"),
-				  commFriends: $("#comm-friends"),
-				  commFriendAdd: $("#comm-friend-add"),
-				  room: $("#RoomDiag"),
-				  roomOK: $("#room-ok"),
-				  quick: $("#QuickDiag"),
-				  quickOK: $("#quick-ok"),
-				  result: $("#ResultDiag"),
-				  resultOK: $("#result-ok"),
-				  resultSave: $("#result-save"),
-				  practice: $("#PracticeDiag"),
-				  practiceOK: $("#practice-ok"),
-				  dict: $("#DictionaryDiag"),
-				  dictInjeong: $("#dict-injeong"),
-				  dictSearch: $("#dict-search"),
-				  wordPlus: $("#WordPlusDiag"),
-				  wordPlusOK: $("#wp-ok"),
-				  invite: $("#InviteDiag"),
-				  inviteList: $(".invite-board"),
-				  inviteRobot: $("#invite-robot"),
-				  roomInfo: $("#RoomInfoDiag"),
-				  roomInfoJoin: $("#room-info-join"),
-				  profile: $("#ProfileDiag"),
-				  profileShut: $("#profile-shut"),
-				  profileHandover: $("#profile-handover"),
-				  profileKick: $("#profile-kick"),
-				  profileLevel: $("#profile-level"),
-				  profileDress: $("#profile-dress"),
-				  profileWhisper: $("#profile-whisper"),
-				  kickVote: $("#KickVoteDiag"),
-				  kickVoteY: $("#kick-vote-yes"),
-				  kickVoteN: $("#kick-vote-no"),
-				  purchase: $("#PurchaseDiag"),
-				  purchaseOK: $("#purchase-ok"),
-				  purchaseNO: $("#purchase-no"),
-				  replay: $("#ReplayDiag"),
-				  replayView: $("#replay-view"),
-				  leaderboard: $("#LeaderboardDiag"),
-				  lbTable: $("#ranking tbody"),
-				  lbPage: $("#lb-page"),
-				  lbNext: $("#lb-next"),
-				  lbMe: $("#lb-me"),
-				  lbPrev: $("#lb-prev"),
-				  dress: $("#DressDiag"),
-				  dressOK: $("#dress-ok"),
-				  charFactory: $("#CharFactoryDiag"),
-				  cfCompose: $("#cf-compose"),
-				  injPick: $("#InjPickDiag"),
-				  injPickAll: $("#injpick-all"),
-				  injPickNo: $("#injpick-no"),
-				  injPickOK: $("#injpick-ok"),
-				  chatLog: $("#ChatLogDiag"),
-				  obtain: $("#ObtainDiag"),
-				  obtainOK: $("#obtain-ok"),
-				  help: $("#HelpDiag")
-				  },
-				  box: {
-					  chat: $(".ChatBox"),
-				  userList: $(".UserListBox"),
-				  roomList: $(".RoomListBox"),
-				  shop: $(".ShopBox"),
-				  room: $(".RoomBox"),
-				  game: $(".GameBox"),
-				  me: $(".MeBox")
-				  },
-				  game: {
-					  display: $(".jjo-display"),
-				  hints: $(".GameBox .hints"),
-				  cwcmd: $(".GameBox .cwcmd"),
-				  bb: $(".GameBox .bb"),
-				  items: $(".GameBox .items"),
-				  chain: $(".GameBox .chain"),
-				  round: $(".rounds"),
-				  here: $(".game-input").hide(),
-				  hereText: $("#game-input"),
-				  history: $(".history"),
-				  roundBar: $(".jjo-round-time .graph-bar"),
-				  turnBar: $(".jjo-turn-time .graph-bar")
-				  },
-				  yell: $("#Yell").hide(),
-				  balloons: $("#Balloons")
+		lobby: {
+			userListTitle: $(".UserListBox .product-title"),
+			userList: $(".UserListBox .product-body"),
+			roomListTitle: $(".RoomListBox .product-title"),
+			roomList: $(".RoomListBox .product-body"),
+			createBanner: $("<div>").addClass("rooms-item rooms-create").append($("<div>").html(L['newRoom']))
+		},
+		chat: $("#Chat"),
+		chatLog: $("#chat-log-board"),
+		talk: $("#Talk"),
+		chatBtn: $("#ChatBtn"),
+		menu: {
+			help: $("#HelpBtn"),
+			setting: $("#SettingBtn"),
+			community: $("#CommunityBtn"),
+			newRoom: $("#NewRoomBtn"),
+			setRoom: $("#SetRoomBtn"),
+			quickRoom: $("#QuickRoomBtn"),
+			spectate: $("#SpectateBtn"),
+			shop: $("#ShopBtn"),
+			dict: $("#DictionaryBtn"),
+			wordPlus: $("#WordPlusBtn"),
+			invite: $("#InviteBtn"),
+			practice: $("#PracticeBtn"),
+			ready: $("#ReadyBtn"),
+			start: $("#StartBtn"),
+			exit: $("#ExitBtn"),
+			notice: $("#NoticeBtn"),
+			replay: $("#ReplayBtn"),
+			leaderboard: $("#LeaderboardBtn")
+		},
+		dialog: {
+			setting: $("#SettingDiag"),
+				settingServer: $("#setting-server"),
+				settingOK: $("#setting-ok"),
+			community: $("#CommunityDiag"),
+				commFriends: $("#comm-friends"),
+				commFriendAdd: $("#comm-friend-add"),
+			room: $("#RoomDiag"),
+				roomOK: $("#room-ok"),
+			quick: $("#QuickDiag"),
+				quickOK: $("#quick-ok"),
+			result: $("#ResultDiag"),
+				resultOK: $("#result-ok"),
+				resultSave: $("#result-save"),
+			practice: $("#PracticeDiag"),
+				practiceOK: $("#practice-ok"),
+			dict: $("#DictionaryDiag"),
+				dictInjeong: $("#dict-injeong"),
+				dictSearch: $("#dict-search"),
+			wordPlus: $("#WordPlusDiag"),
+				wordPlusOK: $("#wp-ok"),
+			invite: $("#InviteDiag"),
+				inviteList: $(".invite-board"),
+				inviteRobot: $("#invite-robot"),
+			roomInfo: $("#RoomInfoDiag"),
+				roomInfoJoin: $("#room-info-join"),
+			profile: $("#ProfileDiag"),
+				profileShut: $("#profile-shut"),
+				profileHandover: $("#profile-handover"),
+				profileKick: $("#profile-kick"),
+				profileLevel: $("#profile-level"),
+				profileDress: $("#profile-dress"),
+				profileWhisper: $("#profile-whisper"),
+			kickVote: $("#KickVoteDiag"),
+				kickVoteY: $("#kick-vote-yes"),
+				kickVoteN: $("#kick-vote-no"),
+			purchase: $("#PurchaseDiag"),
+				purchaseOK: $("#purchase-ok"),
+				purchaseNO: $("#purchase-no"),
+			replay: $("#ReplayDiag"),
+				replayView: $("#replay-view"),
+			leaderboard: $("#LeaderboardDiag"),
+				lbTable: $("#ranking tbody"),
+				lbPage: $("#lb-page"),
+				lbNext: $("#lb-next"),
+				lbMe: $("#lb-me"),
+				lbPrev: $("#lb-prev"),
+			dress: $("#DressDiag"),
+				dressOK: $("#dress-ok"),
+			charFactory: $("#CharFactoryDiag"),
+				cfCompose: $("#cf-compose"),
+			injPick: $("#InjPickDiag"),
+				injPickAll: $("#injpick-all"),
+				injPickNo: $("#injpick-no"),
+				injPickOK: $("#injpick-ok"),
+			chatLog: $("#ChatLogDiag"),
+			obtain: $("#ObtainDiag"),
+				obtainOK: $("#obtain-ok"),
+			help: $("#HelpDiag")
+		},
+		box: {
+			chat: $(".ChatBox"),
+			userList: $(".UserListBox"),
+			roomList: $(".RoomListBox"),
+			shop: $(".ShopBox"),
+			room: $(".RoomBox"),
+			game: $(".GameBox"),
+			me: $(".MeBox")
+		},
+		game: {
+			display: $(".jjo-display"),
+			hints: $(".GameBox .hints"),
+			cwcmd: $(".GameBox .cwcmd"),
+			bb: $(".GameBox .bb"),
+			items: $(".GameBox .items"),
+			chain: $(".GameBox .chain"),
+			round: $(".rounds"),
+			here: $(".game-input").hide(),
+			hereText: $("#game-input"),
+			history: $(".history"),
+			roundBar: $(".jjo-round-time .graph-bar"),
+			turnBar: $(".jjo-turn-time .graph-bar")
+		},
+		yell: $("#Yell").hide(),
+		balloons: $("#Balloons")
 	};
 	if(_WebSocket == undefined){
 		loading(L['websocketUnsupport']);
@@ -256,17 +255,18 @@ $(document).ready(function(){
 		{ key: "mission", value: "/media/kkutu/mission.mp3" },
 		{ key: "kung", value: "/media/kkutu/kung.mp3" },
 		{ key: "horr", value: "/media/kkutu/horr.mp3" },
+		{ key: "rain", value: "/media/kkutu/rain.mp3" },
 	];
 	for(i=0; i<=10; i++) $data._soundList.push(
-	{ key: "T"+i, value: "/media/kkutu/T"+i+".mp3" },
-	{ key: "K"+i, value: "/media/kkutu/K"+i+".mp3" },
-	{ key: "As"+i, value: "/media/kkutu/As"+i+".mp3" }
+		{ key: "T"+i, value: "/media/kkutu/T"+i+".mp3" },
+		{ key: "K"+i, value: "/media/kkutu/K"+i+".mp3" },
+		{ key: "As"+i, value: "/media/kkutu/As"+i+".mp3" }
 	);
 	loadSounds($data._soundList, function(){
 		processShop(connect);
 	});
 	delete $data._soundList;
-
+	
 	MOREMI_PART = $("#MOREMI_PART").html().split(',');
 	AVAIL_EQUIP = $("#AVAIL_EQUIP").html().split(',');
 	RULE = JSON.parse($("#RULE").html());
@@ -278,12 +278,12 @@ $(document).ready(function(){
 		return $data._turnTime / $data.turnTime * 100 + "%";
 	} : function(){
 		var pos = $data._turnSound.audio ? $data._turnSound.audio.currentTime : (audioContext.currentTime - $data._turnSound.startedAt);
-
+		
 		return (100 - pos/$data.turnTime*100000) + "%";
 	};
 	$data.setRoom = function(id, data){
 		var isLobby = getOnly() == "for-lobby";
-
+		
 		if(data == null){
 			delete $data.rooms[id];
 			if(isLobby) $("#room-" + id).remove();
@@ -299,7 +299,7 @@ $(document).ready(function(){
 		var only = getOnly();
 		var needed = only == "for-lobby" || only == "for-master";
 		var $obj;
-
+		
 		if($data._replay){
 			$rec.users[id] = data;
 			return;
@@ -310,7 +310,7 @@ $(document).ready(function(){
 		}else{
 			if(needed && !$data.users[id]){
 				$obj = userListBar(data, only == "for-master");
-
+				
 				if(only == "for-master") $stage.dialog.inviteList.append($obj);
 				else $stage.lobby.userList.append($obj);
 			}
@@ -322,11 +322,11 @@ $(document).ready(function(){
 		}
 	};
 
-	// 객체 설정
+// 객체 설정
 	/*addTimeout(function(){
-	 $ *("#intro-start").hide();
-$("#intro").show();
-}, 1400);*/
+		$("#intro-start").hide();
+		$("#intro").show();
+	}, 1400);*/
 	$(document).on('paste', function(e){
 		if($data.room) if($data.room.gaming){
 			e.preventDefault();
@@ -348,7 +348,7 @@ $("#intro").show();
 	}
 	$(".dialog-head .dialog-title").on('mousedown', function(e){
 		var $pd = $(e.currentTarget).parents(".dialog");
-
+		
 		$(".dialog-front").removeClass("dialog-front");
 		$pd.addClass("dialog-front");
 		startDrag($pd, e.pageX, e.pageY);
@@ -358,23 +358,16 @@ $("#intro").show();
 	// addInterval(checkInput, 1);
 	$stage.chatBtn.on('click', function(e){
 		checkInput();
-
+		
 		var value = (mobile && $stage.game.here.is(':visible'))
-		? $stage.game.hereText.val()
-		: $stage.talk.val();
+			? $stage.game.hereText.val()
+			: $stage.talk.val();
 		if(!value) return;
 		var o = { value: value.trim() };
 		if(o.value[0] == "/"){
 			o.cmd = o.value.split(" ");
 			runCommand(o.cmd);
 		}else{
-			// 산성비 게임 중일 때 단어 제출
-			if($data.room && $data.room.gaming && MODE[$data.room.mode] === 'KSB'){
-				send('sansung-input', { value: o.value });
-				$stage.talk.val("");
-				$stage.game.hereText.val("");
-				return;
-			}
 			if($stage.game.here.is(":visible") || $data._relay){
 				o.relay = true;
 			}
@@ -393,7 +386,7 @@ $("#intro").show();
 			var $target = $(e.currentTarget);
 			var value = $target.val();
 			var o = { relay: true, data: $data._sel, value: value };
-
+			
 			if(!value) return;
 			send('talk', o);
 			$target.val("");
@@ -405,7 +398,7 @@ $("#intro").show();
 	$("#room-limit").on('change', function(e){
 		var $target = $(e.currentTarget);
 		var value = $target.val();
-
+		
 		if(value < 2 || value > 8){
 			$target.css('color', "#FF4444");
 		}else{
@@ -415,7 +408,7 @@ $("#intro").show();
 	$("#room-round").on('change', function(e){
 		var $target = $(e.currentTarget);
 		var value = $target.val();
-
+		
 		if(value < 1 || value > 10){
 			$target.css('color', "#FF4444");
 		}else{
@@ -431,675 +424,674 @@ $("#intro").show();
 	$(window).on('beforeunload', function(e){
 		if($data.room) return L['sureExit'];
 	});
-		function startDrag($diag, sx, sy){
-			var pos = $diag.position();
-			$(window).on('mousemove', function(e){
-				var dx = e.pageX - sx, dy = e.pageY - sy;
-
-				$diag.css('left', pos.left + dx);
-				$diag.css('top', pos.top + dy);
-			});
-		}
-		function stopDrag($diag){
-			$(window).off('mousemove');
-		}
-		$(".result-me-gauge .graph-bar").addClass("result-me-before-bar");
-		$(".result-me-gauge")
+	function startDrag($diag, sx, sy){
+		var pos = $diag.position();
+		$(window).on('mousemove', function(e){
+			var dx = e.pageX - sx, dy = e.pageY - sy;
+			
+			$diag.css('left', pos.left + dx);
+			$diag.css('top', pos.top + dy);
+		});
+	}
+	function stopDrag($diag){
+		$(window).off('mousemove');
+	}
+	$(".result-me-gauge .graph-bar").addClass("result-me-before-bar");
+	$(".result-me-gauge")
 		.append($("<div>").addClass("graph-bar result-me-current-bar"))
 		.append($("<div>").addClass("graph-bar result-me-bonus-bar"));
-		// 메뉴 버튼
-		for(i in $stage.dialog){
-			if($stage.dialog[i].children(".dialog-head").hasClass("no-close")) continue;
-
-			$stage.dialog[i].children(".dialog-head").append($("<div>").addClass("closeBtn").on('click', function(e){
-				$(e.currentTarget).parent().parent().hide();
-			}).hotkey(false, 27));
+// 메뉴 버튼
+	for(i in $stage.dialog){
+		if($stage.dialog[i].children(".dialog-head").hasClass("no-close")) continue;
+		
+		$stage.dialog[i].children(".dialog-head").append($("<div>").addClass("closeBtn").on('click', function(e){
+			$(e.currentTarget).parent().parent().hide();
+		}).hotkey(false, 27));
+	}
+	$stage.menu.help.on('click', function(e){
+		$("#help-board").attr('src', "/help");
+		showDialog($stage.dialog.help);
+	});
+	$stage.menu.setting.on('click', function(e){
+		showDialog($stage.dialog.setting);
+	});
+	$stage.menu.community.on('click', function(e){
+		if($data.guest) return fail(451);
+		showDialog($stage.dialog.community);
+	});
+	$stage.dialog.commFriendAdd.on('click', function(e){
+		var id = prompt(L['friendAddNotice']);
+		
+		if(!id) return;
+		if(!$data.users[id]) return fail(450);
+		
+		send('friendAdd', { target: id }, true);
+	});
+	$stage.menu.newRoom.on('click', function(e){
+		var $d;
+		
+		$stage.dialog.quick.hide();
+		
+		$data.typeRoom = 'enter';
+		showDialog($d = $stage.dialog.room);
+		$d.find(".dialog-title").html(L['newRoom']);
+	});
+	$stage.menu.setRoom.on('click', function(e){
+		var $d;
+		var rule = RULE[MODE[$data.room.mode]];
+		var i, k;
+		
+		$data.typeRoom = 'setRoom';
+		$("#room-title").val($data.room.title);
+		$("#room-limit").val($data.room.limit);
+		$("#room-mode").val($data.room.mode).trigger('change');
+		$("#room-round").val($data.room.round);
+		$("#room-time").val($data.room.time / rule.time);
+		for(i in OPTIONS){
+			k = OPTIONS[i].name.toLowerCase();
+			$("#room-" + k).attr('checked', $data.room.opts[k]);
 		}
-		$stage.menu.help.on('click', function(e){
-			$("#help-board").attr('src', "/help");
-			showDialog($stage.dialog.help);
-		});
-		$stage.menu.setting.on('click', function(e){
-			showDialog($stage.dialog.setting);
-		});
-		$stage.menu.community.on('click', function(e){
-			if($data.guest) return fail(451);
-			showDialog($stage.dialog.community);
-		});
-		$stage.dialog.commFriendAdd.on('click', function(e){
-			var id = prompt(L['friendAddNotice']);
-
-			if(!id) return;
-			if(!$data.users[id]) return fail(450);
-
-			send('friendAdd', { target: id }, true);
-		});
-		$stage.menu.newRoom.on('click', function(e){
-			var $d;
-
+		$data._injpick = $data.room.opts.injpick;
+		showDialog($d = $stage.dialog.room);
+		$d.find(".dialog-title").html(L['setRoom']);
+	});
+	function updateGameOptions(opts, prefix){
+		var i, k;
+		
+		for(i in OPTIONS){
+			k = OPTIONS[i].name.toLowerCase();
+			if(opts.indexOf(i) == -1) $("#" + prefix + "-" + k + "-panel").hide();
+			else $("#" + prefix + "-" + k + "-panel").show();
+		}
+	}
+	function getGameOptions(prefix){
+		var i, name, opts = {};
+		
+		for(i in OPTIONS){
+			name = OPTIONS[i].name.toLowerCase();
+			
+			if($("#" + prefix + "-" + name).is(':checked')) opts[name] = true;
+		}
+		return opts;
+	}
+	function isRoomMatched(room, mode, opts, all){
+		var i;
+		
+		if(!all){
+			if(room.gaming) return false;
+			if(room.password) return false;
+			if(room.players.length >= room.limit) return false;
+		}
+		if(room.mode != mode) return false;
+		for(i in opts) if(!room.opts[i]) return false;
+		return true;
+	}
+	$("#quick-mode, #QuickDiag .game-option").on('change', function(e){
+		var val = $("#quick-mode").val();
+		var ct = 0;
+		var i, opts;
+		
+		if(e.currentTarget.id == "quick-mode"){
+			$("#QuickDiag .game-option").prop('checked', false);
+		}
+		opts = getGameOptions('quick');
+		updateGameOptions(RULE[MODE[val]].opts, 'quick');
+		for(i in $data.rooms){
+			if(isRoomMatched($data.rooms[i], val, opts, true)) ct++;
+		}
+		$("#quick-status").html(L['quickStatus'] + " " + ct);
+	});
+	$stage.menu.quickRoom.on('click', function(e){
+		$stage.dialog.room.hide();
+		showDialog($stage.dialog.quick);
+		if($stage.dialog.quick.is(':visible')){
+			$("#QuickDiag>.dialog-body").find("*").prop('disabled', false);
+			$("#quick-mode").trigger('change');
+			$("#quick-queue").html("");
+			$stage.dialog.quickOK.removeClass("searching").html(L['OK']);
+		}
+	});
+	$stage.dialog.quickOK.on('click', function(e){
+		var mode = $("#quick-mode").val();
+		var opts = getGameOptions('quick');
+		
+		if(getOnly() != "for-lobby") return;
+		if($stage.dialog.quickOK.hasClass("searching")){
 			$stage.dialog.quick.hide();
-
-			$data.typeRoom = 'enter';
-			showDialog($d = $stage.dialog.room);
-			$d.find(".dialog-title").html(L['newRoom']);
-		});
-		$stage.menu.setRoom.on('click', function(e){
-			var $d;
-			var rule = RULE[MODE[$data.room.mode]];
-			var i, k;
-
-			$data.typeRoom = 'setRoom';
-			$("#room-title").val($data.room.title);
-			$("#room-limit").val($data.room.limit);
-			$("#room-mode").val($data.room.mode).trigger('change');
-			$("#room-round").val($data.room.round);
-			$("#room-time").val($data.room.time / rule.time);
-			for(i in OPTIONS){
-				k = OPTIONS[i].name.toLowerCase();
-				$("#room-" + k).attr('checked', $data.room.opts[k]);
-			}
-			$data._injpick = $data.room.opts.injpick;
-			showDialog($d = $stage.dialog.room);
-			$d.find(".dialog-title").html(L['setRoom']);
-		});
-		function updateGameOptions(opts, prefix){
-			var i, k;
-
-			for(i in OPTIONS){
-				k = OPTIONS[i].name.toLowerCase();
-				if(opts.indexOf(i) == -1) $("#" + prefix + "-" + k + "-panel").hide();
-				else $("#" + prefix + "-" + k + "-panel").show();
-			}
+			quickTick();
+			$stage.menu.quickRoom.trigger('click');
+			return;
 		}
-		function getGameOptions(prefix){
-			var i, name, opts = {};
-
-			for(i in OPTIONS){
-				name = OPTIONS[i].name.toLowerCase();
-
-				if($("#" + prefix + "-" + name).is(':checked')) opts[name] = true;
+		$("#QuickDiag>.dialog-body").find("*").prop('disabled', true);
+		$stage.dialog.quickOK.addClass("searching").html("<i class='fa fa-spinner fa-spin'></i> " + L['NO']).prop('disabled', false);
+		$data._quickn = 0;
+		$data._quickT = addInterval(quickTick, 1000);
+		function quickTick(){
+			var i, arr = [];
+			
+			if(!$stage.dialog.quick.is(':visible')){
+				clearTimeout($data._quickT);
+				return;
 			}
-			return opts;
-		}
-		function isRoomMatched(room, mode, opts, all){
-			var i;
-
-			if(!all){
-				if(room.gaming) return false;
-				if(room.password) return false;
-				if(room.players.length >= room.limit) return false;
-			}
-			if(room.mode != mode) return false;
-			for(i in opts) if(!room.opts[i]) return false;
-			return true;
-		}
-		$("#quick-mode, #QuickDiag .game-option").on('change', function(e){
-			var val = $("#quick-mode").val();
-			var ct = 0;
-			var i, opts;
-
-			if(e.currentTarget.id == "quick-mode"){
-				$("#QuickDiag .game-option").prop('checked', false);
-			}
-			opts = getGameOptions('quick');
-			updateGameOptions(RULE[MODE[val]].opts, 'quick');
+			$("#quick-queue").html(L['quickQueue'] + " " + prettyTime($data._quickn++ * 1000));
 			for(i in $data.rooms){
-				if(isRoomMatched($data.rooms[i], val, opts, true)) ct++;
+				if(isRoomMatched($data.rooms[i], mode, opts)) arr.push(i);
 			}
-			$("#quick-status").html(L['quickStatus'] + " " + ct);
-		});
-		$stage.menu.quickRoom.on('click', function(e){
-			$stage.dialog.room.hide();
-			showDialog($stage.dialog.quick);
-			if($stage.dialog.quick.is(':visible')){
-				$("#QuickDiag>.dialog-body").find("*").prop('disabled', false);
-				$("#quick-mode").trigger('change');
-				$("#quick-queue").html("");
-				$stage.dialog.quickOK.removeClass("searching").html(L['OK']);
+			if(arr.length){
+				i = arr[Math.floor(Math.random() * arr.length)];
+				$data._preQuick = true;
+				$("#room-" + i).trigger('click');
 			}
-		});
-		$stage.dialog.quickOK.on('click', function(e){
-			var mode = $("#quick-mode").val();
-			var opts = getGameOptions('quick');
+		}
+	});
+	$("#room-mode").on('change', function(e){
+		var v = $("#room-mode").val();
+		var rule = RULE[MODE[v]];
+		$("#game-mode-expl").html(L['modex' + v]);
 
-			if(getOnly() != "for-lobby") return;
-			if($stage.dialog.quickOK.hasClass("searching")){
-				$stage.dialog.quick.hide();
-				quickTick();
-				$stage.menu.quickRoom.trigger('click');
-				return;
-			}
-			$("#QuickDiag>.dialog-body").find("*").prop('disabled', true);
-			$stage.dialog.quickOK.addClass("searching").html("<i class='fa fa-spinner fa-spin'></i> " + L['NO']).prop('disabled', false);
-			$data._quickn = 0;
-			$data._quickT = addInterval(quickTick, 1000);
-			function quickTick(){
-				var i, arr = [];
-
-				if(!$stage.dialog.quick.is(':visible')){
-					clearTimeout($data._quickT);
-					return;
-				}
-				$("#quick-queue").html(L['quickQueue'] + " " + prettyTime($data._quickn++ * 1000));
-				for(i in $data.rooms){
-					if(isRoomMatched($data.rooms[i], mode, opts)) arr.push(i);
-				}
-				if(arr.length){
-					i = arr[Math.floor(Math.random() * arr.length)];
-					$data._preQuick = true;
-					$("#room-" + i).trigger('click');
-				}
-			}
+		updateGameOptions(rule.opts, 'room');
+		
+		$data._injpick = [];
+		if(rule.opts.indexOf("ijp") != -1) $("#room-injpick-panel").show();
+		else $("#room-injpick-panel").hide();
+		if(rule.rule == "Typing") $("#room-round").val(3);
+		$("#room-time").children("option").each(function(i, o){
+			$(o).html(Number($(o).val()) * rule.time + L['SECOND']);
 		});
-		$("#room-mode").on('change', function(e){
-			var v = $("#room-mode").val();
-			var rule = RULE[MODE[v]];
-			$("#game-mode-expl").html(L['modex' + v]);
-
-			updateGameOptions(rule.opts, 'room');
-
-			$data._injpick = [];
-			if(rule.opts.indexOf("ijp") != -1) $("#room-injpick-panel").show();
-			else $("#room-injpick-panel").hide();
-			if(rule.rule == "Typing") $("#room-round").val(3);
-			$("#room-time").children("option").each(function(i, o){
-				$(o).html(Number($(o).val()) * rule.time + L['SECOND']);
-			});
-		}).trigger('change');
-		$stage.menu.spectate.on('click', function(e){
-			var mode = $stage.menu.spectate.hasClass("toggled");
-
-			if(mode){
-				send('form', { mode: "J" });
-				$stage.menu.spectate.removeClass("toggled");
-			}else{
-				send('form', { mode: "S" });
-				$stage.menu.spectate.addClass("toggled");
-			}
-		});
-		$stage.menu.shop.on('click', function(e){
-			if($data._shop = !$data._shop){
-				loadShop();
-				$stage.menu.shop.addClass("toggled");
-			}else{
-				$stage.menu.shop.removeClass("toggled");
-			}
-			updateUI();
-		});
-		$(".shop-type").on('click', function(e){
-			var $target = $(e.currentTarget);
-			var type = $target.attr('id').slice(10);
-
-			$(".shop-type.selected").removeClass("selected");
-			$target.addClass("selected");
-
-			filterShop(type == 'all' || $target.attr('value'));
-		});
-		$stage.menu.dict.on('click', function(e){
-			showDialog($stage.dialog.dict);
-		});
-		$stage.menu.wordPlus.on('click', function(e){
-			showDialog($stage.dialog.wordPlus);
-		});
-		$stage.menu.invite.on('click', function(e){
-			showDialog($stage.dialog.invite);
-			updateUserList(true);
-		});
-		$stage.menu.practice.on('click', function(e){
-			if(RULE[MODE[$data.room.mode]].ai){
-				$("#PracticeDiag .dialog-title").html(L['practice']);
-				$("#ai-team").val(0).prop('disabled', true);
-				showDialog($stage.dialog.practice);
-			}else{
-				send('practice', { level: -1 });
-			}
-		});
-		$stage.menu.ready.on('click', function(e){
-			send('ready');
-		});
-		$stage.menu.start.on('click', function(e){
-			send('start');
-		});
-		$stage.menu.exit.on('click', function(e){
-			if($data.room.gaming){
-				if(!confirm(L['sureExit'])) return;
-				clearGame();
-			}
-			send('leave');
-		});
-		$stage.menu.replay.on('click', function(e){
-			if($data._replay){
-				replayStop();
-			}
-			showDialog($stage.dialog.replay);
-			initReplayDialog();
-			if($stage.dialog.replay.is(':visible')){
-				$("#replay-file").trigger('change');
-			}
-		});
-		$stage.menu.leaderboard.on('click', function(e){
-			$data._lbpage = 0;
-			if($stage.dialog.leaderboard.is(":visible")){
-				$stage.dialog.leaderboard.hide();
-			}else $.get("/ranking", function(res){
-				drawLeaderboard(res);
-				showDialog($stage.dialog.leaderboard);
-			});
-		});
-		$stage.dialog.lbPrev.on('click', function(e){
-			$(e.currentTarget).attr('disabled', true);
-			$.get("/ranking?p=" + ($data._lbpage - 1), function(res){
-				drawLeaderboard(res);
-			});
-		});
-		$stage.dialog.lbMe.on('click', function(e){
-			$(e.currentTarget).attr('disabled', true);
-			$.get("/ranking?id=" + $data.id, function(res){
-				drawLeaderboard(res);
-			});
-		});
-		$stage.dialog.lbNext.on('click', function(e){
-			$(e.currentTarget).attr('disabled', true);
-			$.get("/ranking?p=" + ($data._lbpage + 1), function(res){
-				drawLeaderboard(res);
-			});
-		});
-		$stage.dialog.settingServer.on('click', function(e){
-			location.href = "/";
-		});
-		$stage.dialog.settingOK.on('click', function(e){
-			applyOptions({
-				bv: $("#bgm-volume").val(),
-						 ev: $("#effect-volume").val(),
-						 di: $("#deny-invite").is(":checked"),
-						 dw: $("#deny-whisper").is(":checked"),
-						 df: $("#deny-friend").is(":checked"),
-						 ar: $("#auto-ready").is(":checked"),
-						 su: $("#sort-user").is(":checked"),
-						 ow: $("#only-waiting").is(":checked"),
-						 ou: $("#only-unlock").is(":checked")
-			});
-			$.cookie('kks', JSON.stringify($data.opts));
-			$stage.dialog.setting.hide();
-		});
-		$stage.dialog.profileLevel.on('click', function(e){
-			$("#PracticeDiag .dialog-title").html(L['robot']);
-			$("#ai-team").prop('disabled', false);
+	}).trigger('change');
+	$stage.menu.spectate.on('click', function(e){
+		var mode = $stage.menu.spectate.hasClass("toggled");
+		
+		if(mode){
+			send('form', { mode: "J" });
+			$stage.menu.spectate.removeClass("toggled");
+		}else{
+			send('form', { mode: "S" });
+			$stage.menu.spectate.addClass("toggled");
+		}
+	});
+	$stage.menu.shop.on('click', function(e){
+		if($data._shop = !$data._shop){
+			loadShop();
+			$stage.menu.shop.addClass("toggled");
+		}else{
+			$stage.menu.shop.removeClass("toggled");
+		}
+		updateUI();
+	});
+	$(".shop-type").on('click', function(e){
+		var $target = $(e.currentTarget);
+		var type = $target.attr('id').slice(10);
+		
+		$(".shop-type.selected").removeClass("selected");
+		$target.addClass("selected");
+		
+		filterShop(type == 'all' || $target.attr('value'));
+	});
+	$stage.menu.dict.on('click', function(e){
+		showDialog($stage.dialog.dict);
+	});
+	$stage.menu.wordPlus.on('click', function(e){
+		showDialog($stage.dialog.wordPlus);
+	});
+	$stage.menu.invite.on('click', function(e){
+		showDialog($stage.dialog.invite);
+		updateUserList(true);
+	});
+	$stage.menu.practice.on('click', function(e){
+		if(RULE[MODE[$data.room.mode]].ai){
+			$("#PracticeDiag .dialog-title").html(L['practice']);
+			$("#ai-team").val(0).prop('disabled', true);
 			showDialog($stage.dialog.practice);
+		}else{
+			send('practice', { level: -1 });
+		}
+	});
+	$stage.menu.ready.on('click', function(e){
+		send('ready');
+	});
+	$stage.menu.start.on('click', function(e){
+		send('start');
+	});
+	$stage.menu.exit.on('click', function(e){
+		if($data.room.gaming){
+			if(!confirm(L['sureExit'])) return;
+			clearGame();
+		}
+		send('leave');
+	});
+	$stage.menu.replay.on('click', function(e){
+		if($data._replay){
+			replayStop();
+		}
+		showDialog($stage.dialog.replay);
+		initReplayDialog();
+		if($stage.dialog.replay.is(':visible')){
+			$("#replay-file").trigger('change');
+		}
+	});
+	$stage.menu.leaderboard.on('click', function(e){
+		$data._lbpage = 0;
+		if($stage.dialog.leaderboard.is(":visible")){
+			$stage.dialog.leaderboard.hide();
+		}else $.get("/ranking", function(res){
+			drawLeaderboard(res);
+			showDialog($stage.dialog.leaderboard);
 		});
-		$stage.dialog.practiceOK.on('click', function(e){
-			var level = $("#practice-level").val();
-			var team = $("#ai-team").val();
+	});
+	$stage.dialog.lbPrev.on('click', function(e){
+		$(e.currentTarget).attr('disabled', true);
+		$.get("/ranking?p=" + ($data._lbpage - 1), function(res){
+			drawLeaderboard(res);
+		});
+	});
+	$stage.dialog.lbMe.on('click', function(e){
+		$(e.currentTarget).attr('disabled', true);
+		$.get("/ranking?id=" + $data.id, function(res){
+			drawLeaderboard(res);
+		});
+	});
+	$stage.dialog.lbNext.on('click', function(e){
+		$(e.currentTarget).attr('disabled', true);
+		$.get("/ranking?p=" + ($data._lbpage + 1), function(res){
+			drawLeaderboard(res);
+		});
+	});
+	$stage.dialog.settingServer.on('click', function(e){
+		location.href = "/";
+	});
+	$stage.dialog.settingOK.on('click', function(e){
+		applyOptions({
+			bv: $("#bgm-volume").val(),
+			ev: $("#effect-volume").val(),
+			di: $("#deny-invite").is(":checked"),
+			dw: $("#deny-whisper").is(":checked"),
+			df: $("#deny-friend").is(":checked"),
+			ar: $("#auto-ready").is(":checked"),
+			su: $("#sort-user").is(":checked"),
+			ow: $("#only-waiting").is(":checked"),
+			ou: $("#only-unlock").is(":checked")
+		});
+		$.cookie('kks', JSON.stringify($data.opts));
+		$stage.dialog.setting.hide();
+	});
+	$stage.dialog.profileLevel.on('click', function(e){
+		$("#PracticeDiag .dialog-title").html(L['robot']);
+		$("#ai-team").prop('disabled', false);
+		showDialog($stage.dialog.practice);
+	});
+	$stage.dialog.practiceOK.on('click', function(e){
+		var level = $("#practice-level").val();
+		var team = $("#ai-team").val();
+		
+		$stage.dialog.practice.hide();
+		if($("#PracticeDiag .dialog-title").html() == L['robot']){
+			send('setAI', { target: $data._profiled, level: level, team: team });
+		}else{
+			send('practice', { level: level });
+		}
+	});
+	$stage.dialog.roomOK.on('click', function(e){
+		var i, k, opts = {
+			injpick: $data._injpick
+		};
+		for(i in OPTIONS){
+			k = OPTIONS[i].name.toLowerCase();
+			opts[k] = $("#room-" + k).is(':checked');
+		}
+		send($data.typeRoom, {
+			title: $("#room-title").val().trim() || $("#room-title").attr('placeholder').trim(),
+			password: $("#room-pw").val(),
+			limit: $("#room-limit").val(),
+			mode: $("#room-mode").val(),
+			round: $("#room-round").val(),
+			time: $("#room-time").val(),
+			opts: opts,
+		});
+		$stage.dialog.room.hide();
+	});
+	$stage.dialog.resultOK.on('click', function(e){
+		if($data._resultPage == 1 && $data._resultRank){
+			drawRanking($data._resultRank[$data.id]);
+			return;
+		}
+		if($data.practicing){
+			$data.room.gaming = true;
+			send('leave');
+		}
+		$data.resulting = false;
+		$stage.dialog.result.hide();
+		delete $data._replay;
+		delete $data._resultRank;
+		$stage.box.room.height(360);
+		playBGM('lobby');
+		forkChat();
+		updateUI();
+	});
+	$stage.dialog.resultSave.on('click', function(e){
+		var date = new Date($rec.time);
+		var blob = new Blob([ JSON.stringify($rec) ], { type: "text/plain" });
+		var url = URL.createObjectURL(blob);
+		var fileName = "KKuTu" + (
+			date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " "
+			+ date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds()
+		) + ".kkt";
+		var $a = $("<a>").attr({
+			'download': fileName,
+			'href': url
+		}).on('click', function(e){
+			$a.remove();
+		});
+		$("#Jungle").append($a);
+		$a[0].click();
+	});
+	$stage.dialog.dictInjeong.on('click', function(e){
+		var $target = $(e.currentTarget);
+		
+		if($target.is(':disabled')) return;
+		if(!$("#dict-theme").val()) return;
+		$target.prop('disabled', true);
+		$("#dict-output").html(L['searching']);
+		$.get("/injeong/" + $("#dict-input").val() + "?theme=" + $("#dict-theme").val(), function(res){
+			addTimeout(function(){
+				$target.prop('disabled', false);
+			}, 2000);
+			if(res.error) return $("#dict-output").html(res.error + ": " + L['wpFail_' + res.error]);
+			
+			$("#dict-output").html(L['wpSuccess'] + "(" + res.message + ")");
+		});
+	});
+	$stage.dialog.dictSearch.on('click', function(e){
+		var $target = $(e.currentTarget);
+		
+		if($target.is(':disabled')) return;
+		$target.prop('disabled', true);
+		$("#dict-output").html(L['searching']);
+		tryDict($("#dict-input").val(), function(res){
+			addTimeout(function(){
+				$target.prop('disabled', false);
+			}, 500);
+			if(res.error) return $("#dict-output").html(res.error + ": " + L['wpFail_' + res.error]);
+			
+			$("#dict-output").html(processWord(res.word, res.mean, res.theme, res.type.split(',')));
+		});
+	}).hotkey($("#dict-input"), 13);
+	$stage.dialog.wordPlusOK.on('click', function(e){
+		var t;
+		if($stage.dialog.wordPlusOK.hasClass("searching")) return;
+		if(!(t = $("#wp-input").val())) return;
+		t = t.replace(/[^a-z가-힣]/g, "");
+		if(t.length < 2) return;
+		
+		$("#wp-input").val("");
+		$(e.currentTarget).addClass("searching").html("<i class='fa fa-spin fa-spinner'></i>");
+		send('wp', { value: t });
+	}).hotkey($("#wp-input"), 13);
+	$stage.dialog.inviteRobot.on('click', function(e){
+		requestInvite("AI");
+	});
+	$stage.box.me.on('click', function(e){
+		requestProfile($data.id);
+	});
+	$stage.dialog.roomInfoJoin.on('click', function(e){
+		$stage.dialog.roomInfo.hide();
+		tryJoin($data._roominfo);
+	});
+	$stage.dialog.profileHandover.on('click', function(e){
+		if(!confirm(L['sureHandover'])) return;
+		send('handover', { target: $data._profiled });
+	});
+	$stage.dialog.profileKick.on('click', function(e){
+		send('kick', { robot: $data.robots.hasOwnProperty($data._profiled), target: $data._profiled });
+	});
+	$stage.dialog.profileShut.on('click', function(e){
+		var o = $data.users[$data._profiled];
+		
+		if(!o) return;
+		toggleShutBlock(o.profile.title || o.profile.name);
+	});
+	$stage.dialog.profileWhisper.on('click', function(e){
+		var o = $data.users[$data._profiled];
+		
+		$stage.talk.val("/e " + (o.profile.title || o.profile.name).replace(/\s/g, "") + " ").focus();
+	});
+	$stage.dialog.profileDress.on('click', function(e){
+		// alert(L['error_555']);
+		if($data.guest) return fail(421);
+		if($data._gaming) return fail(438);
+		if(showDialog($stage.dialog.dress)) $.get("/box", function(res){
+			if(res.error) return fail(res.error);
+			
+			$data.box = res;
+			drawMyDress();
+		});
+	});
+	$stage.dialog.dressOK.on('click', function(e){
+		const data = {};
 
-			$stage.dialog.practice.hide();
-			if($("#PracticeDiag .dialog-title").html() == L['robot']){
-				send('setAI', { target: $data._profiled, level: level, team: team });
-			}else{
-				send('practice', { level: level });
-			}
-		});
-		$stage.dialog.roomOK.on('click', function(e){
-			var i, k, opts = {
-				injpick: $data._injpick
-			};
-			for(i in OPTIONS){
-				k = OPTIONS[i].name.toLowerCase();
-				opts[k] = $("#room-" + k).is(':checked');
-			}
-			send($data.typeRoom, {
-				title: $("#room-title").val().trim() || $("#room-title").attr('placeholder').trim(),
-				 password: $("#room-pw").val(),
-				 limit: $("#room-limit").val(),
-				 mode: $("#room-mode").val(),
-				 round: $("#room-round").val(),
-				 time: $("#room-time").val(),
-				 opts: opts,
-			});
-			$stage.dialog.room.hide();
-		});
-		$stage.dialog.resultOK.on('click', function(e){
-			if($data._resultPage == 1 && $data._resultRank){
-				drawRanking($data._resultRank[$data.id]);
-				return;
-			}
-			if($data.practicing){
-				$data.room.gaming = true;
-				send('leave');
-			}
-			$data.resulting = false;
-			$stage.dialog.result.hide();
-			delete $data._replay;
-			delete $data._resultRank;
-			$stage.box.room.height(360);
-			playBGM('lobby');
-			forkChat();
-			updateUI();
-		});
-		$stage.dialog.resultSave.on('click', function(e){
-			var date = new Date($rec.time);
-			var blob = new Blob([ JSON.stringify($rec) ], { type: "text/plain" });
-			var url = URL.createObjectURL(blob);
-			var fileName = "KKuTu" + (
-				date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " "
-				+ date.getHours() + "-" + date.getMinutes() + "-" + date.getSeconds()
-			) + ".kkt";
-			var $a = $("<a>").attr({
-				'download': fileName,
-				'href': url
-			}).on('click', function(e){
-				$a.remove();
-			});
-			$("#Jungle").append($a);
-			$a[0].click();
-		});
-		$stage.dialog.dictInjeong.on('click', function(e){
-			var $target = $(e.currentTarget);
-
-			if($target.is(':disabled')) return;
-			if(!$("#dict-theme").val()) return;
-			$target.prop('disabled', true);
-			$("#dict-output").html(L['searching']);
-			$.get("/injeong/" + $("#dict-input").val() + "?theme=" + $("#dict-theme").val(), function(res){
-				addTimeout(function(){
-					$target.prop('disabled', false);
-				}, 2000);
-				if(res.error) return $("#dict-output").html(res.error + ": " + L['wpFail_' + res.error]);
-
-				$("#dict-output").html(L['wpSuccess'] + "(" + res.message + ")");
-			});
-		});
-		$stage.dialog.dictSearch.on('click', function(e){
-			var $target = $(e.currentTarget);
-
-			if($target.is(':disabled')) return;
-			$target.prop('disabled', true);
-			$("#dict-output").html(L['searching']);
-			tryDict($("#dict-input").val(), function(res){
-				addTimeout(function(){
-					$target.prop('disabled', false);
-				}, 500);
-				if(res.error) return $("#dict-output").html(res.error + ": " + L['wpFail_' + res.error]);
-
-				$("#dict-output").html(processWord(res.word, res.mean, res.theme, res.type.split(',')));
-			});
-		}).hotkey($("#dict-input"), 13);
-		$stage.dialog.wordPlusOK.on('click', function(e){
-			var t;
-			if($stage.dialog.wordPlusOK.hasClass("searching")) return;
-			if(!(t = $("#wp-input").val())) return;
-			t = t.replace(/[^a-z가-힣]/g, "");
-			if(t.length < 2) return;
-
-			$("#wp-input").val("");
-			$(e.currentTarget).addClass("searching").html("<i class='fa fa-spin fa-spinner'></i>");
-			send('wp', { value: t });
-		}).hotkey($("#wp-input"), 13);
-		$stage.dialog.inviteRobot.on('click', function(e){
-			requestInvite("AI");
-		});
-		$stage.box.me.on('click', function(e){
-			requestProfile($data.id);
-		});
-		$stage.dialog.roomInfoJoin.on('click', function(e){
-			$stage.dialog.roomInfo.hide();
-			tryJoin($data._roominfo);
-		});
-		$stage.dialog.profileHandover.on('click', function(e){
-			if(!confirm(L['sureHandover'])) return;
-			send('handover', { target: $data._profiled });
-		});
-		$stage.dialog.profileKick.on('click', function(e){
-			send('kick', { robot: $data.robots.hasOwnProperty($data._profiled), target: $data._profiled });
-		});
-		$stage.dialog.profileShut.on('click', function(e){
-			var o = $data.users[$data._profiled];
-
-			if(!o) return;
-			toggleShutBlock(o.profile.title || o.profile.name);
-		});
-		$stage.dialog.profileWhisper.on('click', function(e){
-			var o = $data.users[$data._profiled];
-
-			$stage.talk.val("/e " + (o.profile.title || o.profile.name).replace(/\s/g, "") + " ").focus();
-		});
-		$stage.dialog.profileDress.on('click', function(e){
-			// alert(L['error_555']);
-			if($data.guest) return fail(421);
-			if($data._gaming) return fail(438);
-			if(showDialog($stage.dialog.dress)) $.get("/box", function(res){
-				if(res.error) return fail(res.error);
-
-													  $data.box = res;
-				drawMyDress();
-			});
-		});
-		$stage.dialog.dressOK.on('click', function(e){
-			const data = {};
-
-			$(e.currentTarget).attr('disabled', true);
-
-			if($("#dress-nickname").val() && $("#dress-nickname").val() !== $data.nickname) data.nickname = $("#dress-nickname").val();
-			if($("#dress-exordial").val() !== undefined && $("#dress-exordial").val() !== $data.exordial) data.exordial = $("#dress-exordial").val();
-
-			if(data.nickname && $data.NICKNAME_LIMIT.REGEX.test(data.nickname)) data.nickname = confirm(L.confirmNickPolicy) ? data.nickname.replace($data.NICKNAME_LIMIT.REGEX, "") : undefined;
-			if(!data.nickname && data.exordial === undefined){
-				$stage.dialog.dressOK.attr("disabled", false);
-				$stage.dialog.dress.hide();
-				return;
-			}
-			if(confirm($data.NICKNAME_LIMIT.TERM > 0 ? L.confirmNickChangeLimit.replace("{V1}", $data.NICKNAME_LIMIT.TERM) : L.confirmNickChange)) $.post("/profile", data, function(res){
-				if(res.error) return fail(res.error);
-																																						  const message = [];
-				if(data.nickname){
-					$("#account-info").text($data.users[$data.id].nickname = $data.users[$data.id].profile.title = $data.users[$data.id].profile.name = $data.nickname = data.nickname);
-					message.push(L.nickChanged.replace("{V1}", data.nickname));
-				}
-				if(data.exordial !== undefined) message.push(L.exorChanged.replace("{V1}", $data.users[$data.id].exordial = $data.exordial = data.exordial));
-
-																																						  send("updateProfile", data, true);
-																																						  alert(message.join("\n"));
-			});
+		$(e.currentTarget).attr('disabled', true);
+		
+		if($("#dress-nickname").val() && $("#dress-nickname").val() !== $data.nickname) data.nickname = $("#dress-nickname").val();
+		if($("#dress-exordial").val() !== undefined && $("#dress-exordial").val() !== $data.exordial) data.exordial = $("#dress-exordial").val();
+		
+		if(data.nickname && $data.NICKNAME_LIMIT.REGEX.test(data.nickname)) data.nickname = confirm(L.confirmNickPolicy) ? data.nickname.replace($data.NICKNAME_LIMIT.REGEX, "") : undefined;
+		if(!data.nickname && data.exordial === undefined){
 			$stage.dialog.dressOK.attr("disabled", false);
 			$stage.dialog.dress.hide();
+			return;
+		}
+		if(confirm($data.NICKNAME_LIMIT.TERM > 0 ? L.confirmNickChangeLimit.replace("{V1}", $data.NICKNAME_LIMIT.TERM) : L.confirmNickChange)) $.post("/profile", data, function(res){
+			if(res.error) return fail(res.error);
+			const message = [];
+			if(data.nickname){
+				$("#account-info").text($data.users[$data.id].nickname = $data.users[$data.id].profile.title = $data.users[$data.id].profile.name = $data.nickname = data.nickname);
+				message.push(L.nickChanged.replace("{V1}", data.nickname));
+			}
+			if(data.exordial !== undefined) message.push(L.exorChanged.replace("{V1}", $data.users[$data.id].exordial = $data.exordial = data.exordial));
+			
+			send("updateProfile", data, true);
+			alert(message.join("\n"));
 		});
-		$("#DressDiag .dress-type").on('click', function(e){
-			var $target = $(e.currentTarget);
-			var type = $target.attr('id').slice(11);
-
-			$(".dress-type.selected").removeClass("selected");
-			$target.addClass("selected");
-
-			drawMyGoods(type == 'all' || $target.attr('value'));
+		$stage.dialog.dressOK.attr("disabled", false);
+		$stage.dialog.dress.hide();
+	});
+	$("#DressDiag .dress-type").on('click', function(e){
+		var $target = $(e.currentTarget);
+		var type = $target.attr('id').slice(11);
+		
+		$(".dress-type.selected").removeClass("selected");
+		$target.addClass("selected");
+		
+		drawMyGoods(type == 'all' || $target.attr('value'));
+	});
+	$("#dress-cf").on('click', function(e){
+		if($data._gaming) return fail(438);
+		if(showDialog($stage.dialog.charFactory)) drawCharFactory();
+	});
+	$stage.dialog.cfCompose.on('click', function(e){
+		if(!$stage.dialog.cfCompose.hasClass("cf-composable")) return fail(436);
+		if(!confirm(L['cfSureCompose'])) return;
+		
+		$.post("/cf", { tray: $data._tray.join('|') }, function(res){
+			var i;
+			
+			if(res.error) return fail(res.error);
+			send('refresh');
+			alert(L['cfComposed']);
+			$data.users[$data.id].money = res.money;
+			$data.box = res.box;
+			for(i in res.gain) queueObtain(res.gain[i]);
+			
+			drawMyDress($data._avGroup);
+			updateMe();
+			drawCharFactory();
 		});
-		$("#dress-cf").on('click', function(e){
-			if($data._gaming) return fail(438);
-			if(showDialog($stage.dialog.charFactory)) drawCharFactory();
+	});
+	$("#room-injeong-pick").on('click', function(e){
+		var rule = RULE[MODE[$("#room-mode").val()]];
+		var i;
+		
+		$("#injpick-list>div").hide();
+		if(rule.lang == "ko"){
+			$data._ijkey = "#ko-pick-";
+			$("#ko-pick-list").show();
+		}else if(rule.lang == "en"){
+			$data._ijkey = "#en-pick-";
+			$("#en-pick-list").show();
+		}
+		$stage.dialog.injPickNo.trigger('click');
+		for(i in $data._injpick){
+			$($data._ijkey + $data._injpick[i]).prop('checked', true);
+		}
+		showDialog($stage.dialog.injPick);
+	});
+	$stage.dialog.injPickAll.on('click', function(e){
+		$("#injpick-list input").prop('checked', true);
+	});
+	$stage.dialog.injPickNo.on('click', function(e){
+		$("#injpick-list input").prop('checked', false);
+	});
+	$stage.dialog.injPickOK.on('click', function(e){
+		var $target = $($data._ijkey + "list");
+		var list = [];
+		
+		$data._injpick = $target.find("input").each(function(i, o){
+			var $o = $(o);
+			var id = $o.attr('id').slice(8);
+			
+			if($o.is(':checked')) list.push(id);
 		});
-			$stage.dialog.cfCompose.on('click', function(e){
-				if(!$stage.dialog.cfCompose.hasClass("cf-composable")) return fail(436);
-				if(!confirm(L['cfSureCompose'])) return;
-
-				$.post("/cf", { tray: $data._tray.join('|') }, function(res){
-					var i;
-
-					if(res.error) return fail(res.error);
-					send('refresh');
-					alert(L['cfComposed']);
-					$data.users[$data.id].money = res.money;
-					$data.box = res.box;
-					for(i in res.gain) queueObtain(res.gain[i]);
-
-					drawMyDress($data._avGroup);
-					updateMe();
-					drawCharFactory();
-				});
-			});
-			$("#room-injeong-pick").on('click', function(e){
-				var rule = RULE[MODE[$("#room-mode").val()]];
-				var i;
-
-				$("#injpick-list>div").hide();
-				if(rule.lang == "ko"){
-					$data._ijkey = "#ko-pick-";
-					$("#ko-pick-list").show();
-				}else if(rule.lang == "en"){
-					$data._ijkey = "#en-pick-";
-					$("#en-pick-list").show();
+		$data._injpick = list;
+		$stage.dialog.injPick.hide();
+	});
+	$stage.dialog.kickVoteY.on('click', function(e){
+		send('kickVote', { agree: true });
+		clearTimeout($data._kickTimer);
+		$stage.dialog.kickVote.hide();
+	});
+	$stage.dialog.kickVoteN.on('click', function(e){
+		send('kickVote', { agree: false });
+		clearTimeout($data._kickTimer);
+		$stage.dialog.kickVote.hide();
+	});
+	$stage.dialog.purchaseOK.on('click', function(e){
+		$.post("/buy/" + $data._sgood, function(res){
+			var my = $data.users[$data.id];
+			
+			if(res.error) return fail(res.error);
+			alert(L['purchased']);
+			my.money = res.money;
+			my.box = res.box;
+			updateMe();
+		});
+		$stage.dialog.purchase.hide();
+	});
+	$stage.dialog.purchaseNO.on('click', function(e){
+		$stage.dialog.purchase.hide();
+	});
+	$stage.dialog.obtainOK.on('click', function(e){
+		var obj = $data._obtain.shift();
+		
+		if(obj) drawObtain(obj);
+		else $stage.dialog.obtain.hide();
+	});
+	for(i=0; i<5; i++) $("#team-" + i).on('click', onTeam);
+	function onTeam(e){
+		if($(".team-selector").hasClass("team-unable")) return;
+		
+		send('team', { value: $(e.currentTarget).attr('id').slice(5) });
+	}
+// 리플레이
+	function initReplayDialog(){
+		$stage.dialog.replayView.attr('disabled', true);
+	}
+	$("#replay-file").on('change', function(e){
+		var file = e.target.files[0];
+		var reader = new FileReader();
+		var $date = $("#replay-date").html("-");
+		var $version = $("#replay-version").html("-");
+		var $players = $("#replay-players").html("-");
+	
+		$rec = false;
+		$stage.dialog.replayView.attr('disabled', true);
+		if(!file) return;
+		reader.readAsText(file);
+		reader.onload = function(e){
+			var i, data;
+			
+			try{
+				data = JSON.parse(e.target.result);
+				$date.html((new Date(data.time)).toLocaleString());
+				$version.html(data.version);
+				$players.empty();
+				for(i in data.players){
+					var u = data.players[i];
+					var $p;
+					
+					$players.append($p = $("<div>").addClass("replay-player-bar ellipse")
+						.text(u.title)
+						.prepend(getLevelImage(u.data.score).addClass("users-level"))
+					);
+					if(u.id == data.me) $p.css('font-weight', "bold");
 				}
-				$stage.dialog.injPickNo.trigger('click');
-				for(i in $data._injpick){
-					$($data._ijkey + $data._injpick[i]).prop('checked', true);
-				}
-				showDialog($stage.dialog.injPick);
+				$rec = data;
+				$stage.dialog.replayView.attr('disabled', false);
+			}catch(ex){
+				console.warn(ex);
+				return alert(L['replayError']);
+			}
+		};
+	});
+	$stage.dialog.replayView.on('click', function(e){
+		replayReady();
+	});
+	
+// 스팸
+	addInterval(function(){
+		if(spamCount > 0) spamCount = 0;
+		else if(spamWarning > 0) spamWarning -= 0.03;
+	}, 1000);
+
+// 웹소켓 연결
+	function connect(){
+		ws = new _WebSocket($data.URL);
+		ws.onopen = function(e){
+			loading();
+			/*if($data.PUBLIC && mobile) $("#ad").append($("<ins>").addClass("daum_ddn_area")
+				.css({ 'display': "none", 'margin-top': "10px", 'width': "100%" })
+				.attr({
+					'data-ad-unit': "DAN-1ib8r0w35a0qb",
+					'data-ad-media': "4I8",
+					'data-ad-pubuser': "3iI",
+					'data-ad-type': "A",
+					'data-ad-width': "320",
+					'data-ad-height': "100"
+				})
+			).append($("<script>")
+				.attr({
+					'type': "text/javascript",
+					'src': "//t1.daumcdn.net/adfit/static/ad.min.js"
+				})
+			);*/
+		};
+		ws.onmessage = _onMessage = function(e){
+			onMessage(JSON.parse(e.data));
+		};
+		ws.onclose = function(e){
+			var ct = L['closed'] + " (#" + e.code + ")";
+			
+			if(rws) rws.close();
+			stopAllSounds();
+			alert(ct);
+			$.get("/kkutu_notice.html", function(res){
+				loading(res);
 			});
-			$stage.dialog.injPickAll.on('click', function(e){
-				$("#injpick-list input").prop('checked', true);
-			});
-			$stage.dialog.injPickNo.on('click', function(e){
-				$("#injpick-list input").prop('checked', false);
-			});
-			$stage.dialog.injPickOK.on('click', function(e){
-				var $target = $($data._ijkey + "list");
-				var list = [];
-
-				$data._injpick = $target.find("input").each(function(i, o){
-					var $o = $(o);
-					var id = $o.attr('id').slice(8);
-
-					if($o.is(':checked')) list.push(id);
-				});
-					$data._injpick = list;
-					$stage.dialog.injPick.hide();
-			});
-			$stage.dialog.kickVoteY.on('click', function(e){
-				send('kickVote', { agree: true });
-				clearTimeout($data._kickTimer);
-				$stage.dialog.kickVote.hide();
-			});
-			$stage.dialog.kickVoteN.on('click', function(e){
-				send('kickVote', { agree: false });
-				clearTimeout($data._kickTimer);
-				$stage.dialog.kickVote.hide();
-			});
-			$stage.dialog.purchaseOK.on('click', function(e){
-				$.post("/buy/" + $data._sgood, function(res){
-					var my = $data.users[$data.id];
-
-					if(res.error) return fail(res.error);
-					alert(L['purchased']);
-					my.money = res.money;
-					my.box = res.box;
-					updateMe();
-				});
-				$stage.dialog.purchase.hide();
-			});
-			$stage.dialog.purchaseNO.on('click', function(e){
-				$stage.dialog.purchase.hide();
-			});
-			$stage.dialog.obtainOK.on('click', function(e){
-				var obj = $data._obtain.shift();
-
-				if(obj) drawObtain(obj);
-				else $stage.dialog.obtain.hide();
-			});
-				for(i=0; i<5; i++) $("#team-" + i).on('click', onTeam);
-				function onTeam(e){
-					if($(".team-selector").hasClass("team-unable")) return;
-
-					send('team', { value: $(e.currentTarget).attr('id').slice(5) });
-				}
-				// 리플레이
-				function initReplayDialog(){
-					$stage.dialog.replayView.attr('disabled', true);
-				}
-				$("#replay-file").on('change', function(e){
-					var file = e.target.files[0];
-					var reader = new FileReader();
-					var $date = $("#replay-date").html("-");
-					var $version = $("#replay-version").html("-");
-					var $players = $("#replay-players").html("-");
-
-					$rec = false;
-					$stage.dialog.replayView.attr('disabled', true);
-					if(!file) return;
-					reader.readAsText(file);
-					reader.onload = function(e){
-						var i, data;
-
-						try{
-							data = JSON.parse(e.target.result);
-							$date.html((new Date(data.time)).toLocaleString());
-							$version.html(data.version);
-							$players.empty();
-							for(i in data.players){
-								var u = data.players[i];
-								var $p;
-
-								$players.append($p = $("<div>").addClass("replay-player-bar ellipse")
-								.text(u.title)
-								.prepend(getLevelImage(u.data.score).addClass("users-level"))
-								);
-								if(u.id == data.me) $p.css('font-weight', "bold");
-							}
-							$rec = data;
-							$stage.dialog.replayView.attr('disabled', false);
-						}catch(ex){
-							console.warn(ex);
-							return alert(L['replayError']);
-						}
-					};
-				});
-				$stage.dialog.replayView.on('click', function(e){
-					replayReady();
-				});
-
-				// 스팸
-				addInterval(function(){
-					if(spamCount > 0) spamCount = 0;
-					else if(spamWarning > 0) spamWarning -= 0.03;
-				}, 1000);
-
-					// 웹소켓 연결
-					function connect(){
-						ws = new _WebSocket($data.URL);
-						ws.onopen = function(e){
-							loading();
-							/*if($data.PUBLIC && mobile) $("#ad").append($("<ins>").addClass("daum_ddn_area")
-							 *	.css({ 'display': "none", 'margin-top': "10px", 'width': "100%" })
-							 *	.attr({
-							 *		'data-ad-unit': "DAN-1ib8r0w35a0qb",
-							 *		'data-ad-media': "4I8",
-							 *		'data-ad-pubuser': "3iI",
-							 *		'data-ad-type': "A",
-							 *		'data-ad-width': "320",
-							 *		'data-ad-height': "100"
-						})
-).append($("<script>")
-.attr({
-'type': "text/javascript",
-'src': "//t1.daumcdn.net/adfit/static/ad.min.js"
-						})
-);*/
-						};
-						ws.onmessage = _onMessage = function(e){
-							onMessage(JSON.parse(e.data));
-						};
-						ws.onclose = function(e){
-							var ct = L['closed'] + " (#" + e.code + ")";
-
-							if(rws) rws.close();
-							stopAllSounds();
-							alert(ct);
-							$.get("/kkutu_notice.html", function(res){
-								loading(res);
-							});
-						};
-						ws.onerror = function(e){
-							console.warn(L['error'], e);
-						};
-					}
+		};
+		ws.onerror = function(e){
+			console.warn(L['error'], e);
+		};
+	}
 });
-
 /**
  * Rule the words! KKuTu Online
  * Copyright (C) 2017 JJoriping(op@jjo.kr)
@@ -1925,192 +1917,270 @@ $lib.Sock.turnHint = function(data){
 };
 
 /**
- * rule_sansung.js
- * 산성비 게임 클라이언트 룰
+ * Rule the words! KKuTu Online
+ * 산성비 (KSB) 클라이언트 룰
  * 경로: Server/lib/Web/lib/kkutu/rule_sansung.js
  */
 
-// $lib.Sansung 에 등록될 함수들
-$lib.Sansung = (function () {
+// ── CSS ──────────────────────────────────────────────
+(function () {
+	if (document.getElementById('ss-style')) return;
+	var css = [
+		/* display 영역 자체를 flex로 가운데 정렬 */
+		'.jjo-display:has(#ss-wrap){',
+			'display:flex;',
+			'align-items:flex-start;',
+			'justify-content:center;',
+			'background:transparent !important;',
+		'}',
 
-    // ── 내부 상태 ──────────────────────────────────────
-    var _active  = false;
-    var _words   = {};   // id → { $el, word }
-    var _$area   = null; // 낙하 컨테이너
-    var _$board  = null; // 점수판
+		/* 캔버스 래퍼 */
+		'#ss-wrap{',
+			'position:relative;',
+			'width:460px;',
+			'height:340px;',
+			'background:rgba(0,0,0,0.6);',
+			'border-radius:12px;',
+			'overflow:hidden;',
+			'flex-shrink:0;',
+		'}',
 
-    // ── CSS (최초 1회 삽입) ─────────────────────────────
-    if (!document.getElementById("ss-style")) {
-        var _css = [
-            "#ss-area{",
-            "position:absolute;top:0;left:0;width:100%;height:100%;",
-            "overflow:hidden;pointer-events:none;z-index:15;",
-            "}",
-            ".ss-word{",
-            "position:absolute;",
-            "background:linear-gradient(135deg,#1a2a6c,#2d6a4f);",
-                "color:#fff;font-size:18px;font-weight:bold;",
-                "padding:5px 14px;border-radius:8px;white-space:nowrap;",
-                "border:1.5px solid #00c9ff88;",
-                "box-shadow:0 2px 8px rgba(0,0,0,.5);",
-                "animation:ss-fall linear forwards;",
-                "}",
-                ".ss-word.ss-hit{",
-                "background:linear-gradient(135deg,#11998e,#38ef7d)!important;",
-                "border-color:#38ef7d!important;",
-                "animation:ss-hit .38s ease-out forwards!important;",
-                "}",
-                ".ss-word.ss-miss{",
-                "background:linear-gradient(135deg,#c0392b,#8e44ad)!important;",
-                "border-color:#e74c3c!important;",
-                "animation:ss-miss .42s ease-in forwards!important;",
-                "}",
-                "@keyframes ss-fall{from{top:-55px}to{top:105%}}",
-                "@keyframes ss-hit{",
-                "0%{opacity:1;transform:scale(1.2)}",
-                "100%{opacity:0;transform:scale(.55) translateY(-25px)}",
-                "}",
-                "@keyframes ss-miss{",
-                "0%{opacity:1}",
-                "100%{opacity:0;transform:scale(1.3) translateY(20px)}",
-                "}",
-                "#ss-board{",
-                "position:absolute;top:8px;right:10px;",
-                "background:rgba(0,0,0,.65);color:#fff;",
-                "padding:8px 16px;border-radius:10px;",
-                "font-size:14px;z-index:20;min-width:120px;",
-                "pointer-events:none;",
-                "}",
-                ".ss-popup{",
-                "font-weight:bold;font-size:15px;",
-                "animation:ss-pop .9s ease-out forwards;",
-                "}",
-                ".ss-pos{color:#38ef7d;}",
-                ".ss-neg{color:#e74c3c;}",
-                "@keyframes ss-pop{",
-                "0%{opacity:1;transform:translateY(0)}",
-                "100%{opacity:0;transform:translateY(-22px)}",
-                "}"
-        ].join("");
-        $("<style id='ss-style'>").text(_css).appendTo("head");
-    }
+		/* 낙하 단어 */
+		'.ss-word{',
+			'position:absolute;',
+			'background:linear-gradient(135deg,#1a2a6c,#2d6a4f);',
+			'color:#fff;font-size:17px;font-weight:bold;',
+			'padding:4px 13px;border-radius:8px;white-space:nowrap;',
+			'border:1.5px solid #00c9ff88;',
+			'box-shadow:0 2px 8px rgba(0,0,0,.5);',
+			'transition:top linear;',
+			'pointer-events:none;',
+		'}',
 
-    // ── 내부 유틸 ──────────────────────────────────────
-    function _gameArea() {
-        // KKuTu 의 .GameBox 안에 삽입
-        return $(".GameBox").length ? $(".GameBox") : $("body");
-    }
+		/* 정답 애니메이션 */
+		'.ss-word.ss-hit{',
+			'transition:none !important;',
+			'animation:ss-hit .38s ease-out forwards;',
+		'}',
+		'@keyframes ss-hit{',
+			'0%{opacity:1;transform:scale(1.2)}',
+			'100%{opacity:0;transform:scale(.55) translateY(-25px)}',
+		'}',
 
-    function _updateScore(scores) {
-        if (!_$board || !scores) return;
-        var myScore = scores[$data.id] || 0;
-        _$board.find("#ss-my-score").html("점수: <b>" + myScore + "</b>");
-    }
+		/* 점수판 */
+		'#ss-score{',
+			'position:absolute;top:8px;right:10px;',
+			'background:rgba(0,0,0,.75);color:#fff;',
+			'padding:5px 12px;border-radius:7px;',
+			'font-size:14px;font-weight:bold;',
+			'z-index:20;pointer-events:none;',
+		'}',
 
-    function _popup(text, isPos) {
-        if (!_$board) return;
-        var $p = $("<div>")
-        .addClass("ss-popup " + (isPos ? "ss-pos" : "ss-neg"))
-        .text(text)
-        .appendTo(_$board);
-        addTimeout(function () { $p.remove(); }, 900);
-    }
+		/* 점수 팝업 */
+		'.ss-popup{',
+			'position:absolute;right:14px;top:34px;',
+			'font-weight:bold;font-size:15px;color:#38ef7d;',
+			'animation:ss-pop .9s ease-out forwards;',
+			'pointer-events:none;z-index:21;',
+		'}',
+		'@keyframes ss-pop{',
+			'0%{opacity:1;transform:translateY(0)}',
+			'100%{opacity:0;transform:translateY(-24px)}',
+		'}',
 
-    // ── 공개 API ──────────────────────────────────────
-    return {
-
-        // 게임 시작 시 호출
-        roundReady: function (data) {
-            _active = true;
-            _words  = {};
-
-            var $ga = _gameArea();
-            _$area  = $("<div id='ss-area'>").appendTo($ga);
-            _$board = $("<div id='ss-board'><span id='ss-my-score'>점수: <b>0</b></span></div>")
-            .appendTo($ga);
-        },
-
-        // 단어 등장 (서버: sansung-spawn)
-        spawn: function (data) {
-            if (!_active || !_$area) return;
-
-            var xPct = Math.floor(Math.random() * 72) + 8; // 8%~80%
-            var $el = $("<div>")
-            .addClass("ss-word")
-            .text(data.word)
-            .css({
-                left:              xPct + "%",
-                animationDuration: (data.fallDuration / 1000).toFixed(2) + "s"
-            })
-            .appendTo(_$area);
-
-            _words[data.id] = { $el: $el, word: data.word };
-            playSound("mission"); // 등장음
-        },
-
-        // 정답 (서버: sansung-hit)
-        hit: function (data) {
-            if (!_active) return;
-
-            var entry = _words[data.id];
-            if (entry) {
-                entry.$el.addClass("ss-hit");
-                addTimeout(function () { entry.$el.remove(); }, 400);
-                delete _words[data.id];
-            }
-
-            _updateScore(data.scores);
-
-            if (String(data.playerId) === String($data.id)) {
-                _popup("+" + data.score, true);
-            }
-
-            playSound("missing"); // 정답음
-        },
-
-        // 놓침 (서버: sansung-miss)
-        miss: function (data) {
-            if (!_active) return;
-
-            var entry = _words[data.id];
-            if (entry) {
-                entry.$el.addClass("ss-miss");
-                addTimeout(function () { entry.$el.remove(); }, 450);
-                delete _words[data.id];
-            }
-
-            _updateScore(data.scores);
-            _popup("-" + data.penalty, false);
-            playSound("horr"); // 실패음
-        },
-
-        // 게임 종료 (서버: sansung-end)
-        end: function (data) {
-            _updateScore(data.scores);
-            _active = false;
-            addTimeout(function () {
-                if (_$area)  { _$area.remove();  _$area  = null; }
-                if (_$board) { _$board.remove(); _$board = null; }
-                _words = {};
-            }, 1200);
-        }
-    };
+		/* 모레미(캐릭터 이미지) 숨기기 */
+		'#ss-active .game-user-image,',
+		'#ss-active .moremi{ display:none !important; }',
+		'#ss-active .game-user-title{ margin-left:0 !important; }'
+	].join('');
+	$('<style id="ss-style">').text(css).appendTo('head');
 }());
 
+// ── 내부 상태 ─────────────────────────────────────────
+$lib.Sansung._words  = {};
+$lib.Sansung._$wrap  = null;
+$lib.Sansung._$score = null;
+
+// ── roundReady ────────────────────────────────────────
+$lib.Sansung.roundReady = function (data, spec) {
+	clearBoard();
+	$data._relay     = true;
+	$data._roundTime = $data.room.time * 1000;
+	$data._fastTime  = 10000;
+
+	$lib.Sansung._words = {};
+
+	// cw 클래스로 넓은 화면 사용
+	$('.jjoriping,.rounds,.game-body').addClass('cw');
+
+	// 모레미 숨기기용 id 마킹
+	$('.game-body').attr('id', 'ss-active');
+
+	$stage.game.items.hide();
+	$stage.game.hints.hide();
+	$stage.game.cwcmd.hide();
+	$stage.game.bb.hide();
+	$stage.game.here.hide();
+
+	// 캔버스 래퍼 생성 (display 안, CSS flex로 자동 가운데)
+	$stage.game.display.empty();
+	$lib.Sansung._$wrap  = $('<div id="ss-wrap">').appendTo($stage.game.display);
+	$lib.Sansung._$score = $('<div id="ss-score">점수: 0</div>')
+		.appendTo($lib.Sansung._$wrap);
+
+	drawRound(data.round);
+	if (!spec) playSound('round_start');
+	clearInterval($data._tTime);
+};
+
+// ── turnStart ─────────────────────────────────────────
+$lib.Sansung.turnStart = function (data) {
+	clearInterval($data._tTime);
+	$data._roundTime = data.roundTime || ($data.room.time * 1000);
+	$data._tTime = addInterval(turnGoing, TICK);
+
+	// 게임 BGM: rain.mp3
+	playBGM('rain');
+};
+
+$lib.Jaqwi.turnGoing = function(){
+	var $rtb = $stage.game.roundBar;
+	var bRate;
+	var tt;
+	
+	if(!$data.room) clearInterval($data._tTime);
+	$data._roundTime -= TICK;
+	
+	tt = $data._spectate ? L['stat_spectate'] : ($data._roundTime*0.001).toFixed(1) + L['SECOND'];
+	$rtb
+		.width($data._roundTime/$data.room.time*0.1 + "%")
+		.html(tt);
+		
+	if(!$rtb.hasClass("round-extreme")) if($data._roundTime <= $data._fastTime){
+		bRate = $data.bgm.currentTime / $data.bgm.duration;
+		if($data.bgm.paused) stopBGM();
+		else playBGM('jaqwiF');
+		$data.bgm.currentTime = $data.bgm.duration * bRate;
+		$rtb.addClass("round-extreme");
+	}
+};
+
+// ── 단어 등장 (서버: sansung-word) ────────────────────
+$lib.Sansung.onWord = function (data) {
+	if (!$lib.Sansung._$wrap) return;
+
+	var wordId  = data.wordId;
+	var word    = data.word;
+	var timeout = data.fallDuration;
+	var laneX   = Math.floor(Math.random() * 70) + 5; // 5%~75%
+
+	var $word = $('<div>')
+		.addClass('ss-word')
+		.text(word)
+		.css({ left: laneX + '%', top: '-8%', transition: 'none' })
+		.appendTo($lib.Sansung._$wrap);
+
+	// 1프레임 후 transition 시작
+	addTimeout(function () {
+		$word.css({
+			transition: 'top ' + timeout + 'ms linear',
+			top: '108%'
+		});
+	}, 20);
+
+	$lib.Sansung._words[wordId] = {
+		$el: $word, createdAt: Date.now(), timeout: timeout
+	};
+
+	// 단어 등장 시: mission.mp3
+	playSound('mission');
+};
+
+// ── turnEnd ───────────────────────────────────────────
+$lib.Sansung.turnEnd = function (id, data) {
+	var wObj, $el;
+
+	// 라운드 종료 (wordId 없음)
+	if (!data.ok && data.wordId === undefined) {
+		$data._relay = false;
+		clearInterval($data._tTime);
+		stopBGM();
+
+		// 남은 단어 전부 제거
+		$.each($lib.Sansung._words, function (wId, w) { if (w.$el) w.$el.remove(); });
+		$lib.Sansung._words = {};
+
+		// 래퍼 제거
+		if ($lib.Sansung._$wrap) {
+			$lib.Sansung._$wrap.remove();
+			$lib.Sansung._$wrap  = null;
+			$lib.Sansung._$score = null;
+		}
+
+		// 모레미 숨김 해제 (결과창에 캐릭터 다시 표시)
+		$('.game-body').removeAttr('id');
+
+		playSound('horr');
+		return;
+	}
+
+	wObj = $lib.Sansung._words[data.wordId];
+
+	// 바닥 도달 (놓침): fail.mp3
+	if (!data.ok) {
+		if (wObj) { wObj.$el.remove(); delete $lib.Sansung._words[data.wordId]; }
+		playSound('fail');
+		return;
+	}
+
+	// 정답: success.mp3
+	if (wObj) {
+		$el = wObj.$el;
+		$el.css({ transition: 'none', top: $el.position().top + 'px' });
+		$el.addClass('ss-hit');
+		addTimeout(function () { $el.remove(); }, 400);
+		delete $lib.Sansung._words[data.wordId];
+	}
+
+	if (data.scores) {
+		var myScore = data.scores[$data.id] || 0;
+		if ($lib.Sansung._$score) $lib.Sansung._$score.text('점수: ' + myScore);
+
+		// 내가 맞췄을 때만 팝업
+		if (String(data.playerId) === String($data.id) && $lib.Sansung._$wrap) {
+			var $p = $('<div>').addClass('ss-popup').text('+' + data.score)
+				.appendTo($lib.Sansung._$wrap);
+			addTimeout(function () { $p.remove(); }, 900);
+		}
+
+		// 점수판 반영
+		if (data.playerId) {
+			var o = $data.users[data.playerId] || $data.robots[data.playerId];
+			if (o) {
+				o.game.score = data.scores[data.playerId];
+				updateScore(data.playerId, o.game.score);
+			}
+		}
+		playSound('success');
+	}
+};
+
+$lib.Sansung.turnGoing = $lib.Jaqwi.turnGoing;
+$lib.Sansung.turnHint  = function () {};
 /**
  * Rule the words! KKuTu Online
  * Copyright (C) 2017 JJoriping(op@jjo.kr)
- *
+ * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * 
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * 
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -2123,14 +2193,14 @@ function zeroPadding(num, len){ var s = num.toString(); return "000000000000000"
 function send(type, data, toMaster){
 	var i, r = { type: type };
 	var subj = toMaster ? ws : (rws || ws);
-
+	
 	for(i in data) r[i] = data[i];
-
+	
 	/*if($data._talkValue == r.value){
-	 *	if(++$data._sameTalk >= 3) return fail();
-}else $data._sameTalk = 0;
-$data._talkValue = r.value;*/
-
+		if(++$data._sameTalk >= 3) return fail();
+	}else $data._sameTalk = 0;
+	$data._talkValue = r.value;*/
+	
 	if(type != "test") if(spamCount++ > 10){
 		if(++spamWarning >= 3) return subj.close();
 		spamCount = 5;
@@ -2147,7 +2217,7 @@ function loading(text){
 }
 function showDialog($d, noToggle){
 	var size = [ $(window).width(), $(window).height() ];
-
+	
 	if(!noToggle && $d.is(":visible")){
 		$d.hide();
 		return false;
@@ -2155,17 +2225,17 @@ function showDialog($d, noToggle){
 		$(".dialog-front").removeClass("dialog-front");
 		$d.show().addClass("dialog-front").css({
 			'left': (size[0] - $d.width()) * 0.5,
-											   'top': (size[1] - $d.height()) * 0.5
+			'top': (size[1] - $d.height()) * 0.5
 		});
 		return true;
 	}
 }
 function applyOptions(opt){
 	$data.opts = opt;
-
+	
 	$data.BGMVolume = parseFloat($data.opts.bv);
 	$data.EffectVolume = parseFloat($data.opts.ev);
-
+	
 	$("#bgm-volume").val($data.BGMVolume);
 	$("#effect-volume").val($data.EffectVolume);
 	$("#deny-invite").attr('checked', $data.opts.di);
@@ -2175,7 +2245,7 @@ function applyOptions(opt){
 	$("#sort-user").attr('checked', $data.opts.su);
 	$("#only-waiting").attr('checked', $data.opts.ow);
 	$("#only-unlock").attr('checked', $data.opts.ou);
-
+	
 	if($data.bgm){
 		if($data.BGMVolume){
 			$data.bgm.volume = $data.BGMVolume;
@@ -2188,27 +2258,27 @@ function applyOptions(opt){
 }
 function checkInput(){
 	/*var v = $stage.talk.val();
-	 * var len = v.length;
-	 *
-	 * if($data.room) if($data.room.gaming){
-	 *	if(len - $data._kd.length > 3) $stage.talk.val($data._kd);
-	 *	if($stage.talk.is(':focus')){
-	 *		$data._kd = v;
-}else{
-	$stage.talk.val($data._kd);
-}
-}
-$data._kd = v;*/
+	var len = v.length;
+	
+	if($data.room) if($data.room.gaming){
+		if(len - $data._kd.length > 3) $stage.talk.val($data._kd);
+		if($stage.talk.is(':focus')){
+			$data._kd = v;
+		}else{
+			$stage.talk.val($data._kd);
+		}
+	}
+	$data._kd = v;*/
 }
 function addInterval(cb, v, a1, a2, a3, a4, a5){
 	var R = _setInterval(cb, v, a1, a2, a3, a4, a5);
-
+	
 	$data._timers.push(R);
 	return R;
 }
 function addTimeout(cb, v, a1, a2, a3, a4, a5){
 	var R = _setTimeout(cb, v, a1, a2, a3, a4, a5);
-
+	
 	$data._timers.push(R);
 	return R;
 }
@@ -2218,7 +2288,7 @@ function clearTrespasses(){ return; // 일단 비활성화
 	var xEnd = _setTimeout(checkInput, 1);
 	var rem = 0;
 	var i;
-
+	
 	for(i in $.timers){
 		jt.push($.timers[i].id);
 	}
@@ -2239,7 +2309,7 @@ function clearTrespasses(){ return; // 일단 비활성화
 function route(func, a0, a1, a2, a3, a4){
 	if(!$data.room) return;
 	var r = RULE[MODE[$data.room.mode]];
-
+	
 	if(!r) return null;
 	$lib[r.rule][func].call(this, a0, a1, a2, a3, a4);
 }
@@ -2247,36 +2317,36 @@ function connectToRoom(chan, rid){
 	var url = $data.URL.replace(/:(\d+)/, function(v, p1){
 		return ":" + $data.ROOM_PORT || (Number(p1) + 416 + Number(chan) - 1);
 	}) + "&" + chan + "&" + rid;
-
+	
 	if(rws) return;
 	rws = new _WebSocket(url);
-
+	
 	loading(L['connectToRoom'] + "\n<center><button id='ctr-close'>" + L['ctrCancel'] + "</button></center>");
 	$("#ctr-close").on('click', function(){
 		loading();
 		if(rws) rws.close();
 	});
-		rws.onopen = function(e){
-			console.log("room-conn", chan, rid);
-		};
-		rws.onmessage = _onMessage;
-		rws.onclose = function(e){
-			console.log("room-disc", chan, rid);
-			rws = undefined;
-		};
-		rws.onerror = function(e){
-			console.warn(L['error'], e);
-		};
+	rws.onopen = function(e){
+		console.log("room-conn", chan, rid);
+	};
+	rws.onmessage = _onMessage;
+	rws.onclose = function(e){
+		console.log("room-disc", chan, rid);
+		rws = undefined;
+	};
+	rws.onerror = function(e){
+		console.warn(L['error'], e);
+	};
 }
 function checkAge(){
 	if(!confirm(L['checkAgeAsk'])) return send('caj', { answer: "no" }, true);
-
+	
 	while(true){
 		var input = [], lv = 1;
-
+		
 		while(lv <= 3){
 			var str = prompt(L['checkAgeInput' + lv]);
-
+			
 			if(!str || isNaN(str = Number(str))){
 				if(--lv < 1) break; else continue;
 			}
@@ -2296,9 +2366,9 @@ function checkAge(){
 		}
 		if(lv == 4){
 			if(confirm(L['checkAgeSure'] + "\n"
-				+ input[0] + L['YEAR'] + " "
-				+ input[1] + L['MONTH'] + " "
-				+ input[2] + L['DATE'])) return send('caj', { answer: "yes", input: [ input[1], input[2], input[0] ] }, true);
+			+ input[0] + L['YEAR'] + " "
+			+ input[1] + L['MONTH'] + " "
+			+ input[2] + L['DATE'])) return send('caj', { answer: "yes", input: [ input[1], input[2], input[0] ] }, true);
 		}else{
 			if(confirm(L['checkAgeCancel'])) return send('caj', { answer: "no" }, true);
 		}
@@ -2308,20 +2378,20 @@ function onMessage(data){
 	var i;
 	var $target;
 
-	switch (data.type) {
-		case 'recaptcha':
-			var $introText = $("#intro-text");
-			$introText.empty();
-			$introText.html('게스트는 캡챠 인증이 필요합니다.' +
-			'<br/>로그인을 하시면 캡챠 인증을 건너뛰실 수 있습니다.' +
-			'<br/><br/>');
-			$introText.append($('<div class="g-recaptcha" id="recaptcha" style="display: table; margin: 0 auto;"></div>'));
+    switch (data.type) {
+        case 'recaptcha':
+            var $introText = $("#intro-text");
+            $introText.empty();
+            $introText.html('게스트는 캡챠 인증이 필요합니다.' +
+                '<br/>로그인을 하시면 캡챠 인증을 건너뛰실 수 있습니다.' +
+                '<br/><br/>');
+            $introText.append($('<div class="g-recaptcha" id="recaptcha" style="display: table; margin: 0 auto;"></div>'));
 
-			grecaptcha.render('recaptcha', {
-				'sitekey': data.siteKey,
-				'callback': recaptchaCallback
-			});
-			break;
+            grecaptcha.render('recaptcha', {
+                'sitekey': data.siteKey,
+                'callback': recaptchaCallback
+            });
+            break;
 		case 'welcome':
 			$data.id = data.id;
 			$data.guest = data.guest;
@@ -2341,10 +2411,10 @@ function onMessage(data){
 			if(data.test) alert(L['welcomeTestServer']);
 			if(location.hash[1]) tryJoin(location.hash.slice(1));
 			updateUI(undefined, true);
-		welcome();
-		if(data.caj) checkAge();
-		updateCommunity();
-		break;
+			welcome();
+			if(data.caj) checkAge();
+			updateCommunity();
+			break;
 		case 'conn':
 			$data.setUser(data.user.id, data.user);
 			updateUserList();
@@ -2362,14 +2432,14 @@ function onMessage(data){
 			$stage.dialog.quick.hide();
 			$data.setUser(data.user.id, data.user);
 			$target = $data.usersR[data.user.id] = data.user;
-
+			
 			if($target.id == $data.id) loading();
 			else notice(getDisplayName($target) + L['hasJoined']);
 			updateUserList();
-		break;
+			break;
 		case 'disconnRoom':
 			$target = $data.usersR[data.id];
-
+			
 			if($target){
 				delete $data.usersR[data.id];
 				notice(getDisplayName($target) + L['hasLeft']);
@@ -2444,7 +2514,7 @@ function onMessage(data){
 			i = ($target.title || $target.name) + "(#" + data.from.substr(0, 5) + ")";
 			send('friendAddRes', {
 				from: data.from,
-		res: $data.opts.df ? false : confirm(i + L['attemptFriendAdd'])
+				res: $data.opts.df ? false : confirm(i + L['attemptFriendAdd'])
 			}, true);
 			break;
 		case 'friendAddRes':
@@ -2495,9 +2565,9 @@ function onMessage(data){
 				$data.setUser(i, data.users[i]);
 			}
 			/*if($data.guest){
-			 *			$stage.menu.exit.trigger('click');
-			 *			alert(L['guestExit']);
-	}*/
+				$stage.menu.exit.trigger('click');
+				alert(L['guestExit']);
+			}*/
 			$data._resultRank = data.ranks;
 			roundEnd(data.result, data.data);
 			break;
@@ -2514,7 +2584,7 @@ function onMessage(data){
 		case 'invited':
 			send('inviteRes', {
 				from: data.from,
-		res: $data.opts.di ? false : confirm(data.from + L['invited'])
+				res: $data.opts.di ? false : confirm(data.from + L['invited'])
 			});
 			break;
 		case 'inviteNo':
@@ -2526,8 +2596,8 @@ function onMessage(data){
 				notice(L['okgExpired']);
 			}else if($data._okg != data.count) notice(L['okgNotice'] + " (" + L['okgCurrent'] + data.count +")");
 			$data._playTime = data.time;
-		$data._okg = data.count;
-		break;
+			$data._okg = data.count;
+			break;
 		case 'obtain':
 			queueObtain(data);
 			// notice(L['obtained'] + ": " + iName(data.key) + " x" + data.q);
@@ -2564,8 +2634,8 @@ function onMessage(data){
 			i = data.message || "";
 			if(data.code == 401){
 				/* 로그인
-				 *			$.cookie('preprev', location.href);
-				 *			location.href = "/login?desc=login_kkutu"; */
+				$.cookie('preprev', location.href);
+				location.href = "/login?desc=login_kkutu"; */
 			}else if(data.code == 403){
 				loading();
 				playBGM('lobby');
@@ -2604,53 +2674,44 @@ function onMessage(data){
 					alert("생년월일이 올바르게 입력되지 않아 게임 이용이 제한되었습니다. 잠시 후 다시 시도해 주세요.");
 					break;
 				}
-				/* Enhanced User Block System [S] */
+			/* Enhanced User Block System [S] */
 				if(!data.blockedUntil) break;
-
+				
 				var blockedUntil = new Date(parseInt(data.blockedUntil));
 				var block = "\n제한 시점: " + blockedUntil.getFullYear() + "년 " + blockedUntil.getMonth() + 1 + "월 " +
 				blockedUntil.getDate() + "일 " + blockedUntil.getHours() + "시 " + blockedUntil.getMinutes() + "분까지";
-
+				
 				alert("[#444] " + L['error_444'] + i + block);
 				break;
 			}else if(data.code == 446){
 				i = data.reasonBlocked;
 				if(!data.ipBlockedUntil) break;
-
+				
 				var blockedUntil = new Date(parseInt(data.ipBlockedUntil));
 				var block = "\n제한 시점: " + blockedUntil.getFullYear() + "년 " + blockedUntil.getMonth() + 1 + "월 " +
 				blockedUntil.getDate() + "일 " + blockedUntil.getHours() + "시 " + blockedUntil.getMinutes() + "분까지";
-
+				
 				alert("[#446] " + L['error_446'] + i + block);
 				break;
-				/* Enhanced User Block System [E] */
+			/* Enhanced User Block System [E] */
 			} else if (data.code === 447) {
 				alert("자동화 봇 방지를 위한 캡챠 인증에 실패했습니다. 메인 화면에서 다시 시도해 주세요.");
 				break;
 			}
 			alert("[#" + data.code + "] " + L['error_'+data.code] + i);
 			break;
-			case 'sansung-spawn':
-				$lib.Sansung.spawn(data);
-				break;
-			case 'sansung-hit':
-				$lib.Sansung.hit(data);
-				break;
-			case 'sansung-miss':
-				$lib.Sansung.miss(data);
-				break;
-			case 'sansung-end':
-				$lib.Sansung.end(data);
-				break;
-			case 'maintainConnection':
-			default:
-				break;
+		case 'sansung-word':
+			$lib.Sansung.onWord(data);
+			break;
+		case 'maintainConnection':
+		default:
+			break;
 	}
 	if($data._record) recordEvent(data);
 
-	function recaptchaCallback(response) {
-		ws.send(JSON.stringify({type: 'recaptcha', token: response}));
-	}
+    function recaptchaCallback(response) {
+        ws.send(JSON.stringify({type: 'recaptcha', token: response}));
+    }
 }
 function welcome(){
 	playBGM('lobby');
@@ -2659,7 +2720,7 @@ function welcome(){
 	addTimeout(function(){
 		$("#Intro").hide();
 	}, 2000);
-
+	
 	if($data.admin) console.log("관리자 모드");
 }
 function getKickText(profile, vote){
@@ -2682,7 +2743,7 @@ function runCommand(cmd){
 		'/차단': L['cmd_shut'],
 		'/id': L['cmd_id']
 	};
-
+	
 	switch(cmd[0].toLowerCase()){
 		case "/ㄱ":
 		case "/r":
@@ -2769,13 +2830,13 @@ function toggleShutBlock(target){
 function tryDict(text, callback){
 	var text = text.replace(/[^\sa-zA-Zㄱ-ㅎ0-9가-힣]/g, "");
 	var lang = text.match(/[ㄱ-ㅎ가-힣]/) ? 'ko' : 'en';
-
+	
 	if(text.length < 1) return callback({ error: 404 });
 	$.get("/dict/" + text + "?lang=" + lang, callback);
 }
 function processRoom(data){
 	var i, j, key, o;
-
+	
 	data.myRoom = ($data.place == data.room.id) || (data.target == $data.id);
 	if(data.myRoom){
 		$target = $data.users[data.target];
@@ -2884,13 +2945,13 @@ function getOnly(){
 	return $data.place ? (($data.room.gaming || $data.resulting) ? "for-gaming" : ($data.master ? "for-master" : "for-normal")) : "for-lobby";
 }
 function updateUI(myRoom, refresh){
-	/*
-	 * myRoom이 undefined인 경우: 상점/결과 확인
-	 * myRoom이 true/false인 경우: 그 외
-	 */
+/*
+	myRoom이 undefined인 경우: 상점/결과 확인
+	myRoom이 true/false인 경우: 그 외
+*/
 	var only = getOnly();
 	var i;
-
+	
 	if($data._replay){
 		if(myRoom === undefined || myRoom){
 			replayStop();
@@ -2899,13 +2960,13 @@ function updateUI(myRoom, refresh){
 	if($data._replay) return;
 	if(only == "for-gaming" && !myRoom) return;
 	if($data.practicing) only = "for-gaming";
-
+	
 	$(".kkutu-menu button").hide();
 	for(i in $stage.box) $stage.box[i].hide();
 	$stage.box.me.show();
 	$stage.box.chat.show().width(790).height(190);
 	$stage.chat.height(120);
-
+	
 	if(only == "for-lobby"){
 		$data._ar_first = true;
 		$stage.box.userList.show();
@@ -2967,12 +3028,12 @@ function animModified(cls){
 function checkRoom(modify){
 	if(!$data._players) return;
 	if(!$data.room) return;
-
+	
 	var OBJ = {} + '';
 	var i, arr = $data._players.split(',');
 	var lb = arr.length, la = $data.room.players.length;
 	var u;
-
+	
 	for(i in arr){
 		if(arr[i] == OBJ) lb--;
 	}
@@ -3016,7 +3077,7 @@ function updateMe(){
 	var lv = getLevel(my.data.score);
 	var prev = EXP[lv-2] || 0;
 	var goal = EXP[lv-1];
-
+	
 	for(i in my.data.record) gw += my.data.record[i][1];
 	renderMoremi(".my-image", my.equip);
 	// $(".my-image").css('background-image', "url('"+my.profile.image+"')");
@@ -3034,7 +3095,7 @@ function prettyTime(time){
 	var min = Math.floor(time / 60000) % 60, sec = Math.floor(time * 0.001) % 60;
 	var hour = Math.floor(time / 3600000);
 	var txt = [];
-
+	
 	if(hour) txt.push(hour + L['HOURS']);
 	if(min) txt.push(min + L['MINUTE']);
 	if(!hour) txt.push(sec + L['SECOND']);
@@ -3044,7 +3105,7 @@ function updateUserList(refresh){
 	var $bar;
 	var i, o, len = 0;
 	var arr;
-
+	
 	// refresh = true;
 	// if(!$stage.box.userList.is(':visible')) return;
 	if($data.opts.su){
@@ -3057,21 +3118,21 @@ function updateUserList(refresh){
 		refresh = true;
 	}else{
 		arr = $data.users;
-
+		
 		for(i in $data.users) len++;
 	}
 	$stage.lobby.userListTitle.html("<i class='fa fa-users'></i>"
-	+ "&lt;<b>" + L['server_' + $data.server] + "</b>&gt; "
-	+ L['UserList'].replace("FA{users}", "")
-	+ " [" + len + L['MN'] + "]");
-
+		+ "&lt;<b>" + L['server_' + $data.server] + "</b>&gt; "
+		+ L['UserList'].replace("FA{users}", "")
+		+ " [" + len + L['MN'] + "]");
+	
 	if(refresh){
 		$stage.lobby.userList.empty();
 		$stage.dialog.inviteList.empty();
 		for(i in arr){
 			o = arr[i];
 			if(o.robot) continue;
-
+			
 			$stage.lobby.userList.append(userListBar(o));
 			if(o.place == 0) $stage.dialog.inviteList.append(userListBar(o, true));
 		}
@@ -3079,7 +3140,7 @@ function updateUserList(refresh){
 }
 function userListBar(o, forInvite){
 	var $R;
-
+	
 	if(forInvite){
 		$R = $("<div>").attr('id', "invite-item-"+o.id).addClass("invite-item users-item")
 		.append($("<div>").addClass("jt-image users-image").css('background-image', "url('"+o.profile.image+"')"))
@@ -3100,7 +3161,7 @@ function userListBar(o, forInvite){
 		});
 	}
 	addonNickname($R, o);
-
+	
 	return $R;
 }
 function addonNickname($R, o){
@@ -3110,7 +3171,7 @@ function addonNickname($R, o){
 function updateRoomList(refresh){
 	var i;
 	var len = 0;
-
+	
 	if(!refresh){
 		$(".rooms-create").remove();
 		for(i in $data.rooms) len++;
@@ -3122,7 +3183,7 @@ function updateRoomList(refresh){
 		}
 	}
 	$stage.lobby.roomListTitle.html(L['RoomList'].replace("FA{bars}", "<i class='fa fa-bars'></i>") + " [" + len + L['GAE'] + "]");
-
+	
 	if(len){
 		$(".rooms-gaming").css('display', $data.opts.ow ? "none" : "");
 		$(".rooms-locked").css('display', $data.opts.ou ? "none" : "");
@@ -3136,16 +3197,16 @@ function updateRoomList(refresh){
 function roomListBar(o){
 	var $R, $ch;
 	var opts = getOptions(o.mode, o.opts);
-
+	
 	$R = $("<div>").attr('id', "room-"+o.id).addClass("rooms-item")
 	.append($ch = $("<div>").addClass("rooms-channel channel-" + o.channel).on('click', function(e){ requestRoomInfo(o.id); }))
 	.append($("<div>").addClass("rooms-number").html(o.id))
 	.append($("<div>").addClass("rooms-title ellipse").text(badWords(o.title)))
 	.append($("<div>").addClass("rooms-limit").html(o.players.length + " / " + o.limit))
 	.append($("<div>").width(270)
-	.append($("<div>").addClass("rooms-mode").html(opts.join(" / ").toString()))
-	.append($("<div>").addClass("rooms-round").html(L['rounds'] + " " + o.round))
-	.append($("<div>").addClass("rooms-time").html(o.time + L['SECOND']))
+		.append($("<div>").addClass("rooms-mode").html(opts.join(" / ").toString()))
+		.append($("<div>").addClass("rooms-round").html(L['rounds'] + " " + o.round))
+		.append($("<div>").addClass("rooms-time").html(o.time + L['SECOND']))
 	)
 	.append($("<div>").addClass("rooms-lock").html(o.password ? "<i class='fa fa-lock'></i>" : "<i class='fa fa-unlock'></i>"))
 	.on('click', function(e){
@@ -3154,38 +3215,38 @@ function roomListBar(o){
 	});
 	if(o.gaming) $R.addClass("rooms-gaming");
 	if(o.password) $R.addClass("rooms-locked");
-
+	
 	return $R;
 }
 function normalGameUserBar(o){
 	var $m, $n, $bar;
 	var $R = $("<div>").attr('id', "game-user-"+o.id).addClass("game-user")
-	.append($m = $("<div>").addClass("moremi game-user-image"))
-	.append($("<div>").addClass("game-user-title")
-	.append(getLevelImage(o.data.score).addClass("game-user-level"))
-	.append($bar = $("<div>").addClass("game-user-name ellipse").text(getDisplayName(o)))
-	.append($("<div>").addClass("expl").html(L['LEVEL'] + " " + getLevel(o.data.score)))
-	)
-	.append($n = $("<div>").addClass("game-user-score"));
+		.append($m = $("<div>").addClass("moremi game-user-image"))
+		.append($("<div>").addClass("game-user-title")
+			.append(getLevelImage(o.data.score).addClass("game-user-level"))
+			.append($bar = $("<div>").addClass("game-user-name ellipse").text(getDisplayName(o)))
+			.append($("<div>").addClass("expl").html(L['LEVEL'] + " " + getLevel(o.data.score)))
+		)
+		.append($n = $("<div>").addClass("game-user-score"));
 	renderMoremi($m, o.equip);
 	global.expl($R);
 	addonNickname($bar, o);
 	if(o.game.team) $n.addClass("team-" + o.game.team);
-
+	
 	return $R;
 }
 function miniGameUserBar(o){
 	var $n, $bar;
 	var $R = $("<div>").attr('id', "game-user-"+o.id).addClass("game-user")
-	.append($("<div>").addClass("game-user-title")
-	.append(getLevelImage(o.data.score).addClass("game-user-level"))
-	.append($bar = $("<div>").addClass("game-user-name ellipse").text(getDisplayName(o)))
-	)
-	.append($n = $("<div>").addClass("game-user-score"));
+		.append($("<div>").addClass("game-user-title")
+			.append(getLevelImage(o.data.score).addClass("game-user-level"))
+			.append($bar = $("<div>").addClass("game-user-name ellipse").text(getDisplayName(o)))
+		)
+		.append($n = $("<div>").addClass("game-user-score"));
 	if(o.id == $data.id) $bar.addClass("game-user-my-name");
 	addonNickname($bar, o);
 	if(o.game.team) $n.addClass("team-" + o.game.team);
-
+	
 	return $R;
 }
 function getAIProfile(level){
@@ -3203,7 +3264,7 @@ function updateRoom(gaming){
 	var renderer = (mobile || rule.big) ? miniGameUserBar : normalGameUserBar;
 	var spec;
 	var arAcc = false, allReady = true;
-
+	
 	setRoomHead($(".RoomBox .product-title"), $data.room);
 	setRoomHead($(".GameBox .product-title"), $data.room);
 	if(gaming){
@@ -3231,26 +3292,26 @@ function updateRoom(gaming){
 		for(i in $data.room.players){
 			o = $data.users[$data.room.players[i]] || $data.room.players[i];
 			if(!o.game) continue;
-
+			
 			var prac = o.game.practice ? ('/' + L['stat_practice']) : '';
 			var spec = (o.game.form == "S") ? ('/' + L['stat_spectate']) : false;
-
+			
 			if(o.robot){
 				o.profile = getAIProfile(o.level);
 				$data.robots[o.id] = o;
 			}
 			$r.append($("<div>").attr('id', "room-user-"+o.id).addClass("room-user")
-			.append($m = $("<div>").addClass("moremi room-user-image"))
-			.append($("<div>").addClass("room-user-stat")
-			.append($y = $("<div>").addClass("room-user-ready"))
-			.append($z = $("<div>").addClass("room-user-team team-" + o.game.team).html($("#team-" + o.game.team).html()))
-			)
-			.append($("<div>").addClass("room-user-title")
-			.append(getLevelImage(o.data.score).addClass("room-user-level"))
-			.append($bar = $("<div>").addClass("room-user-name").text(getDisplayName(o)))
-			).on('click', function(e){
-				requestProfile($(e.currentTarget).attr('id').slice(10));
-			})
+				.append($m = $("<div>").addClass("moremi room-user-image"))
+				.append($("<div>").addClass("room-user-stat")
+					.append($y = $("<div>").addClass("room-user-ready"))
+					.append($z = $("<div>").addClass("room-user-team team-" + o.game.team).html($("#team-" + o.game.team).html()))
+				)
+				.append($("<div>").addClass("room-user-title")
+					.append(getLevelImage(o.data.score).addClass("room-user-level"))
+					.append($bar = $("<div>").addClass("room-user-name").text(getDisplayName(o)))
+				).on('click', function(e){
+					requestProfile($(e.currentTarget).attr('id').slice(10));
+				})
 			);
 			renderMoremi($m, o.equip);
 			if(spec) $z.hide();
@@ -3290,7 +3351,7 @@ function onMasterSubJamsu(){
 }
 function updateScore(id, score){
 	var i, o, t;
-
+	
 	if(o = $data["_s"+id]){
 		clearTimeout(o.timer);
 		o.$obj = $("#game-user-"+id+" .game-user-score");
@@ -3304,61 +3365,61 @@ function updateScore(id, score){
 	}
 	animateScore(o);
 	/*if(id === true){
-	 *	// 팀 정보 초기화
-	 *	$data.teams = [];
-	 *	for(i=0; i<5; i++) $data.teams.push({ list: [], score: 0 });
-	 *	for(i in $data.room.game.seq){
-	 *		t = $data.room.game.seq[i];
-	 *		o = $data.users[t] || $data.robots[t] || t;
-	 *		if(o){
-	 *			$data.teams[o.game.team].list.push(t.id ? t.id : t);
-	 *			$data.teams[o.game.team].score += o.game.score;
-}
-}
-for(i in $data.room.game.seq){
-	t = $data.room.game.seq[i];
-	o = $data.users[t] || $data.robots[t] || t;
-	updateScore(t.id || t, o.game.score);
-}
-}else{
-	o = $data.users[id] || $data.robots[id];
-	if(o.game.team){
-		t = $data.teams[o.game.team];
-		i = $data["_s"+id];
-		t.score += score - (i ? i.goal : 0);
-}else{
-	t = { list: [ id ], score: score };
-}
-for(i in t.list){
-	if(o = $data["_s"+t.list[i]]){
-		clearTimeout(o.timer);
-		o.$obj = $("#game-user-"+t.list[i]+" .game-user-score");
-		o.goal = t.score;
-}else{
-	o = $data["_s"+t.list[i]] = {
-	$obj: $("#game-user-"+t.list[i]+" .game-user-score"),
-	goal: t.score,
-	now: 0
-};
-}
-animateScore(o);
-}
-return $("#game-user-" + id);
-}*/
+		// 팀 정보 초기화
+		$data.teams = [];
+		for(i=0; i<5; i++) $data.teams.push({ list: [], score: 0 });
+		for(i in $data.room.game.seq){
+			t = $data.room.game.seq[i];
+			o = $data.users[t] || $data.robots[t] || t;
+			if(o){
+				$data.teams[o.game.team].list.push(t.id ? t.id : t);
+				$data.teams[o.game.team].score += o.game.score;
+			}
+		}
+		for(i in $data.room.game.seq){
+			t = $data.room.game.seq[i];
+			o = $data.users[t] || $data.robots[t] || t;
+			updateScore(t.id || t, o.game.score);
+		}
+	}else{
+		o = $data.users[id] || $data.robots[id];
+		if(o.game.team){
+			t = $data.teams[o.game.team];
+			i = $data["_s"+id];
+			t.score += score - (i ? i.goal : 0);
+		}else{
+			t = { list: [ id ], score: score };
+		}
+		for(i in t.list){
+			if(o = $data["_s"+t.list[i]]){
+				clearTimeout(o.timer);
+				o.$obj = $("#game-user-"+t.list[i]+" .game-user-score");
+				o.goal = t.score;
+			}else{
+				o = $data["_s"+t.list[i]] = {
+					$obj: $("#game-user-"+t.list[i]+" .game-user-score"),
+					goal: t.score,
+					now: 0
+				};
+			}
+			animateScore(o);
+		}
+		return $("#game-user-" + id);
+	}*/
 	return $("#game-user-" + id);
 }
 function animateScore(o){
 	var v = (o.goal - o.now) * Math.min(1, TICK * 0.01);
-
+	
 	if(v < 0.1) v = o.goal - o.now;
 	else o.timer = addTimeout(animateScore, TICK, o);
-
+	
 	o.now += v;
 	drawScore(o.$obj, Math.round(o.now));
 }
 function drawScore($obj, score){
 	var i, sc = (score > 99999) ? (zeroPadding(Math.round(score * 0.001), 4) + 'k') : zeroPadding(score, 5);
-
+	
 	$obj.empty();
 	for(i=0; i<sc.length; i++){
 		$obj.append($("<div>").addClass("game-user-score-char").html(sc[i]));
@@ -3367,7 +3428,7 @@ function drawScore($obj, score){
 function drawMyDress(avGroup){
 	var $view = $("#dress-view");
 	var my = $data.users[$data.id];
-
+	
 	renderMoremi($view, my.equip);
 	$(".dress-type.selected").removeClass("selected");
 	$("#dress-type-all").addClass("selected");
@@ -3381,7 +3442,7 @@ function renderGoods($target, preId, filter, equip, onClick){
 	var obj, q, g, equipped;
 	var isAll = filter === true;
 	var i;
-
+	
 	$target.empty();
 	if(!equip) equip = {};
 	for(i in equip){
@@ -3397,15 +3458,15 @@ function renderGoods($target, preId, filter, equip, onClick){
 		g = obj.group;
 		if(g.substr(0, 3) == "BDG") g = "BDG";
 		equipped = (g == "Mhand") ? (equip['Mlhand'] == list[i].key || equip['Mrhand'] == list[i].key) : (equip[g] == list[i].key);
-
+		
 		if(typeof q == "number") q = {
 			value: q
 		};
 		if(!q.hasOwnProperty("value") && !equipped) continue;
 		if(!isAll) if(filter.indexOf(obj.group) == -1) continue;
 		$target.append($item = $("<div>").addClass("dress-item")
-		.append(getImage(obj.image).addClass("dress-item-image").html("x" + q.value))
-		.append(explainGoods(obj, equipped, q.expire))
+			.append(getImage(obj.image).addClass("dress-item-image").html("x" + q.value))
+			.append(explainGoods(obj, equipped, q.expire))
 		);
 		$item.attr('id', preId + "-" + obj._id).on('click', onClick);
 		if(equipped) $item.addClass("dress-equipped");
@@ -3416,17 +3477,17 @@ function drawMyGoods(avGroup){
 	var equip = $data.users[$data.id].equip || {};
 	var filter;
 	var isAll = avGroup === true;
-
+	
 	$data._avGroup = avGroup;
 	if(isAll) filter = true;
 	else filter = (avGroup || "").split(',');
-
+	
 	renderGoods($("#dress-goods"), 'dress', filter, equip, function(e){
 		var $target = $(e.currentTarget);
 		var id = $target.attr('id').slice(6);
 		var item = iGoods(id);
 		var isLeft;
-
+		
 		if(e.ctrlKey){
 			if($target.hasClass("dress-equipped")) return fail(426);
 			if(!confirm(L['surePayback'] + commify(Math.round((item.cost || 0) * 0.2)) + L['ping'])) return;
@@ -3435,7 +3496,7 @@ function drawMyGoods(avGroup){
 				alert(L['painback']);
 				$data.box = res.box;
 				$data.users[$data.id].money = res.money;
-
+				
 				drawMyDress($data._avGroup);
 				updateUI(false);
 			});
@@ -3453,7 +3514,7 @@ function drawMyGoods(avGroup){
 				$data.box = res.box;
 				$data.users[$data.id].data = res.data;
 				send('refresh');
-
+				
 				drawMyDress($data._avGroup);
 				updateMe();
 			});
@@ -3466,13 +3527,13 @@ function requestEquip(id, isLeft){
 	if(part == "Mhand") part = isLeft ? "Mlhand" : "Mrhand";
 	if(part.substr(0, 3) == "BDG") part = "BDG";
 	var already = my.equip[part] == id;
-
+	
 	if(confirm(L[already ? 'sureUnequip' : 'sureEquip'] + ": " + L[id][0])){
 		$.post("/equip/" + id, { isLeft: isLeft }, function(res){
 			if(res.error) return fail(res.error);
 			$data.box = res.box;
 			my.equip = res.equip;
-
+			
 			drawMyDress($data._avGroup);
 			send('refresh');
 			updateUI(false);
@@ -3485,19 +3546,19 @@ function drawCharFactory(){
 	var $rew = $("#cf-reward");
 	var $goods = $("#cf-goods");
 	var $cost = $("#cf-cost");
-
+	
 	$data._tray = [];
 	$dict.empty();
 	$rew.empty();
 	$cost.html("");
 	$stage.dialog.cfCompose.removeClass("cf-composable");
-
+	
 	renderGoods($goods, 'cf', [ 'PIX', 'PIY', 'PIZ' ], null, function(e){
 		var $target = $(e.currentTarget);
 		var id = $target.attr('id').slice(3);
 		var bd = $data.box[id];
 		var i, c = 0;
-
+		
 		if($data._tray.length >= 6) return fail(435);
 		for(i in $data._tray) if($data._tray[i] == id) c++;
 		if(bd - c > 0){
@@ -3514,7 +3575,7 @@ function drawCharFactory(){
 		var LEVEL = { 'WPC': 1, 'WPB': 2, 'WPA': 3 };
 		var gd, word = "";
 		var level = 0;
-
+		
 		$tray.empty();
 		$(".cf-tray-selected").removeClass("cf-tray-selected");
 		$data._tray.forEach(function(item){
@@ -3522,9 +3583,9 @@ function drawCharFactory(){
 			word += item.slice(4);
 			level += LEVEL[item.slice(1, 4)];
 			$tray.append($("<div>").addClass("jt-image")
-			.css('background-image', "url(" + gd.image + ")")
-			.attr('id', "cf-tray-" + item)
-			.on('click', onTrayClick)
+				.css('background-image', "url(" + gd.image + ")")
+				.attr('id', "cf-tray-" + item)
+				.on('click', onTrayClick)
 			);
 			$("#cf-\\" + item).addClass("cf-tray-selected");
 		});
@@ -3534,7 +3595,7 @@ function drawCharFactory(){
 		$cost.html("");
 		tryDict(word, function(res){
 			var blend = false;
-
+			
 			if(res.error){
 				if(word.length == 3){
 					blend = true;
@@ -3545,26 +3606,26 @@ function drawCharFactory(){
 			$stage.dialog.cfCompose.addClass("cf-composable");
 			if(!res.error) $dict.html(processWord(res.word, res.mean, res.theme, res.type.split(',')));
 		});
-			if(word == "") trayEmpty();
+		if(word == "") trayEmpty();
 	}
 	function viewReward(text, level, blend){
 		$.get("/cf/" + text + "?l=" + level + "&b=" + (blend ? "1" : ""), function(res){
 			if(res.error) return fail(res.error);
-
+			
 			$rew.empty();
 			res.data.forEach(function(item){
 				var bd = iGoods(item.key);
 				var rt = (item.rate >= 1) ? L['cfRewAlways'] : ((item.rate * 100).toFixed(1) + '%');
-
+				
 				$rew.append($("<div>").addClass("cf-rew-item")
-				.append($("<div>").addClass("jt-image cf-rew-image")
-				.css('background-image', "url(" + bd.image + ")")
-				)
-				.append($("<div>").width(100)
-				.append($("<div>").width(100).html(bd.name))
-				.append($("<div>").addClass("cf-rew-value").html("x" + item.value))
-				)
-				.append($("<div>").addClass("cf-rew-rate").html(rt))
+					.append($("<div>").addClass("jt-image cf-rew-image")
+						.css('background-image', "url(" + bd.image + ")")
+					)
+					.append($("<div>").width(100)
+						.append($("<div>").width(100).html(bd.name))
+						.append($("<div>").addClass("cf-rew-value").html("x" + item.value))
+					)
+					.append($("<div>").addClass("cf-rew-rate").html(rt))
 				);
 			});
 			$cost.html(L['cfCost'] + ": " + res.cost + L['ping']);
@@ -3573,7 +3634,7 @@ function drawCharFactory(){
 	function onTrayClick(e){
 		var id = $(e.currentTarget).attr('id').slice(8);
 		var bi = $data._tray.indexOf(id);
-
+		
 		if(bi == -1) return;
 		$data._tray.splice(bi, 1);
 		drawCFTray();
@@ -3584,24 +3645,24 @@ function drawLeaderboard(data){
 	var $board = $stage.dialog.lbTable.empty();
 	var fr = data.data[0] ? data.data[0].rank : 0;
 	var page = (data.page || Math.floor(fr / 20)) + 1;
-
+	
 	data.data.forEach(function(item, index){
 		var profile = $data.users[item.id];
-
+		
 		if(profile) profile = profile.profile.title || profile.profile.name;
 		else if (item.nickname) profile = item.nickname;
 		else profile = L['hidden'];
-
+		
 		item.score = Number(item.score);
 		$board.append($("<tr>").attr('id', "ranking-" + item.id)
-		.addClass("ranking-" + (item.rank + 1))
-		.append($("<td>").html(item.rank + 1))
-		.append($("<td>")
-		.append(getLevelImage(item.score).addClass("ranking-image"))
-		.append($("<label>").css('padding-top', 2).html(getLevel(item.score)))
-		)
-		.append($("<td>").text(profile))
-		.append($("<td>").html(commify(item.score)))
+			.addClass("ranking-" + (item.rank + 1))
+			.append($("<td>").html(item.rank + 1))
+			.append($("<td>")
+				.append(getLevelImage(item.score).addClass("ranking-image"))
+				.append($("<label>").css('padding-top', 2).html(getLevel(item.score)))
+			)
+			.append($("<td>").text(profile))
+			.append($("<td>").html(commify(item.score)))
 		);
 	});
 	$("#ranking-" + $data.id).addClass("ranking-me");
@@ -3614,37 +3675,37 @@ function drawLeaderboard(data){
 function updateCommunity(){
 	var i, o, p, memo;
 	var len = 0;
-
+	
 	$stage.dialog.commFriends.empty();
 	for(i in $data.friends){
 		len++;
 		memo = $data.friends[i];
 		o = $data._friends[i] || {};
 		p = ($data.users[i] || {}).profile;
-
+		
 		$stage.dialog.commFriends.append($("<div>").addClass("cf-item").attr('id', "cfi-" + i)
-		.append($("<div>").addClass("cfi-status cfi-stat-" + (o.server ? 'on' : 'off')))
-		.append($("<div>").addClass("cfi-server").html(o.server ? L['server_' + o.server] : "-"))
-		.append($("<div>").addClass("cfi-name ellipse").text(p ? (p.title || p.name) : L['hidden']))
-		.append($("<div>").addClass("cfi-memo ellipse").text(memo))
-		.append($("<div>").addClass("cfi-menu")
-		.append($("<i>").addClass("fa fa-pencil").on('click', requestEditMemo))
-		.append($("<i>").addClass("fa fa-remove").on('click', requestRemoveFriend))
-		)
+			.append($("<div>").addClass("cfi-status cfi-stat-" + (o.server ? 'on' : 'off')))
+			.append($("<div>").addClass("cfi-server").html(o.server ? L['server_' + o.server] : "-"))
+			.append($("<div>").addClass("cfi-name ellipse").text(p ? (p.title || p.name) : L['hidden']))
+			.append($("<div>").addClass("cfi-memo ellipse").text(memo))
+			.append($("<div>").addClass("cfi-menu")
+				.append($("<i>").addClass("fa fa-pencil").on('click', requestEditMemo))
+				.append($("<i>").addClass("fa fa-remove").on('click', requestRemoveFriend))
+			)
 		);
 	}
 	function requestEditMemo(e){
 		var id = $(e.currentTarget).parent().parent().attr('id').slice(4);
 		var _memo = $data.friends[id];
 		var memo = prompt(L['friendEditMemo'], _memo);
-
+		
 		if(!memo) return;
 		send('friendEdit', { id: id, memo: memo }, true);
 	}
 	function requestRemoveFriend(e){
 		var id = $(e.currentTarget).parent().parent().attr('id').slice(4);
 		var memo = $data.friends[id];
-
+		
 		if($data._friends[id].server) return fail(455);
 		if(!confirm(memo + "(#" + id.substr(0, 5) + ")\n" + L['friendSureRemove'])) return;
 		send('friendRemove', { id: id }, true);
@@ -3654,7 +3715,7 @@ function updateCommunity(){
 function requestRoomInfo(id){
 	var o = $data.rooms[id];
 	var $pls = $("#ri-players").empty();
-
+	
 	$data._roominfo = id;
 	$("#RoomInfoDiag .dialog-title").html(id + L['sRoomInfo']);
 	$("#ri-title").html((o.password ? "<i class='fa fa-lock'></i>&nbsp;" : "") + o.title.replaceAll(/\<|\>|\"|\'|\%|\;|\(|\)|\&|\+|\-/g, ""));
@@ -3664,22 +3725,22 @@ function requestRoomInfo(id){
 	o.players.forEach(function(p, i){
 		var $p, $moremi;
 		var rd = o.readies[p] || {};
-
+		
 		p = $data.users[p] || NULL_USER;
 		if(o.players[i].robot){
 			p.profile = { title: L['robot'] };
 			p.equip = { robot: true };
 		}else rd.t = rd.t || 0;
-
+		
 		$pls.append($("<div>").addClass("ri-player")
-		.append($moremi = $("<div>").addClass("moremi rip-moremi"))
-		.append($p = $("<div>").addClass("ellipse rip-title").text(getDisplayName(p)))
-		.append($("<div>").addClass("rip-team team-" + rd.t).html($("#team-" + rd.t).html()))
-		.append($("<div>").addClass("rip-form").html(L['pform_' + rd.f]))
+			.append($moremi = $("<div>").addClass("moremi rip-moremi"))
+			.append($p = $("<div>").addClass("ellipse rip-title").text(getDisplayName(p)))
+			.append($("<div>").addClass("rip-team team-" + rd.t).html($("#team-" + rd.t).html()))
+			.append($("<div>").addClass("rip-form").html(L['pform_' + rd.f]))
 		);
 		if(p.id == o.master) $p.prepend($("<label>").addClass("rip-master").html("[" + L['master'] + "]&nbsp;"));
 		$p.prepend(getLevelImage(p.data.score).addClass("profile-level rip-level"));
-
+		
 		renderMoremi($moremi, p.equip);
 	});
 	showDialog($stage.dialog.roomInfo);
@@ -3690,27 +3751,27 @@ function requestProfile(id){
 	var $rec = $("#profile-record").empty();
 	var $pi, $ex;
 	var i;
-
+	
 	if(!o){
 		notice(L['error_405']);
 		return;
 	}
 	$("#ProfileDiag .dialog-title").text(getDisplayName(o) + L['sProfile']);
 	$(".profile-head").empty().append($pi = $("<div>").addClass("moremi profile-moremi"))
-	.append($("<div>").addClass("profile-head-item")
-	.append(getImage(o.profile.image).addClass("profile-image"))
-	.append($("<div>").addClass("profile-title ellipse").text(getDisplayName(o))
-	.append($("<label>").addClass("profile-tag").html(" #" + o.id.toString().substr(0, 5)))
-	)
-	)
-	.append($("<div>").addClass("profile-head-item")
-	.append(getLevelImage(o.data.score).addClass("profile-level"))
-	.append($("<div>").addClass("profile-level-text").html(L['LEVEL'] + " " + (i = getLevel(o.data.score))))
-	.append($("<div>").addClass("profile-score-text").html(commify(o.data.score) + " / " + commify(EXP[i - 1]) + L['PTS']))
-	)
-	.append($ex = $("<div>").addClass("profile-head-item profile-exordial ellipse").text(badWords(o.exordial || ""))
-	.append($("<div>").addClass("expl").css({ 'white-space': "normal", 'width': 300, 'font-size': "11px" }).text(o.exordial))
-	);
+		.append($("<div>").addClass("profile-head-item")
+			.append(getImage(o.profile.image).addClass("profile-image"))
+			.append($("<div>").addClass("profile-title ellipse").text(getDisplayName(o))
+				.append($("<label>").addClass("profile-tag").html(" #" + o.id.toString().substr(0, 5)))
+			)
+		)
+		.append($("<div>").addClass("profile-head-item")
+			.append(getLevelImage(o.data.score).addClass("profile-level"))
+			.append($("<div>").addClass("profile-level-text").html(L['LEVEL'] + " " + (i = getLevel(o.data.score))))
+			.append($("<div>").addClass("profile-score-text").html(commify(o.data.score) + " / " + commify(EXP[i - 1]) + L['PTS']))
+		)
+		.append($ex = $("<div>").addClass("profile-head-item profile-exordial ellipse").text(badWords(o.exordial || ""))
+			.append($("<div>").addClass("expl").css({ 'white-space': "normal", 'width': 300, 'font-size': "11px" }).text(o.exordial))
+		);
 	if(o.robot){
 		$stage.dialog.profileLevel.show();
 		$stage.dialog.profileLevel.prop('disabled', $data.id != $data.room.master);
@@ -3720,11 +3781,11 @@ function requestProfile(id){
 		$("#profile-place").html(o.place ? (o.place + L['roomNumber']) : L['lobby']);
 		for(i in o.data.record){
 			var r = o.data.record[i];
-
+			
 			$rec.append($("<div>").addClass("profile-record-field")
-			.append($("<div>").addClass("profile-field-name").html(L['mode' + i]))
-			.append($("<div>").addClass("profile-field-record").html(r[0] + L['P'] + " " + r[1] + L['W']))
-			.append($("<div>").addClass("profile-field-score").html(commify(r[2]) + L['PTS']))
+				.append($("<div>").addClass("profile-field-name").html(L['mode' + i]))
+				.append($("<div>").addClass("profile-field-record").html(r[0] + L['P'] + " " + r[1] + L['W']))
+				.append($("<div>").addClass("profile-field-score").html(commify(r[2]) + L['PTS']))
 			);
 		}
 		renderMoremi($pi, o.equip);
@@ -3735,7 +3796,7 @@ function requestProfile(id){
 	$stage.dialog.profileDress.hide();
 	$stage.dialog.profileWhisper.hide();
 	$stage.dialog.profileHandover.hide();
-
+	
 	if($data.id == id) $stage.dialog.profileDress.show();
 	else if(!o.robot){
 		$stage.dialog.profileShut.show();
@@ -3753,7 +3814,7 @@ function requestProfile(id){
 }
 function requestInvite(id){
 	var nick;
-
+	
 	if(id != "AI"){
 		nick = getDisplayName($data.users[id]);
 		if(!confirm(nick + L['sureInvite'])) return;
@@ -3780,7 +3841,7 @@ function clearGame(){
 }
 function gameReady(){
 	var i, u;
-
+	
 	for(i in $data.room.players){
 		if($data._replay){
 			u = $rec.users[$data.room.players[i]] || $data.room.players[i];
@@ -3809,7 +3870,7 @@ function gameReady(){
 }
 function replayPrevInit(){
 	var i;
-
+	
 	for(i in $data.room.game.seq){
 		if($data.room.game.seq[i].robot){
 			$data.room.game.seq[i].game.score = 0;
@@ -3821,7 +3882,7 @@ function replayPrevInit(){
 		var rd = $rec.readies[id] || {};
 		var u = $data.users[id] || $data.robots[id];
 		var po = id;
-
+		
 		if($rec.players[i].robot){
 			u = $rec.users[id] = { robot: true };
 			po = $rec.players[i];
@@ -3840,7 +3901,7 @@ function replayPrevInit(){
 }
 function replayReady(){
 	var i;
-
+	
 	replayStop();
 	$data._replay = true;
 	$data.room = {
@@ -3866,12 +3927,12 @@ function replayReady(){
 	gameReady();
 	updateRoom(true);
 	$data.$gp = $(".GameBox .product-title").empty()
-	.append($data.$gpt = $("<div>").addClass("game-replay-title"))
-	.append($data.$gpc = $("<div>").addClass("game-replay-controller")
-	.append($("<button>").html(L['replayNext']).on('click', replayNext))
-	.append($("<button>").html(L['replayPause']).on('click', replayPause))
-	.append($("<button>").html(L['replayPrev']).on('click', replayPrev))
-	);
+		.append($data.$gpt = $("<div>").addClass("game-replay-title"))
+		.append($data.$gpc = $("<div>").addClass("game-replay-controller")
+			.append($("<button>").html(L['replayNext']).on('click', replayNext))
+			.append($("<button>").html(L['replayPause']).on('click', replayPause))
+			.append($("<button>").html(L['replayPrev']).on('click', replayPrev))
+		);
 	$data._gpp = L['replay'] + " - " + (new Date($rec.time)).toLocaleString();
 	$data._gtt = $data.room.events[$data.room.events.length - 1].time;
 	$data._eventTime = 0;
@@ -3884,53 +3945,53 @@ function replayPrev(e){
 	var ev = $data.room.events[--$data._rf];
 	var c;
 	var to;
-
+	
 	if(!ev) return;
 	c = ev.time;
 	do{
 		if(!(ev = $data.room.events[--$data._rf])) break;
 	}while(c - ev.time < 1000);
-
-		to = $data._rf - 1;
-		replayPrevInit();
-		c = $data.muteEff;
-		$data.muteEff = true;
-		for(i=0; i<to; i++){
-			replayTick();
-		}
-		$(".deltaScore").remove();
-		$data.muteEff = c;
+	
+	to = $data._rf - 1;
+	replayPrevInit();
+	c = $data.muteEff;
+	$data.muteEff = true;
+	for(i=0; i<to; i++){
 		replayTick();
-		/*var pev, ev = $data.room.events[--$data._rf];
-		 * var c;
-		 *
-		 * if(!ev) return;
-		 *
-		 * c = ev.time;
-		 * clearTimeout($data._rt);
-		 * do{
-		 *	if(ev.data.type == 'turnStart'){
-		 *		$(".game-user-current").removeClass("game-user-current");
-		 *		if((pev = $data.room.events[$data._rf - 1]).data.profile) $("#game-user-" + pev.data.profile.id).addClass("game-user-current");
-}
-if(ev.data.type == 'turnEnd'){
-	$stage.game.chain.html(--$data.chain);
-	if(ev.data.profile){
-		addScore(ev.data.profile.id, -(ev.data.score + ev.data.bonus));
-		updateScore(ev.data.profile.id, getScore(ev.data.profile.id));
-}
-}
-if(!(ev = $data.room.events[--$data._rf])) break;
-}while(c - ev.time < 1000);
-if($data._rf < 0) $data._rf = 0;
-if(ev) if(ev.data.type == 'roundReady'){
-	$(".game-user-current").removeClass("game-user-current");
-}
-replayTick(true);*/
+	}
+	$(".deltaScore").remove();
+	$data.muteEff = c;
+	replayTick();
+	/*var pev, ev = $data.room.events[--$data._rf];
+	var c;
+	
+	if(!ev) return;
+	
+	c = ev.time;
+	clearTimeout($data._rt);
+	do{
+		if(ev.data.type == 'turnStart'){
+			$(".game-user-current").removeClass("game-user-current");
+			if((pev = $data.room.events[$data._rf - 1]).data.profile) $("#game-user-" + pev.data.profile.id).addClass("game-user-current");
+		}
+		if(ev.data.type == 'turnEnd'){
+			$stage.game.chain.html(--$data.chain);
+			if(ev.data.profile){
+				addScore(ev.data.profile.id, -(ev.data.score + ev.data.bonus));
+				updateScore(ev.data.profile.id, getScore(ev.data.profile.id));
+			}
+		}
+		if(!(ev = $data.room.events[--$data._rf])) break;
+	}while(c - ev.time < 1000);
+	if($data._rf < 0) $data._rf = 0;
+	if(ev) if(ev.data.type == 'roundReady'){
+		$(".game-user-current").removeClass("game-user-current");
+	}
+	replayTick(true);*/
 }
 function replayPause(e){
 	var p = $data._rpause = !$data._rpause;
-
+	
 	$(e.target).html(p ? L['replayResume'] : L['replayPause']);
 }
 function replayNext(e){
@@ -3939,15 +4000,15 @@ function replayNext(e){
 }
 function replayStatus(){
 	$data.$gpt.html($data._gpp
-	+ " (" + ($data._eventTime * 0.001).toFixed(1) + L['SECOND']
-	+ " / " + ($data._gtt * 0.001).toFixed(1) + L['SECOND']
-	+ ")"
+		+ " (" + ($data._eventTime * 0.001).toFixed(1) + L['SECOND']
+		+ " / " + ($data._gtt * 0.001).toFixed(1) + L['SECOND']
+		+ ")"
 	);
 }
 function replayTick(stay){
 	var event = $data.room.events[$data._rf];
 	var args, i;
-
+	
 	clearTimeout($data._rt);
 	if(!stay) $data._rf++;
 	if(!event){
@@ -3961,9 +4022,9 @@ function replayTick(stay){
 	args = event.data;
 	if(args.hint) args.hint = { _id: args.hint };
 	if(args.type == 'chat') args.timestamp = $rec.time + event.time;
-
+	
 	onMessage(args);
-
+	
 	$data._eventTime = event.time;
 	replayStatus();
 	if($data.room.events.length > $data._rf) $data._rt = addTimeout(replayTick,
@@ -3981,7 +4042,7 @@ function replayStop(){
 }
 function startRecord(title){
 	var i, u;
-
+	
 	$rec = {
 		version: $data.version,
 		me: $data.id,
@@ -3999,7 +4060,7 @@ function startRecord(title){
 	};
 	for(i in $data.room.players){
 		var o;
-
+		
 		u = $data.users[$data.room.players[i]] || $data.room.players[i];
 		o = { id: u.id, score: 0 };
 		if(u.robot){
@@ -4032,7 +4093,7 @@ function recordEvent(data){
 	for(i in _data) data[i] = _data[i];
 	if(data.profile) data.profile = { id: data.profile.id, title: "#" + data.profile.id };
 	if(data.user) data.user = { id: data.user.profile.id, profile: { id: data.user.profile.id, title: "#" + data.user.profile.id }, data: { score: 0 }, equip: {} };
-
+	
 	$rec.events.push({
 		data: data,
 		time: (new Date()).getTime() - $rec.time
@@ -4060,7 +4121,7 @@ function clearBoard(){
 }
 function drawRound(round){
 	var i;
-
+	
 	$stage.game.round.empty();
 	for(i=0; i<$data.room.round; i++){
 		$stage.game.round.append($l = $("<label>").html($data.room.game.title[i]));
@@ -4075,7 +4136,7 @@ function turnHint(data){
 }
 function turnError(code, text){
 	$stage.game.display.empty().append($("<label>").addClass("game-fail-text")
-	.text((L['turnError_'+code] ? (L['turnError_'+code] + ": ") : "") + text)
+		.text((L['turnError_'+code] ? (L['turnError_'+code] + ": ") : "") + text)
 	);
 	playSound('fail');
 	clearTimeout($data._fail);
@@ -4094,7 +4155,7 @@ function addScore(id, score){
 function drawObtainedScore($uc, $sc){
 	$uc.append($sc);
 	addTimeout(function(){ $sc.remove(); }, 2000);
-
+	
 	return $uc;
 }
 function turnEnd(id, data){
@@ -4107,7 +4168,7 @@ function roundEnd(result, data){
 	var $o, $p;
 	var lvUp, sc;
 	var addit, addp;
-
+	
 	$(".result-me-expl").empty();
 	$stage.game.display.html(L['roundEnd']);
 	$data._resultPage = 1;
@@ -4124,22 +4185,22 @@ function roundEnd(result, data){
 		}
 		if(!o.data) continue;
 		if(!r.reward) continue;
-
+		
 		r.reward.score = $data._replay ? 0 : Math.round(r.reward.score);
 		lvUp = getLevel(sc = o.data.score) > getLevel(o.data.score - r.reward.score);
-
+		
 		$b.append($o = $("<div>").addClass("result-board-item")
-		.append($p = $("<div>").addClass("result-board-rank").html(r.rank + 1))
-		.append(getLevelImage(sc).addClass("result-board-level"))
-		.append($("<div>").addClass("result-board-name").text(getDisplayName(o)))
-		.append($("<div>").addClass("result-board-score")
-		.html(data.scores ? (L['avg'] + " " + commify(data.scores[r.id]) + L['kpm']) : (commify(r.score || 0) + L['PTS']))
-		)
-		.append($("<div>").addClass("result-board-reward").html(r.reward.score ? ("+" + commify(r.reward.score)) : "-"))
-		.append($("<div>").addClass("result-board-lvup").css('display', lvUp ? "block" : "none")
-		.append($("<i>").addClass("fa fa-arrow-up"))
-		.append($("<div>").html(L['lvUp']))
-		)
+			.append($p = $("<div>").addClass("result-board-rank").html(r.rank + 1))
+			.append(getLevelImage(sc).addClass("result-board-level"))
+			.append($("<div>").addClass("result-board-name").text(getDisplayName(o)))
+			.append($("<div>").addClass("result-board-score")
+				.html(data.scores ? (L['avg'] + " " + commify(data.scores[r.id]) + L['kpm']) : (commify(r.score || 0) + L['PTS']))
+			)
+			.append($("<div>").addClass("result-board-reward").html(r.reward.score ? ("+" + commify(r.reward.score)) : "-"))
+			.append($("<div>").addClass("result-board-lvup").css('display', lvUp ? "block" : "none")
+				.append($("<i>").addClass("fa fa-arrow-up"))
+				.append($("<div>").html(L['lvUp']))
+			)
 		);
 		if(o.game.team) $p.addClass("team-" + o.game.team);
 		if(r.id == $data.id){
@@ -4155,21 +4216,21 @@ function roundEnd(result, data){
 	if($data._result){
 		addit = $data._result.reward.score - $data._result.reward._score;
 		addp = $data._result.reward.money - $data._result.reward._money;
-
+		
 		$data._result._exp = $data._result.exp;
 		$data._result._score = $data._result.reward.score;
 		$data._result._bonus = addit;
 		$data._result._boing = $data._result.reward._score;
 		$data._result._addit = addit;
 		$data._result._addp = addp;
-
+		
 		if(addit > 0){
 			addit = "<label class='result-me-bonus'>(+" + commify(addit) + ")</label>";
 		}else addit = "";
 		if(addp > 0){
 			addp = "<label class='result-me-bonus'>(+" + commify(addp) + ")</label>";
 		}else addp = "";
-
+		
 		notice(L['scoreGain'] + ": " + commify($data._result.reward.score) + ", " + L['moneyGain'] + ": " + commify($data._result.reward.money));
 		$(".result-me").css('opacity', 1);
 		$(".result-me-score").html(L['scoreGain']+" +"+commify($data._result.reward.score)+addit);
@@ -4178,16 +4239,16 @@ function roundEnd(result, data){
 	function roundEndAnimation(first){
 		var v, nl;
 		var going;
-
+		
 		$data._result.goal = EXP[$data._result.level - 1];
 		$data._result.before = EXP[$data._result.level - 2] || 0;
 		/*if(first){
-		 *		$data._result._before = $data._result.before;
-	}*/
+			$data._result._before = $data._result.before;
+		}*/
 		if($data._result.reward.score > 0){
 			v = $data._result.reward.score * $data._coef;
 			if(v < 0.05 && $data._coef) v = $data._result.reward.score;
-
+			
 			$data._result.reward.score -= v;
 			$data._result.exp += v;
 			nl = getLevel($data._result.exp);
@@ -4197,14 +4258,14 @@ function roundEnd(result, data){
 				playSound('lvup');
 			}
 			$data._result.level = nl;
-
+			
 			addTimeout(roundEndAnimation, 50);
 		}
 		going = $data._result.exp - $data._result._exp;
 		draw('before', $data._result._exp, $data._result.before, $data._result.goal);
 		draw('current', Math.min(going, $data._result._boing), 0, $data._result.goal - $data._result.before);
 		draw('bonus', Math.max(0, going - $data._result._boing), 0, $data._result.goal - $data._result.before);
-
+		
 		$(".result-me-level-body").html($data._result.level);
 		$(".result-me-score-text").html(commify(Math.round($data._result.exp)) + " / " + commify($data._result.goal));
 	}
@@ -4214,11 +4275,11 @@ function roundEnd(result, data){
 	function explainReward(orgX, orgM, list){
 		var $sb, $mb;
 		var $R = $("<div>")
-		.append($("<h4>").html(L['scoreGain']))
-		.append($sb = $("<div>"))
-		.append($("<h4>").html(L['moneyGain']))
-		.append($mb = $("<div>"));
-
+			.append($("<h4>").html(L['scoreGain']))
+			.append($sb = $("<div>"))
+			.append($("<h4>").html(L['moneyGain']))
+			.append($mb = $("<div>"));
+		
 		row($sb, L['scoreOrigin'], orgX);
 		row($mb, L['moneyOrigin'], orgM);
 		list.forEach(function(item){
@@ -4227,18 +4288,18 @@ function roundEnd(result, data){
 			var target = item.slice(2, 5);
 			var value = Number(item.slice(5));
 			var $t, vtx, org;
-
+			
 			if(target == 'EXP') $t = $sb, org = orgX;
 			else if(target == 'MNY') $t = $mb, org = orgM;
-
+			
 			if(type == 'g') vtx = "+" + (org * value).toFixed(1);
 			else if(type == 'h') vtx = "+" + Math.floor(value);
-
+			
 			row($t, L['bonusFrom_' + from], vtx);
 		});
 		function row($t, h, b){
 			$t.append($("<h5>").addClass("result-me-blog-head").html(h))
-			.append($("<h5>").addClass("result-me-blog-body").html(b));
+				.append($("<h5>").addClass("result-me-blog-body").html(b));
 		}
 		return $R;
 	}
@@ -4256,7 +4317,7 @@ function drawRanking(ranks){
 	var $b = $(".result-board").empty();
 	var $o, $v;
 	var me;
-
+	
 	$data._resultPage = 2;
 	if(!ranks) return $stage.dialog.resultOK.trigger('click');
 	for(i in ranks.list){
@@ -4265,19 +4326,19 @@ function drawRanking(ranks){
 			profile: { title: L['hidden'] }
 		};
 		me = r.id == $data.id;
-
+		
 		$b.append($o = $("<div>").addClass("result-board-item")
-		.append($("<div>").addClass("result-board-rank").html(r.rank + 1))
-		.append(getLevelImage(r.score).addClass("result-board-level"))
-		.append($("<div>").addClass("result-board-name").text(getDisplayName(o)))
-		.append($("<div>").addClass("result-board-score").html(commify(r.score) + L['PTS']))
-		.append($("<div>").addClass("result-board-reward").html(""))
-		.append($v = $("<div>").addClass("result-board-lvup").css('display', me ? "block" : "none")
-		.append($("<i>").addClass("fa fa-arrow-up"))
-		.append($("<div>").html(ranks.prev - r.rank))
-		)
+			.append($("<div>").addClass("result-board-rank").html(r.rank + 1))
+			.append(getLevelImage(r.score).addClass("result-board-level"))
+			.append($("<div>").addClass("result-board-name").text(getDisplayName(o)))
+			.append($("<div>").addClass("result-board-score").html(commify(r.score) + L['PTS']))
+			.append($("<div>").addClass("result-board-reward").html(""))
+			.append($v = $("<div>").addClass("result-board-lvup").css('display', me ? "block" : "none")
+				.append($("<i>").addClass("fa fa-arrow-up"))
+				.append($("<div>").html(ranks.prev - r.rank))
+			)
 		);
-
+		
 		if(me){
 			if(ranks.prev - r.rank <= 0) $v.hide();
 			$o.addClass("result-board-me");
@@ -4286,7 +4347,7 @@ function drawRanking(ranks){
 }
 function kickVoting(target){
 	var op = $data.users[target].profile;
-
+	
 	$("#kick-vote-text").text((op.title || op.name) + L['kickVoteText']);
 	$data.kickTime = 10;
 	$data._kickTime = 10;
@@ -4300,7 +4361,7 @@ function kickVoteTick(){
 }
 function loadShop(){
 	var $body = $("#shop-shelf");
-
+	
 	$body.html(L['LOADING']);
 	processShop(function(res){
 		$body.empty();
@@ -4312,12 +4373,12 @@ function loadShop(){
 		res.goods.sort(function(a, b){ return b.updatedAt - a.updatedAt; }).forEach(function(item, index, my){
 			if(item.cost < 0) return;
 			var url = iImage(false, item);
-
+			
 			$body.append($("<div>").attr('id', "goods_" + item._id).addClass("goods")
-			.append($("<div>").addClass("jt-image goods-image").css('background-image', "url(" + url + ")"))
-			.append($("<div>").addClass("goods-title").html(iName(item._id)))
-			.append($("<div>").addClass("goods-cost").html(commify(item.cost) + L['ping']))
-			.append(explainGoods(item, false))
+				.append($("<div>").addClass("jt-image goods-image").css('background-image', "url(" + url + ")"))
+				.append($("<div>").addClass("goods-title").html(iName(item._id)))
+				.append($("<div>").addClass("goods-cost").html(commify(item.cost) + L['ping']))
+				.append(explainGoods(item, false))
 			.on('click', onGoods));
 		});
 		global.expl($body);
@@ -4329,7 +4390,7 @@ function filterShop(by){
 	var isAll = by === true;
 	var $o, obj;
 	var i;
-
+	
 	if(!isAll) by = by.split(',');
 	for(i in $data.shop){
 		obj = $data.shop[i];
@@ -4342,32 +4403,32 @@ function filterShop(by){
 function explainGoods(item, equipped, expire){
 	var i;
 	var $R = $("<div>").addClass("expl dress-expl")
-	.append($("<div>").addClass("dress-item-title").html(iName(item._id) + (equipped ? L['equipped'] : "")))
-	.append($("<div>").addClass("dress-item-group").html(L['GROUP_' + item.group]))
-	.append($("<div>").addClass("dress-item-expl").html(iDesc(item._id)));
+		.append($("<div>").addClass("dress-item-title").html(iName(item._id) + (equipped ? L['equipped'] : "")))
+		.append($("<div>").addClass("dress-item-group").html(L['GROUP_' + item.group]))
+		.append($("<div>").addClass("dress-item-expl").html(iDesc(item._id)));
 	var $opts = $("<div>").addClass("dress-item-opts");
 	var txt;
-
+	
 	if(item.term) $R.append($("<div>").addClass("dress-item-term").html(Math.floor(item.term / 86400) + L['DATE'] + " " + L['ITEM_TERM']));
 	if(expire) $R.append($("<div>").addClass("dress-item-term").html((new Date(expire * 1000)).toLocaleString() + L['ITEM_TERMED']));
 	for(i in item.options){
 		if(i == "gif") continue;
 		var k = i.charAt(0);
-
+		
 		txt = item.options[i];
 		if(k == 'g') txt = "+" + (txt * 100).toFixed(1) + "%p";
 		else if(k == 'h') txt = "+" + txt;
-
+		
 		$opts.append($("<label>").addClass("item-opts-head").html(L['OPTS_' + i]))
-		.append($("<label>").addClass("item-opts-body").html(txt))
-		.append($("<br>"));
+			.append($("<label>").addClass("item-opts-body").html(txt))
+			.append($("<br>"));
 	}
 	if(txt) $R.append($opts);
 	return $R;
 }
 function processShop(callback){
 	var i;
-
+	
 	$.get("/shop", function(res){
 		$data.shop = {};
 		for(i in res.goods){
@@ -4385,7 +4446,7 @@ function onGoods(e){
 	var $oj;
 	var spt = L['surePurchase'];
 	var i, ceq = {};
-
+	
 	if($data.box) if($data.box[id]) spt = L['alreadyGot'] + " " + spt;
 	showDialog($stage.dialog.purchase, true);
 	$("#purchase-ping-before").html(commify(ping) + L['ping']);
@@ -4395,9 +4456,9 @@ function onGoods(e){
 	$("#purchase-item-desc").html((after < 0) ? L['notEnoughMoney'] : spt);
 	for(i in my.equip) ceq[i] = my.equip[i];
 	ceq[($obj.group == "Mhand") ? [ "Mlhand", "Mrhand" ][Math.floor(Math.random() * 2)] : $obj.group] = id;
-
+	
 	renderMoremi("#moremi-after", ceq);
-
+	
 	$data._sgood = id;
 	$stage.dialog.purchaseOK.attr('disabled', after < 0);
 	if(after < 0){
@@ -4408,7 +4469,7 @@ function onGoods(e){
 }
 function vibrate(level){
 	if(level < 1) return;
-
+	
 	$("#Middle").css('padding-top', level);
 	addTimeout(function(){
 		$("#Middle").css('padding-top', 0);
@@ -4426,7 +4487,7 @@ function pushDisplay(text, mean, theme, wc){
 	var $l;
 	var tick = $data.turnTime / 96;
 	var sg = $data.turnTime / 12;
-
+	
 	$stage.game.display.empty();
 	if(beat){
 		ta = 'As' + $data._speed;
@@ -4438,21 +4499,21 @@ function pushDisplay(text, mean, theme, wc){
 		vibrate(len);
 	}
 	kkt = 'K'+$data._speed;
-
+	
 	if(beat){
 		for(i in beat){
 			if(beat[i] == "0") continue;
-
+			
 			$stage.game.display.append($l = $("<div>")
-			.addClass("display-text")
-			.css({ 'float': isRev ? "right" : "left", 'margin-top': -6, 'font-size': 36 })
-			.hide()
-			.html(isRev ? text.charAt(len - j - 1) : text.charAt(j))
+				.addClass("display-text")
+				.css({ 'float': isRev ? "right" : "left", 'margin-top': -6, 'font-size': 36 })
+				.hide()
+				.html(isRev ? text.charAt(len - j - 1) : text.charAt(j))
 			);
 			j++;
 			addTimeout(function($l, snd){
 				var anim = { 'margin-top': 0 };
-
+				
 				playSound(snd);
 				if($l.html() == $data.mission){
 					playSound('mission');
@@ -4501,8 +4562,8 @@ function pushDisplay(text, mean, theme, wc){
 					else playSound('kung');
 				}
 				(beat ? $stage.game.display.children(".display-text") : $stage.game.display)
-				.css('font-size', 21)
-				.animate({ 'font-size': 20 }, tick);
+					.css('font-size', 21)
+					.animate({ 'font-size': 20 }, tick);
 			}, i * tick * 2, i);
 		}
 		addTimeout(pushHistory, tick * 4, text, mean, theme, wc);
@@ -4512,11 +4573,11 @@ function pushDisplay(text, mean, theme, wc){
 function pushHint(hint){
 	var v = processWord("", hint);
 	var $obj;
-
+	
 	$stage.game.hints.append(
 		$obj = $("<div>").addClass("hint-item")
-		.append($("<label>").html(v))
-		.append($("<div>").addClass("expl").css({ 'white-space': "normal", 'width': 200 }).html(v.html()))
+			.append($("<label>").html(v))
+			.append($("<div>").addClass("expl").css({ 'white-space': "normal", 'width': 200 }).html(v.html()))
 	);
 	if(!mobile) $obj.width(0).animate({ width: 215 });
 	global.expl($obj);
@@ -4525,12 +4586,12 @@ function pushHistory(text, mean, theme, wc){
 	var $v, $w, $x;
 	var wcs = wc ? wc.split(',') : [], wd = {};
 	var val;
-
+	
 	$stage.game.history.prepend($v = $("<div>")
-	.addClass("ellipse history-item")
-	.width(0)
-	.animate({ width: 200 })
-	.html(text)
+		.addClass("ellipse history-item")
+		.width(0)
+		.animate({ width: 200 })
+		.html(text)
 	);
 	$w = $stage.game.history.children();
 	if($w.length > 6){
@@ -4538,8 +4599,8 @@ function pushHistory(text, mean, theme, wc){
 	}
 	val = processWord(text, mean, theme, wcs);
 	/*val = mean;
-	 *if(theme) val = "<label class='history-theme-c'>&lt;" + theme + "&gt;</label> " + val;*/
-
+	if(theme) val = "<label class='history-theme-c'>&lt;" + theme + "&gt;</label> " + val;*/
+	
 	wcs.forEach(function(item){
 		if(wd[item]) return;
 		if(!L['class_'+item]) return;
@@ -4547,9 +4608,9 @@ function pushHistory(text, mean, theme, wc){
 		$v.append($("<label>").addClass("history-class").html(L['class_'+item]));
 	});
 	$v.append($w = $("<div>").addClass("history-mean ellipse").append(val))
-	.append($x = $("<div>").addClass("expl").css({ 'width': 200, 'white-space': "normal" })
-	.html("<h5 style='color: #BBBBBB;'>" + val.html() + "</h5>")
-	);
+		.append($x = $("<div>").addClass("expl").css({ 'width': 200, 'white-space': "normal" })
+			.html("<h5 style='color: #BBBBBB;'>" + val.html() + "</h5>")
+		);
 	global.expl($v);
 }
 function processNormal(word, mean){
@@ -4570,27 +4631,27 @@ function processWord(word, _mean, _theme, _wcs){
 		return L['theme_' + _t];
 	}) : [];
 	var ms = means.length > 1;
-
+	
 	means.forEach(function(m1, x1){
 		var $m1 = $("<label>").addClass("word-m1");
 		var m1s = m1.length > 1;
-
+		
 		if(ms) $m1.append($("<label>").addClass("word-head word-m1-head").html(x1 + 1));
 		m1.forEach(function(m2, x2){
 			var $m2 = $("<label>").addClass("word-m2");
 			var m2l = m2.length;
 			var m2s = m2l > 1;
 			var tl = themes.splice(0, m2l);
-
+			
 			if(m1s) $m2.append($("<label>").addClass("word-head word-m2-head").html(x2 + 1));
 			m2.forEach(function(m3, x3){
 				var $m3 = $("<label>").addClass("word-m3");
 				var _t = tl.shift();
-
+				
 				if(m2s) $m3.append($("<label>").addClass("word-head word-m3-head").html(x3 + 1));
 				if(_t) $m3.append($("<label>").addClass("word-theme").html(_t));
 				$m3.append($("<label>").addClass("word-m3-body").html(formMean(m3)));
-
+				
 				$m2.append($m3);
 			});
 			$m1.append($m2);
@@ -4600,433 +4661,433 @@ function processWord(word, _mean, _theme, _wcs){
 	function formMean(v){
 		return v.replace(/\$\$[^\$]+\$\$/g, function(item){
 			var txt = item.slice(2, item.length - 2)
-			.replace(/\^\{([^\}]+)\}/g, "<sup>$1</sup>")
-			.replace(/_\{([^\}]+)\}/g, "<sub>$1</sub>")
-			.replace(/\\geq/g, "≥")
+				.replace(/\^\{([^\}]+)\}/g, "<sup>$1</sup>")
+				.replace(/_\{([^\}]+)\}/g, "<sub>$1</sub>")
+				.replace(/\\geq/g, "≥")
 			;
-
+			
 			return "<equ>" + txt + "</equ>";
-})
+		})
 		.replace(/\*\*([^\*]+)\*\*/g, "<sup>$1</sup>")
 		.replace(/\*([^\*]+)\*/g, "<sub>$1</sub>");
+	}
+	return $R;
+}
+function getCharText(char, subChar, wordLength){
+	var res = char + (subChar ? ("("+subChar+")") : "");
+	
+	if(wordLength) res += "<label class='jjo-display-word-length'>(" + wordLength + ")</label>";
+	
+	return res;
+}
+function getRequiredScore(lv){
+	return Math.round(
+		(!(lv%5)*0.3 + 1) * (!(lv%15)*0.4 + 1) * (!(lv%45)*0.5 + 1) * (
+			120 + Math.floor(lv/5)*60 + Math.floor(lv*lv/225)*120 + Math.floor(lv*lv/2025)*180
+		)
+	);
+}
+function getLevel(score){
+	var i, l = EXP.length;
+	
+	for(i=0; i<l; i++) if(score < EXP[i]) break;
+	return i+1;
+}
+function getLevelImage(score){
+	var lv = getLevel(score) - 1;
+	var lX = (lv % 25) * -100;
+	var lY = Math.floor(lv * 0.04) * -100;
+	
+	// return getImage("/img/kkutu/lv/lv" + zeroPadding(lv+1, 4) + ".png");
+	return $("<div>").css({
+		'float': "left",
+		'background-image': "url('/img/kkutu/lv/newlv.png')",
+		'background-position': lX + "% " + lY + "%",
+		'background-size': "2560%"
+	});
+}
+function getImage(url){
+	return $("<div>").addClass("jt-image").css('background-image', "url('"+url+"')");
+}
+function getOptions(mode, opts, hash){
+	var R = [ L["mode"+MODE[mode]] ];
+	var i, k;
+	
+	for(i in OPTIONS){
+		k = OPTIONS[i].name.toLowerCase();
+		if(opts[k]) R.push(L['opt' + OPTIONS[i].name]);
+	}
+	if(hash) R.push(opts.injpick.join('|'));
+	
+	return hash ? R.toString() : R;
+}
+function setRoomHead($obj, room){
+	var opts = getOptions(room.mode, room.opts);
+	var rule = RULE[MODE[room.mode]];
+	var $rm;
+	
+	$obj.empty()
+		.append($("<h5>").addClass("room-head-number").html("["+(room.practice ? L['practice'] : room.id)+"]"))
+		.append($("<h5>").addClass("room-head-title").text(badWords(room.title)))
+		.append($rm = $("<h5>").addClass("room-head-mode").html(opts.join(" / ")))
+		.append($("<h5>").addClass("room-head-limit").html((mobile ? "" : (L['players'] + " ")) + room.players.length + " / " +room.limit))
+		.append($("<h5>").addClass("room-head-round").html(L['rounds'] + " " + room.round))
+		.append($("<h5>").addClass("room-head-time").html(room.time + L['SECOND']));
+		
+	if(rule.opts.indexOf("ijp") != -1){
+		$rm.append($("<div>").addClass("expl").html("<h5>" + room.opts.injpick.map(function(item){
+			return L["theme_" + item];
+		}) + "</h5>"));
+		global.expl($obj);
+	}
+}
+function loadSounds(list, callback){
+	$data._lsRemain = list.length;
+	
+	list.forEach(function(v){
+		getAudio(v.key, v.value, callback);
+	});
+}
+function getAudio(k, url, cb){
+	var req = new XMLHttpRequest();
+	
+	req.open("GET", /*($data.PUBLIC ? "http://jjo.kr" : "") +*/ url);
+	req.responseType = "arraybuffer";
+	req.onload = function(e){
+		if(audioContext) audioContext.decodeAudioData(e.target.response, function(buf){
+			$sound[k] = buf;
+			done();
+		}, onErr); else onErr();
+	};
+	function onErr(err){
+		$sound[k] = new AudioSound(url);
+		done();
+	}
+	function done(){
+		if(--$data._lsRemain == 0){
+			if(cb) cb();
+		}else loading(L['loadRemain'] + $data._lsRemain);
+	}
+	function AudioSound(url){
+		var my = this;
+		
+		this.audio = new Audio(url);
+		this.audio.load();
+		this.start = function(){
+			my.audio.play();
+		};
+		this.stop = function(){
+			my.audio.currentTime = 0;
+			my.audio.pause();
+		};
+	}
+	req.send();
+}
+function playBGM(key, force){
+	if($data.bgm) $data.bgm.stop();
+	
+	return $data.bgm = playSound(key, true);
+}
+function stopBGM(){
+	if($data.bgm){
+		$data.bgm.stop();
+		delete $data.bgm;
+	}
+}
+function playSound(key, loop){
+	var src, sound;
+	var bgmMuted = loop && $data.BGMVolume == 0;
+	var effectMuted = !loop && $data.EffectVolume == 0;
+	
+	sound = $sound[key] || $sound.missing;
+	if(window.hasOwnProperty("AudioBuffer") && sound instanceof AudioBuffer){
+		var gainNode = audioContext.createGain();
+		src = audioContext.createBufferSource();
+		src.startedAt = audioContext.currentTime;
+		src.loop = loop;
+		if(bgmMuted || effectMuted){
+			gainNode.gain.value = 0;
+			src.buffer = audioContext.createBuffer(2, sound.length, audioContext.sampleRate);
+		}else{
+			gainNode.gain.value = (loop ? $data.BGMVolume : $data.EffectVolume) || 0.5;
+			src.buffer = sound;
 		}
-		return $R;
+		gainNode.connect(audioContext.destination);
+		src.connect(gainNode);
+	}else{
+		if(sound.readyState) sound.audio.currentTime = 0;
+		sound.audio.loop = loop || false;
+		sound.audio.volume = mute ? 0 : ((loop ? $data.BGMVolume : $data.EffectVolume) || 0.5);
+		src = sound;
+	}
+	if($_sound[key]) $_sound[key].stop();
+	$_sound[key] = src;
+	src.key = key;
+	src.start();
+	/*if(sound.readyState) sound.currentTime = 0;
+	sound.loop = loop || false;
+	sound.volume = ((loop && $data.muteBGM) || (!loop && $data.muteEff)) ? 0 : 1;
+	sound.play();*/
+	
+	return src;
+}
+function stopAllSounds(){
+	var i;
+	
+	for(i in $_sound) $_sound[i].stop();
+}
+function tryJoin(id){
+	var pw;
+	
+	if(!$data.rooms[id]) return;
+	if($data.rooms[id].password){
+		pw = prompt(L['putPassword']);
+		if(!pw) return;
+	}
+	$data._pw = pw;
+	send('enter', { id: id, password: pw });
+}
+function clearChat(){
+	$("#Chat").empty();
+}
+function forkChat(){
+	var $cs = $("#Chat,#chat-log-board");
+	var lh = $cs.children(".chat-item").last().get(0);
+	
+	if(lh) if(lh.tagName == "HR") return;
+	$cs.append($("<hr>").addClass("chat-item"));
+	$stage.chat.scrollTop(999999999);
+}
+function badWords(text){
+	return text.replace(BAD, "♥♥");
+}
+function chatBalloon(text, id, flag){
+	$("#cb-" + id).remove();
+	var offset = ((flag & 2) ? $("#game-user-" + id) : $("#room-user-" + id)).offset();
+	var img = (flag == 2) ? "chat-balloon-bot" : "chat-balloon-tip";
+	var $obj = $("<div>").addClass("chat-balloon")
+		.attr('id', "cb-" + id)
+		.append($("<div>").addClass("jt-image " + img))
+		[(flag == 2) ? 'prepend' : 'append']($("<h4>").text(text));
+	var ot, ol;
+	
+	if(!offset) return;
+	$stage.balloons.append($obj);
+	if(flag == 1) ot = 0, ol = 220;
+	else if(flag == 2) ot = 35 - $obj.height(), ol = -2;
+	else if(flag == 3) ot = 5, ol = 210;
+	else ot = 40, ol = 110;
+	$obj.css({ top: offset.top + ot, left: offset.left + ol });
+	addTimeout(function(){
+		$obj.animate({ 'opacity': 0 }, 500, function(){ $obj.remove(); });
+	}, 2500);
+}
+function chat(profile, msg, from, timestamp){
+	var time = timestamp ? new Date(timestamp) : new Date();
+	var equip = $data.users[profile.id] ? $data.users[profile.id].equip : {};
+	var $bar, $msg, $item;
+	var link;
+	
+	if($data._shut[profile.title || profile.name]) return;
+	if(from){
+		if($data.opts.dw) return;
+		if($data._wblock[from]) return;
+	}
+	msg = badWords(msg);
+	playSound('k');
+	stackChat();
+	if(!mobile && $data.room){
+		$bar = ($data.room.gaming ? 2 : 0) + ($(".jjoriping").hasClass("cw") ? 1 : 0);
+		chatBalloon(msg, profile.id, $bar);
+	}
+	$stage.chat.append($item = $("<div>").addClass("chat-item")
+		.append($bar = $("<div>").addClass("chat-head ellipse").text(profile.title || profile.name))
+		.append($msg = $("<div>").addClass("chat-body").text(msg))
+		.append($("<div>").addClass("chat-stamp").text(time.toLocaleTimeString()))
+	);
+	if(timestamp) $bar.prepend($("<i>").addClass("fa fa-video-camera"));
+	$bar.on('click', function(e){
+		requestProfile(profile.id);
+	});
+	$stage.chatLog.append($item = $item.clone());
+	$item.append($("<div>").addClass("expl").css('font-weight', "normal").html("#" + (profile.id || "").substr(0, 5)));
+	
+	if(link = msg.match(/https?:\/\/[\w\.\?\/&#%=-_\+]+/g)){
+		msg = $msg.html();
+		link.forEach(function(item){
+			msg = msg.replace(item, "<a href='#' style='color: #2222FF;' onclick='if(confirm(\"" + L['linkWarning'] + "\")) window.open(\"" + item + "\");'>" + item + "</a>");
+		});
+		$msg.html(msg);
+	}
+	if(from){
+		if(from !== true) $data._recentFrom = from;
+		$msg.html("<label style='color: #7777FF; font-weight: bold;'>&lt;" + L['whisper'] + "&gt;</label>" + $msg.html());
+	}
+	addonNickname($bar, { equip: equip });
+	$stage.chat.scrollTop(999999999);
+}
+function notice(msg, head){
+	var time = new Date();
+	
+	playSound('k');
+	stackChat();
+	$("#Chat,#chat-log-board").append($("<div>").addClass("chat-item chat-notice")
+		.append($("<div>").addClass("chat-head").text(head || L['notice']))
+		.append($("<div>").addClass("chat-body").text(msg))
+		.append($("<div>").addClass("chat-stamp").text(time.toLocaleTimeString()))
+	);
+	$stage.chat.scrollTop(999999999);
+	if(head == "tail") console.warn(time.toLocaleString(), msg);
+}
+function stackChat(){
+	var $v = $("#Chat .chat-item");
+	var $w = $("#chat-log-board .chat-item");
+	
+	if($v.length > 99){
+		$v.first().remove();
+	}
+	if($w.length > 199){
+		$w.first().remove();
+	}
+}
+function iGoods(key){
+	var obj;
+	
+	if(key.charAt() == "$"){
+		obj = $data.shop[key.slice(0, 4)];
+	}else{
+		obj = $data.shop[key];
+	}
+	return {
+		_id: key,
+		group: obj.group,
+		term: obj.term,
+		name: iName(key),
+		cost: obj.cost,
+		image: iImage(key, obj),
+		desc: iDesc(key),
+		options: obj.options
+	};
+}
+function iName(key){
+	if(key.charAt() == "$") return L[key.slice(0, 4)][0] + ' - ' + key.slice(4);
+	else return L[key][0];
+}
+function iDesc(key){
+	if(key.charAt() == "$") return L[key.slice(0, 4)][1];
+	else return L[key][1];
+}
+function iImage(key, sObj){
+	var obj;
+	var gif;
+	
+	if(key){
+		if(key.charAt() == "$"){
+			return iDynImage(key.slice(1, 4), key.slice(4));
 		}
-		function getCharText(char, subChar, wordLength){
-			var res = char + (subChar ? ("("+subChar+")") : "");
-
-			if(wordLength) res += "<label class='jjo-display-word-length'>(" + wordLength + ")</label>";
-
-			return res;
-		}
-		function getRequiredScore(lv){
-			return Math.round(
-				(!(lv%5)*0.3 + 1) * (!(lv%15)*0.4 + 1) * (!(lv%45)*0.5 + 1) * (
-					120 + Math.floor(lv/5)*60 + Math.floor(lv*lv/225)*120 + Math.floor(lv*lv/2025)*180
-				)
-			);
-		}
-		function getLevel(score){
-			var i, l = EXP.length;
-
-			for(i=0; i<l; i++) if(score < EXP[i]) break;
-			return i+1;
-		}
-		function getLevelImage(score){
-			var lv = getLevel(score) - 1;
-			var lX = (lv % 25) * -100;
-			var lY = Math.floor(lv * 0.04) * -100;
-
-			// return getImage("/img/kkutu/lv/lv" + zeroPadding(lv+1, 4) + ".png");
-			return $("<div>").css({
-				'float': "left",
-				'background-image': "url('/img/kkutu/lv/newlv.png')",
-								  'background-position': lX + "% " + lY + "%",
-								  'background-size': "2560%"
-			});
-		}
-		function getImage(url){
-			return $("<div>").addClass("jt-image").css('background-image', "url('"+url+"')");
-		}
-		function getOptions(mode, opts, hash){
-			var R = [ L["mode"+MODE[mode]] ];
-			var i, k;
-
-			for(i in OPTIONS){
-				k = OPTIONS[i].name.toLowerCase();
-				if(opts[k]) R.push(L['opt' + OPTIONS[i].name]);
-			}
-			if(hash) R.push(opts.injpick.join('|'));
-
-			return hash ? R.toString() : R;
-		}
-		function setRoomHead($obj, room){
-			var opts = getOptions(room.mode, room.opts);
-			var rule = RULE[MODE[room.mode]];
-			var $rm;
-
-			$obj.empty()
-			.append($("<h5>").addClass("room-head-number").html("["+(room.practice ? L['practice'] : room.id)+"]"))
-			.append($("<h5>").addClass("room-head-title").text(badWords(room.title)))
-			.append($rm = $("<h5>").addClass("room-head-mode").html(opts.join(" / ")))
-			.append($("<h5>").addClass("room-head-limit").html((mobile ? "" : (L['players'] + " ")) + room.players.length + " / " +room.limit))
-			.append($("<h5>").addClass("room-head-round").html(L['rounds'] + " " + room.round))
-			.append($("<h5>").addClass("room-head-time").html(room.time + L['SECOND']));
-
-			if(rule.opts.indexOf("ijp") != -1){
-				$rm.append($("<div>").addClass("expl").html("<h5>" + room.opts.injpick.map(function(item){
-					return L["theme_" + item];
-				}) + "</h5>"));
-				global.expl($obj);
-			}
-		}
-		function loadSounds(list, callback){
-			$data._lsRemain = list.length;
-
-			list.forEach(function(v){
-				getAudio(v.key, v.value, callback);
-			});
-		}
-		function getAudio(k, url, cb){
-			var req = new XMLHttpRequest();
-
-			req.open("GET", /*($data.PUBLIC ? "http://jjo.kr" : "") +*/ url);
-			req.responseType = "arraybuffer";
-			req.onload = function(e){
-				if(audioContext) audioContext.decodeAudioData(e.target.response, function(buf){
-					$sound[k] = buf;
-					done();
-				}, onErr); else onErr();
-			};
-			function onErr(err){
-				$sound[k] = new AudioSound(url);
-				done();
-			}
-			function done(){
-				if(--$data._lsRemain == 0){
-					if(cb) cb();
-				}else loading(L['loadRemain'] + $data._lsRemain);
-			}
-			function AudioSound(url){
-				var my = this;
-
-				this.audio = new Audio(url);
-				this.audio.load();
-				this.start = function(){
-					my.audio.play();
-				};
-				this.stop = function(){
-					my.audio.currentTime = 0;
-					my.audio.pause();
-				};
-			}
-			req.send();
-		}
-		function playBGM(key, force){
-			if($data.bgm) $data.bgm.stop();
-
-			return $data.bgm = playSound(key, true);
-		}
-		function stopBGM(){
-			if($data.bgm){
-				$data.bgm.stop();
-				delete $data.bgm;
-			}
-		}
-		function playSound(key, loop){
-			var src, sound;
-			var bgmMuted = loop && $data.BGMVolume == 0;
-			var effectMuted = !loop && $data.EffectVolume == 0;
-
-			sound = $sound[key] || $sound.missing;
-			if(window.hasOwnProperty("AudioBuffer") && sound instanceof AudioBuffer){
-				var gainNode = audioContext.createGain();
-				src = audioContext.createBufferSource();
-				src.startedAt = audioContext.currentTime;
-				src.loop = loop;
-				if(bgmMuted || effectMuted){
-					gainNode.gain.value = 0;
-					src.buffer = audioContext.createBuffer(2, sound.length, audioContext.sampleRate);
-				}else{
-					gainNode.gain.value = (loop ? $data.BGMVolume : $data.EffectVolume) || 0.5;
-					src.buffer = sound;
-				}
-				gainNode.connect(audioContext.destination);
-				src.connect(gainNode);
-			}else{
-				if(sound.readyState) sound.audio.currentTime = 0;
-				sound.audio.loop = loop || false;
-				sound.audio.volume = mute ? 0 : ((loop ? $data.BGMVolume : $data.EffectVolume) || 0.5);
-				src = sound;
-			}
-			if($_sound[key]) $_sound[key].stop();
-			$_sound[key] = src;
-			src.key = key;
-			src.start();
-			/*if(sound.readyState) sound.currentTime = 0;
-			 * sound.loop = loop || false;
-			 * sound.volume = ((loop && $data.muteBGM) || (!loop && $data.muteEff)) ? 0 : 1;
-			 * sound.play();*/
-
-			return src;
-		}
-		function stopAllSounds(){
-			var i;
-
-			for(i in $_sound) $_sound[i].stop();
-		}
-		function tryJoin(id){
-			var pw;
-
-			if(!$data.rooms[id]) return;
-			if($data.rooms[id].password){
-				pw = prompt(L['putPassword']);
-				if(!pw) return;
-			}
-			$data._pw = pw;
-			send('enter', { id: id, password: pw });
-		}
-		function clearChat(){
-			$("#Chat").empty();
-		}
-		function forkChat(){
-			var $cs = $("#Chat,#chat-log-board");
-			var lh = $cs.children(".chat-item").last().get(0);
-
-			if(lh) if(lh.tagName == "HR") return;
-			$cs.append($("<hr>").addClass("chat-item"));
-			$stage.chat.scrollTop(999999999);
-		}
-		function badWords(text){
-			return text.replace(BAD, "♥♥");
-		}
-		function chatBalloon(text, id, flag){
-			$("#cb-" + id).remove();
-			var offset = ((flag & 2) ? $("#game-user-" + id) : $("#room-user-" + id)).offset();
-			var img = (flag == 2) ? "chat-balloon-bot" : "chat-balloon-tip";
-			var $obj = $("<div>").addClass("chat-balloon")
-			.attr('id', "cb-" + id)
-			.append($("<div>").addClass("jt-image " + img))
-			[(flag == 2) ? 'prepend' : 'append']($("<h4>").text(text));
-			var ot, ol;
-
-			if(!offset) return;
-			$stage.balloons.append($obj);
-			if(flag == 1) ot = 0, ol = 220;
-			else if(flag == 2) ot = 35 - $obj.height(), ol = -2;
-			else if(flag == 3) ot = 5, ol = 210;
-			else ot = 40, ol = 110;
-			$obj.css({ top: offset.top + ot, left: offset.left + ol });
-			addTimeout(function(){
-				$obj.animate({ 'opacity': 0 }, 500, function(){ $obj.remove(); });
-			}, 2500);
-		}
-		function chat(profile, msg, from, timestamp){
-			var time = timestamp ? new Date(timestamp) : new Date();
-			var equip = $data.users[profile.id] ? $data.users[profile.id].equip : {};
-			var $bar, $msg, $item;
-			var link;
-
-			if($data._shut[profile.title || profile.name]) return;
-			if(from){
-				if($data.opts.dw) return;
-				if($data._wblock[from]) return;
-			}
-			msg = badWords(msg);
-			playSound('k');
-			stackChat();
-			if(!mobile && $data.room){
-				$bar = ($data.room.gaming ? 2 : 0) + ($(".jjoriping").hasClass("cw") ? 1 : 0);
-				chatBalloon(msg, profile.id, $bar);
-			}
-			$stage.chat.append($item = $("<div>").addClass("chat-item")
-			.append($bar = $("<div>").addClass("chat-head ellipse").text(profile.title || profile.name))
-			.append($msg = $("<div>").addClass("chat-body").text(msg))
-			.append($("<div>").addClass("chat-stamp").text(time.toLocaleTimeString()))
-			);
-			if(timestamp) $bar.prepend($("<i>").addClass("fa fa-video-camera"));
-			$bar.on('click', function(e){
-				requestProfile(profile.id);
-			});
-			$stage.chatLog.append($item = $item.clone());
-			$item.append($("<div>").addClass("expl").css('font-weight', "normal").html("#" + (profile.id || "").substr(0, 5)));
-
-			if(link = msg.match(/https?:\/\/[\w\.\?\/&#%=-_\+]+/g)){
-				msg = $msg.html();
-				link.forEach(function(item){
-					msg = msg.replace(item, "<a href='#' style='color: #2222FF;' onclick='if(confirm(\"" + L['linkWarning'] + "\")) window.open(\"" + item + "\");'>" + item + "</a>");
-				});
-				$msg.html(msg);
-			}
-			if(from){
-				if(from !== true) $data._recentFrom = from;
-				$msg.html("<label style='color: #7777FF; font-weight: bold;'>&lt;" + L['whisper'] + "&gt;</label>" + $msg.html());
-			}
-			addonNickname($bar, { equip: equip });
-			$stage.chat.scrollTop(999999999);
-		}
-		function notice(msg, head){
-			var time = new Date();
-
-			playSound('k');
-			stackChat();
-			$("#Chat,#chat-log-board").append($("<div>").addClass("chat-item chat-notice")
-			.append($("<div>").addClass("chat-head").text(head || L['notice']))
-			.append($("<div>").addClass("chat-body").text(msg))
-			.append($("<div>").addClass("chat-stamp").text(time.toLocaleTimeString()))
-			);
-			$stage.chat.scrollTop(999999999);
-			if(head == "tail") console.warn(time.toLocaleString(), msg);
-		}
-		function stackChat(){
-			var $v = $("#Chat .chat-item");
-			var $w = $("#chat-log-board .chat-item");
-
-			if($v.length > 99){
-				$v.first().remove();
-			}
-			if($w.length > 199){
-				$w.first().remove();
-			}
-		}
-		function iGoods(key){
-			var obj;
-
-			if(key.charAt() == "$"){
-				obj = $data.shop[key.slice(0, 4)];
-			}else{
-				obj = $data.shop[key];
-			}
-			return {
-				_id: key,
-				group: obj.group,
-				term: obj.term,
-				name: iName(key),
-				cost: obj.cost,
-				image: iImage(key, obj),
-				desc: iDesc(key),
-				options: obj.options
-			};
-		}
-		function iName(key){
-			if(key.charAt() == "$") return L[key.slice(0, 4)][0] + ' - ' + key.slice(4);
-			else return L[key][0];
-		}
-		function iDesc(key){
-			if(key.charAt() == "$") return L[key.slice(0, 4)][1];
-			else return L[key][1];
-		}
-		function iImage(key, sObj){
-			var obj;
-			var gif;
-
-			if(key){
-				if(key.charAt() == "$"){
-					return iDynImage(key.slice(1, 4), key.slice(4));
-				}
-			}else if(typeof sObj == "string") sObj = { _id: "def", group: sObj, options: {} };
-			obj = $data.shop[key] || sObj;
-			gif = obj.options.hasOwnProperty('gif') ? ".gif" : ".png";
-			if(obj.group.slice(0, 3) == "BDG") return "/img/kkutu/moremi/badge/" + obj._id + gif;
-			return (obj.group.charAt(0) == 'M')
-			? "/img/kkutu/moremi/" + obj.group.slice(1) + "/" + obj._id + gif
-			: "/img/kkutu/shop/" + obj._id + ".png";
-		}
-		function iDynImage(group, data){
-			var canvas = document.createElement("canvas");
-			var ctx = canvas.getContext('2d');
-			var i;
-
-			canvas.width = canvas.height = 50;
-			ctx.font = "24px NBGothic";
-			ctx.textAlign = "center";
-			ctx.textBaseline = "middle";
-			switch(group){
-				case 'WPC':
-				case 'WPB':
-				case 'WPA':
-					i = [ 'WPC', 'WPB', 'WPA' ].indexOf(group);
-					ctx.beginPath();
-					ctx.arc(25, 25, 25, 0, 2 * Math.PI);
-					ctx.fillStyle = [ "#DDDDDD", "#A6C5FF", "#FFEF31" ][i];
-					ctx.fill();
-					ctx.fillStyle = [ "#000000", "#4465C3", "#E69D12" ][i];
-					ctx.fillText(data, 25, 25);
-					break;
-				default:
-			}
-			return canvas.toDataURL();
-		}
-		function queueObtain(data){
-			if($stage.dialog.obtain.is(':visible')){
-				$data._obtain.push(data);
-			}else{
-				drawObtain(data);
-				showDialog($stage.dialog.obtain, true);
-			}
-		}
-		function drawObtain(data){
-			playSound('success');
-			$("#obtain-image").css('background-image', "url(" + iImage(data.key) + ")");
-			$("#obtain-name").html(iName(data.key));
-		}
-		function getDisplayName(user){
-			return user.nickname || user.profile.title || user.profile.name;
-		}
-		function renderMoremi(target, equip){
-			var $obj = $(target).empty();
-			var LR = { 'Mlhand': "Mhand", 'Mrhand': "Mhand" };
-			var i, key;
-
-			if(!equip) equip = {};
-			for(i in MOREMI_PART){
-				key = 'M' + MOREMI_PART[i];
-
-				$obj.append($("<img>")
-				.addClass("moremies moremi-" + key.slice(1))
-				.attr('src', iImage(equip[key], LR[key] || key))
-				.css({ 'width': "100%", 'height': "100%" })
-				);
-			}
-			if(key = equip['BDG']){
-				$obj.append($("<img>")
-				.addClass("moremies moremi-badge")
-				.attr('src', iImage(key))
-				.css({ 'width': "100%", 'height': "100%" })
-				);
-			}
-			$obj.children(".moremi-back").after($("<img>").addClass("moremies moremi-body")
-			.attr('src', equip.robot ? "/img/kkutu/moremi/robot.png" : "/img/kkutu/moremi/body.png")
+	}else if(typeof sObj == "string") sObj = { _id: "def", group: sObj, options: {} };
+	obj = $data.shop[key] || sObj;
+	gif = obj.options.hasOwnProperty('gif') ? ".gif" : ".png";
+	if(obj.group.slice(0, 3) == "BDG") return "/img/kkutu/moremi/badge/" + obj._id + gif;
+	return (obj.group.charAt(0) == 'M')
+		? "/img/kkutu/moremi/" + obj.group.slice(1) + "/" + obj._id + gif
+		: "/img/kkutu/shop/" + obj._id + ".png";
+}
+function iDynImage(group, data){
+	var canvas = document.createElement("canvas");
+	var ctx = canvas.getContext('2d');
+	var i;
+	
+	canvas.width = canvas.height = 50;
+	ctx.font = "24px NBGothic";
+	ctx.textAlign = "center";
+	ctx.textBaseline = "middle";
+	switch(group){
+		case 'WPC':
+		case 'WPB':
+		case 'WPA':
+			i = [ 'WPC', 'WPB', 'WPA' ].indexOf(group);
+			ctx.beginPath();
+			ctx.arc(25, 25, 25, 0, 2 * Math.PI);
+			ctx.fillStyle = [ "#DDDDDD", "#A6C5FF", "#FFEF31" ][i];
+			ctx.fill();
+			ctx.fillStyle = [ "#000000", "#4465C3", "#E69D12" ][i];
+			ctx.fillText(data, 25, 25);
+			break;
+		default:
+	}
+	return canvas.toDataURL();
+}
+function queueObtain(data){
+	if($stage.dialog.obtain.is(':visible')){
+		$data._obtain.push(data);
+	}else{
+		drawObtain(data);
+		showDialog($stage.dialog.obtain, true);
+	}
+}
+function drawObtain(data){
+	playSound('success');
+	$("#obtain-image").css('background-image', "url(" + iImage(data.key) + ")");
+	$("#obtain-name").html(iName(data.key));
+}
+function getDisplayName(user){
+	return user.nickname || user.profile.title || user.profile.name;
+}
+function renderMoremi(target, equip){
+	var $obj = $(target).empty();
+	var LR = { 'Mlhand': "Mhand", 'Mrhand': "Mhand" };
+	var i, key;
+	
+	if(!equip) equip = {};
+	for(i in MOREMI_PART){
+		key = 'M' + MOREMI_PART[i];
+		
+		$obj.append($("<img>")
+			.addClass("moremies moremi-" + key.slice(1))
+			.attr('src', iImage(equip[key], LR[key] || key))
 			.css({ 'width': "100%", 'height': "100%" })
-			);
-			$obj.children(".moremi-rhand").css('transform', "scaleX(-1)");
-		}
-		function commify(val){
-			var tester = /(^[+-]?\d+)(\d{3})/;
-
-			if(val === null) return "?";
-
-			val = val.toString();
-			while(tester.test(val)) val = val.replace(tester, "$1,$2");
-
-			return val;
-		}
-		function setLocation(place){
-			if(place) location.hash = "#"+place;
-			else location.hash = "";
-		}
-		function fail(code){
-			return alert(L['error_' + code]);
-		}
-		function yell(msg){
-			$stage.yell.show().css('opacity', 1).text(msg);
-			addTimeout(function(){
-				$stage.yell.animate({ 'opacity': 0 }, 3000);
-				addTimeout(function(){
-					$stage.yell.hide();
-				}, 3000);
-			}, 1000);
-		}
+		);
+	}
+	if(key = equip['BDG']){
+		$obj.append($("<img>")
+			.addClass("moremies moremi-badge")
+			.attr('src', iImage(key))
+			.css({ 'width': "100%", 'height': "100%" })
+		);
+	}
+	$obj.children(".moremi-back").after($("<img>").addClass("moremies moremi-body")
+		.attr('src', equip.robot ? "/img/kkutu/moremi/robot.png" : "/img/kkutu/moremi/body.png")
+		.css({ 'width': "100%", 'height': "100%" })
+	);
+	$obj.children(".moremi-rhand").css('transform', "scaleX(-1)");
+}
+function commify(val){
+	var tester = /(^[+-]?\d+)(\d{3})/;
+	
+	if(val === null) return "?";
+	
+	val = val.toString();
+	while(tester.test(val)) val = val.replace(tester, "$1,$2");
+	
+	return val;
+}
+function setLocation(place){
+	if(place) location.hash = "#"+place;
+	else location.hash = "";
+}
+function fail(code){
+	return alert(L['error_' + code]);
+}
+function yell(msg){
+	$stage.yell.show().css('opacity', 1).text(msg);
+	addTimeout(function(){
+		$stage.yell.animate({ 'opacity': 0 }, 3000);
+		addTimeout(function(){
+			$stage.yell.hide();
+		}, 3000);
+	}, 1000);
+}
 
 /**
  * Rule the words! KKuTu Online
