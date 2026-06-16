@@ -1261,7 +1261,7 @@ exports.Room = function(room, channel){
 		delete my.game.dic;
 
 		// 다음 라운드로 진행
-		if(++my.game.round < my.round){
+		if(++my.game.round <= my.round){
 			setTimeout(my.roundReady, 3000);
 			my.gaming = true;
 		}

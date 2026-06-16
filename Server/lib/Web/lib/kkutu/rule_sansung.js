@@ -14,6 +14,8 @@
 			'align-items:flex-start;',
 			'justify-content:center;',
 			'background:transparent !important;',
+			'width:640px !important;',
+			'height:480px !important;',
 		'}',
 
 		/* 캔버스 래퍼 */
@@ -129,6 +131,7 @@ $lib.Sansung.turnGoing = function(){
 	var $rtb = $stage.game.roundBar;
 	var bRate;
 	var tt;
+	var speedLevel;
 
 	if(!$data.room) clearInterval($data._tTime);
 	$data._roundTime -= TICK;
@@ -138,13 +141,15 @@ $lib.Sansung.turnGoing = function(){
 		.width($data._roundTime/$data.room.time*0.1 + "%")
 		.html(tt);
 
-	if(!$rtb.hasClass("round-extreme")) if($data._roundTime <= $data._fastTime){
-		bRate = $data.bgm.currentTime / $data.bgm.duration;
-		if($data.bgm.paused) stopBGM();
-		else playBGM('jaqwiF');
-		$data.bgm.currentTime = $data.bgm.duration * bRate;
-		$rtb.addClass("round-extreme");
-	}
+	// 단어 낙하 속도 동적 조정
+	if($data._roundTime <= 10000) speedLevel = 5;      // 겁나 빠르게
+	else if($data._roundTime <= 30000) speedLevel = 4; // 좀 빠르게
+	else if($data._roundTime <= 60000) speedLevel = 3; // 보통
+	else if($data._roundTime <= 90000) speedLevel = 2; // 진짜 조금 느리게
+	else if($data._roundTime <= 120000) speedLevel = 1;// 조금 느리게
+	else speedLevel = 0;                               // 느리게
+
+	$data._rainSpeed = speedLevel;
 };
 
 // ── 단어 등장 (서버: sansung-word) ────────────────────
@@ -155,6 +160,11 @@ $lib.Sansung.onWord = function (data) {
 	var word    = data.word;
 	var timeout = data.fallDuration;
 	var laneX   = Math.floor(Math.random() * 70) + 5; // 5%~75%
+
+	// 속도 조정 (0~5 단계)
+	var speedLevel = $data._rainSpeed || 3;
+	var speedMult = [1.0, 0.85, 0.7, 1.0, 1.3, 1.6][speedLevel];
+	timeout = Math.floor(timeout / speedMult);
 
 	var $word = $('<div>')
 		.addClass('ss-word')

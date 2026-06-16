@@ -1937,8 +1937,8 @@ $lib.Sock.turnHint = function(data){
 		/* 캔버스 래퍼 */
 		'#ss-wrap{',
 			'position:relative;',
-			'width:460px;',
-			'height:340px;',
+			'width:600px;',
+			'height:450px;',
 			'background:rgba(0,0,0,0.6);',
 			'border-radius:12px;',
 			'overflow:hidden;',
@@ -2043,19 +2043,19 @@ $lib.Sansung.turnStart = function (data) {
 	playBGM('rain');
 };
 
-$lib.Jaqwi.turnGoing = function(){
+$lib.Sansung.turnGoing = function(){
 	var $rtb = $stage.game.roundBar;
 	var bRate;
 	var tt;
-	
+
 	if(!$data.room) clearInterval($data._tTime);
 	$data._roundTime -= TICK;
-	
+
 	tt = $data._spectate ? L['stat_spectate'] : ($data._roundTime*0.001).toFixed(1) + L['SECOND'];
 	$rtb
 		.width($data._roundTime/$data.room.time*0.1 + "%")
 		.html(tt);
-		
+
 	if(!$rtb.hasClass("round-extreme")) if($data._roundTime <= $data._fastTime){
 		bRate = $data.bgm.currentTime / $data.bgm.duration;
 		if($data.bgm.paused) stopBGM();
@@ -2165,7 +2165,6 @@ $lib.Sansung.turnEnd = function (id, data) {
 	}
 };
 
-$lib.Sansung.turnGoing = $lib.Jaqwi.turnGoing;
 $lib.Sansung.turnHint  = function () {};
 /**
  * Rule the words! KKuTu Online
