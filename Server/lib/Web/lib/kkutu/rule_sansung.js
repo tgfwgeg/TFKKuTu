@@ -75,7 +75,15 @@
 		/* 모레미(캐릭터 이미지) 숨기기 */
 		'#ss-active .game-user-image,',
 		'#ss-active .moremi{ display:none !important; }',
-		'#ss-active .game-user-title{ margin-left:0 !important; }'
+		'#ss-active .game-user-title{ margin-left:0 !important; }',
+
+		/* 산성비 전용 레이아웃 */
+		'#ss-active.cw.jjoriping{ width: 800px !important; }',
+		'#ss-active.cw .jjoNose{ left: 420px !important; }',
+		'#ss-active.cw .jjoEyeR{ left: 555px !important; }',
+		'#ss-active.cw .jjoDisplayBar{ width: 786px !important; }',
+		'#ss-active.cw .jjo-display{ width: calc(100% - 10px) !important; }',
+		'#ss-active.cw .jjo-round-time{ width: calc(100% - 4px) !important; display: block !important; }'
 	].join('');
 	$('<style id="ss-style">').text(css).appendTo('head');
 }());
@@ -141,13 +149,13 @@ $lib.Sansung.turnGoing = function(){
 		.width($data._roundTime/$data.room.time*0.1 + "%")
 		.html(tt);
 
-	// 단어 낙하 속도 동적 조정
-	if($data._roundTime <= 10000) speedLevel = 5;      // 겁나 빠르게
-	else if($data._roundTime <= 30000) speedLevel = 4; // 좀 빠르게
-	else if($data._roundTime <= 60000) speedLevel = 3; // 보통
-	else if($data._roundTime <= 90000) speedLevel = 2; // 진짜 조금 느리게
-	else if($data._roundTime <= 120000) speedLevel = 1;// 조금 느리게
-	else speedLevel = 0;                               // 느리게
+	// 단어 낙하 속도 동적 조정 (남은 시간 기준)
+	if($data._roundTime > 150000) speedLevel = 0;      // 느리게
+	else if($data._roundTime > 120000) speedLevel = 1; // 조금 느리게
+	else if($data._roundTime > 90000) speedLevel = 2;  // 진짜 조금 느리게
+	else if($data._roundTime > 60000) speedLevel = 3;  // 보통
+	else if($data._roundTime > 30000) speedLevel = 4;  // 좀 빠르게
+	else speedLevel = 5;                               // 겁나 빠르게 (10초 이하)
 
 	$data._rainSpeed = speedLevel;
 };
@@ -218,10 +226,17 @@ $lib.Sansung.turnEnd = function (id, data) {
 
 	wObj = $lib.Sansung._words[data.wordId];
 
-	// 바닥 도달 (놓침): fail.mp3
+	// 바닥 도달 (놓침): fail.mp3, 점수 감점
 	if (!data.ok) {
 		if (wObj) { wObj.$el.remove(); delete $lib.Sansung._words[data.wordId]; }
 		playSound('fail');
+
+		// 내 점수에서 감점
+		if (String(data.playerId) === String($data.id) && data.penalty) {
+			var currentScore = parseInt($lib.Sansung._$score.text().replace('점수: ', '')) || 0;
+			currentScore = Math.max(0, currentScore - data.penalty);
+			$lib.Sansung._$score.text('점수: ' + currentScore);
+		}
 		return;
 	}
 

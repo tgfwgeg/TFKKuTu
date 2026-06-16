@@ -1237,7 +1237,7 @@ exports.Room = function(room, channel){
 		}
 		Lizard.all(suv).then(function(uds){
 			var o = {};
-			
+
 			suv = [];
 			for(i in uds){
 				o[uds[i].id] = { prev: uds[i].prev };
@@ -1245,26 +1245,30 @@ exports.Room = function(room, channel){
 			}
 			Lizard.all(suv).then(function(ranks){
 				var i, j;
-				
+
 				for(i in ranks){
 					if(!o[ranks[i].target]) continue;
-					
+
 					o[ranks[i].target].list = ranks[i].data;
 				}
 				my.byMaster('roundEnd', { result: res, users: users, ranks: o, data: data }, true);
+
+				// 정리 작업
+				my.gaming = false;
+				my.export();
+				delete my.game.seq;
+				delete my.game.wordLength;
+				delete my.game.dic;
+
+				// 다음 라운드로 진행
+				if(++my.game.round <= my.round){
+					my.gaming = true;
+					setTimeout(function(){
+						my.roundReady();
+					}, 3000);
+				}
 			});
 		});
-		my.gaming = false;
-		my.export();
-		delete my.game.seq;
-		delete my.game.wordLength;
-		delete my.game.dic;
-
-		// 다음 라운드로 진행
-		if(++my.game.round <= my.round){
-			setTimeout(my.roundReady, 3000);
-			my.gaming = true;
-		}
 	};
 	my.byMaster = function(type, data, nob){
 		if(DIC[my.master]) DIC[my.master].publish(type, data, nob);

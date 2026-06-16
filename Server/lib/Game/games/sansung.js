@@ -119,7 +119,7 @@ exports.turnStart = function () {
 			if (now >= my.game.words[id].fallEndTime) {
 				var word = my.game.words[id].word;
 				delete my.game.words[id];
-				_publish(my, 'turnEnd', { wordId: Number(id), word: word, ok: false });
+				_publish(my, 'turnEnd', { wordId: Number(id), word: word, ok: false, penalty: 5 });
 			}
 		});
 	}, SCAN_INTERVAL);
