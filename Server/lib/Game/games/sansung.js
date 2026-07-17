@@ -26,7 +26,7 @@ exports.init = function (_DB, _DIC) {
 	DIC = _DIC;
 };
 
-// getTitle: 단어 풀 로드 후 "①②③..." 단일 문자열 반환
+// getTitle: 단어 풀 로드 + "①②③..." 단일 문자열 반환 (라운드 번호 표시용)
 exports.getTitle = function () {
 	var R  = new Lizard.Tail();
 	var my = this;
@@ -57,29 +57,39 @@ exports.getTitle = function () {
 	return R;
 };
 
-// roundReady: 매 라운드 시작
+// roundReady: 라운드 증가 + 종료 여부 판단 (raingame과 동일한 패턴)
 exports.roundReady = function () {
 	var my = this;
 
 	_clearTimers(my);
 
-	// seq를 별도 변수에 저장 (turnEnd 시점에 my.game.seq가 사라져도 안전하게)
-	my.game._ssSeq = (my.game.seq || []).slice();
+	// 라운드 증가, 설정된 라운드 수를 넘으면 게임 전체 종료
+	my.game.round = (my.game.round || 0) + 1;
+	if (my.game.round > my.round) {
+		my.roundEnd();
+		return;
+	}
 
+	// 점수는 라운드 간 누적 (최초 1회만 0으로 초기화)
+	if (!my.game.scores) {
+		my.game.scores = {};
+		my.game.seq.forEach(function (sid) {
+			var pid = typeof sid === 'object' ? sid.id : sid;
+			my.game.scores[pid] = 0;
+		});
+	}
+
+	// 이번 라운드 상태 초기화
 	my.game.words         = {};
 	my.game.wordIdCounter = 0;
 	my.game.spawnInterval = SPAWN_INTERVAL_INIT;
-	my.game.fallDuration  = FALL_DURATION_INIT;
-	my.game.lastSpawnTime = 0;
-	my.game.scores        = my.game.scores || {};
-	my.game.late          = false;
-
-	_eachPlayer(my, function (pid, o) {
-		if (o) o.game.score = 0;
-	});
+	my.game.fallDuration   = FALL_DURATION_INIT;
+	my.game.lastSpawnTime  = 0;
+	my.game.late           = false;
 
 	_publish(my, 'roundReady', { round: my.game.round });
 
+	// 2초 후 turnStart
 	my.game._rrt = setTimeout(function () {
 		my.game._rrt = null;
 		my.turnStart();
@@ -119,12 +129,12 @@ exports.turnStart = function () {
 			if (now >= my.game.words[id].fallEndTime) {
 				var word = my.game.words[id].word;
 				delete my.game.words[id];
-				_publish(my, 'turnEnd', { wordId: Number(id), word: word, ok: false, penalty: 5 });
+				_publish(my, 'turnEnd', { wordId: Number(id), word: word, ok: false });
 			}
 		});
 	}, SCAN_INTERVAL);
 
-	// my.time(초) → ms 변환
+	// my.time(초) → ms
 	var roundMs = my.time * 1000;
 	my.game._turnEndTimer = setTimeout(function () {
 		my.game._turnEndTimer = null;
@@ -165,7 +175,8 @@ exports.submit = function (client, text) {
 	});
 };
 
-// turnEnd: 라운드 시간 종료 (여기서 forEach 에러 발생했었음 → seq 안전 참조로 수정)
+// turnEnd: 이번 라운드 시간 종료 → roundReady를 다시 호출해 다음 라운드로 진행
+// (roundReady 내부에서 my.game.round > my.round 인지 체크해 실제 게임 종료를 판단함)
 exports.turnEnd = function () {
 	var my = this;
 	if (!my.game) return;
@@ -173,20 +184,20 @@ exports.turnEnd = function () {
 	my.game.late = true;
 	_clearTimers(my);
 
-	// my.game.seq가 사라졌어도 _ssSeq로 안전하게 처리
-	var seq = my.game.seq || my.game._ssSeq || [];
-	seq.forEach(function (sid) {
+	// 누적 점수를 game.score에 반영 (결과창 집계용)
+	my.game.seq.forEach(function (sid) {
 		var pid = typeof sid === 'object' ? sid.id : sid;
 		var o   = DIC[pid];
-		if (o) o.game.score = (my.game.scores || {})[pid] || 0;
+		if (o) o.game.score = my.game.scores[pid] || 0;
 	});
 
 	_publish(my, 'turnEnd', { ok: false });
 
+	// 2초 후 다음 라운드(또는 게임 종료) 진행
 	my.game._rrt = setTimeout(function () {
 		my.game._rrt = null;
-		my.roundEnd();
-	}, 3000);
+		my.roundReady();
+	}, 2000);
 };
 
 exports.turnHint   = function () {};
@@ -203,15 +214,6 @@ function _clearTimers(my) {
 	if (my.game._turnEndTimer) { clearTimeout(my.game._turnEndTimer); my.game._turnEndTimer = null; }
 }
 
-// seq는 항상 my.game.seq를 우선, 없으면 _ssSeq를 사용하는 안전한 헬퍼
-function _eachPlayer(my, cb) {
-	var seq = (my.game && (my.game.seq || my.game._ssSeq)) || [];
-	seq.forEach(function (sid) {
-		var pid = typeof sid === 'object' ? sid.id : sid;
-		cb(pid, DIC[pid]);
-	});
-}
-
 function _spawnWord(my) {
 	var pool = my.game.wordPool;
 	if (!pool || !pool.length) return;
@@ -226,7 +228,8 @@ function _spawnWord(my) {
 
 	my.game.words[id] = { word: word, fallEndTime: now + my.game.fallDuration };
 
-	_eachPlayer(my, function (pid) {
+	my.game.seq.forEach(function (sid) {
+		var pid = typeof sid === 'object' ? sid.id : sid;
 		if (DIC[pid]) DIC[pid].send('sansung-word', {
 			wordId:       id,
 			word:         word,
@@ -236,7 +239,8 @@ function _spawnWord(my) {
 }
 
 function _publish(my, type, data) {
-	_eachPlayer(my, function (pid) {
+	my.game.seq.forEach(function (sid) {
+		var pid = typeof sid === 'object' ? sid.id : sid;
 		if (DIC[pid]) DIC[pid].send(type, data);
 	});
 }

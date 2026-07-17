@@ -1917,113 +1917,76 @@ $lib.Sock.turnHint = function(data){
 };
 
 /**
- * Rule the words! KKuTu Online
  * 산성비 (KSB) 클라이언트 룰
  * 경로: Server/lib/Web/lib/kkutu/rule_sansung.js
  */
 
-// ── CSS ──────────────────────────────────────────────
 (function () {
 	if (document.getElementById('ss-style')) return;
 	var css = [
-		/* display 영역 자체를 flex로 가운데 정렬 */
-		'.jjo-display:has(#ss-wrap){',
-			'display:flex;',
-			'align-items:flex-start;',
-			'justify-content:center;',
-			'background:transparent !important;',
-			'width:640px !important;',
-			'height:480px !important;',
-		'}',
+		"@font-face{font-family:'Galmuri14';",
+		"src:url('https://fastly.jsdelivr.net/gh/projectnoonnu/2506-1@1.0/Galmuri14.woff2') format('woff2');",
+		"font-weight:normal;font-style:normal;}",
 
-		/* 캔버스 래퍼 */
-		'#ss-wrap{',
-			'position:relative;',
-			'width:600px;',
-			'height:450px;',
-			'background:rgba(0,0,0,0.6);',
-			'border-radius:12px;',
-			'overflow:hidden;',
-			'flex-shrink:0;',
-		'}',
+		/* jjoriping 왼쪽 고정, 새 디자인 */
+		".jjoriping.ss-skin{ width:600px; }",
+		".jjoriping.ss-skin .jjoObj{ display:none; }",
 
-		/* 낙하 단어 */
-		'.ss-word{',
-			'position:absolute;',
-			'background:linear-gradient(135deg,#1a2a6c,#2d6a4f);',
-			'color:#fff;font-size:17px;font-weight:bold;',
-			'padding:4px 13px;border-radius:8px;white-space:nowrap;',
-			'border:1.5px solid #00c9ff88;',
-			'box-shadow:0 2px 8px rgba(0,0,0,.5);',
-			'transition:top linear;',
-			'pointer-events:none;',
-		'}',
+		".jjoriping.ss-skin .jjoDisplayBar{",
+		"width:586px;height:308px;padding:8px;",
+		"border:none;border-radius:16px;",
+		"background:linear-gradient(180deg,#1c2b40 0%,#0c1622 100%);",
+		"box-shadow:0 8px 24px rgba(0,0,0,.55),inset 0 0 0 1px rgba(120,200,255,.12);}",
 
-		/* 정답 애니메이션 */
-		'.ss-word.ss-hit{',
-			'transition:none !important;',
-			'animation:ss-hit .38s ease-out forwards;',
-		'}',
-		'@keyframes ss-hit{',
-			'0%{opacity:1;transform:scale(1.2)}',
-			'100%{opacity:0;transform:scale(.55) translateY(-25px)}',
-		'}',
+		/* 핵심: overflow:hidden 으로 단어가 캔버스 안에서만 보임 */
+		".jjoriping.ss-skin .jjo-display{",
+		"position:relative !important;",
+		"width:570px !important;height:260px !important;",
+		"padding:0 !important;overflow:hidden !important;",
+		"background:rgba(5,12,20,.55);border-radius:10px;}",
 
-		/* 점수판 */
-		'#ss-score{',
-			'position:absolute;top:8px;right:10px;',
-			'background:rgba(0,0,0,.75);color:#fff;',
-			'padding:5px 12px;border-radius:7px;',
-			'font-size:14px;font-weight:bold;',
-			'z-index:20;pointer-events:none;',
-		'}',
+		".jjoriping.ss-skin .jjo-round-time{width:570px;border-radius:8px;background:#15314f;}",
+		".jjoriping.ss-skin .jjo-round-time .graph-bar{background:#3aa0ff;}",
 
-		/* 점수 팝업 */
-		'.ss-popup{',
-			'position:absolute;right:14px;top:34px;',
-			'font-weight:bold;font-size:15px;color:#38ef7d;',
-			'animation:ss-pop .9s ease-out forwards;',
-			'pointer-events:none;z-index:21;',
-		'}',
-		'@keyframes ss-pop{',
-			'0%{opacity:1;transform:translateY(0)}',
-			'100%{opacity:0;transform:translateY(-24px)}',
-		'}',
+		/* 낙하 단어: 배경 없음, 볼드 없음, 갈무리14 */
+		".ss-word{position:absolute;",
+		"font-family:'Galmuri14','NBGothic',돋움,sans-serif;",
+		"font-weight:normal;font-size:20px;color:#d8f3ff;",
+		"text-shadow:0 0 8px rgba(80,200,255,.6),0 1px 2px rgba(0,0,0,.7);",
+		"background:none;border:none;padding:0;",
+		"white-space:nowrap;pointer-events:none;transition:top linear;}",
 
-		/* 모레미(캐릭터 이미지) 숨기기 */
-		'#ss-active .game-user-image,',
-		'#ss-active .moremi{ display:none !important; }',
-		'#ss-active .game-user-title{ margin-left:0 !important; }',
+		".ss-word.ss-hit{transition:none !important;animation:ss-hit .35s ease-out forwards;}",
+		"@keyframes ss-hit{0%{opacity:1;transform:scale(1.2)}100%{opacity:0;transform:scale(.5) translateY(-20px)}}",
 
-		/* 산성비 전용 레이아웃 */
-		'#ss-active.cw.jjoriping{ width: 800px !important; }',
-		'#ss-active.cw .jjoNose{ left: 420px !important; }',
-		'#ss-active.cw .jjoEyeR{ left: 555px !important; }',
-		'#ss-active.cw .jjoDisplayBar{ width: 786px !important; }',
-		'#ss-active.cw .jjo-display{ width: calc(100% - 10px) !important; }',
-		'#ss-active.cw .jjo-round-time{ width: calc(100% - 4px) !important; display: block !important; }'
+		"#ss-score{position:absolute;top:8px;right:10px;",
+		"font-family:'Galmuri14','NBGothic',돋움;font-weight:normal;font-size:14px;color:#eafcff;",
+		"background:rgba(10,20,32,.65);padding:4px 12px;border-radius:8px;",
+		"z-index:20;pointer-events:none;}",
+
+		".ss-popup{position:absolute;right:14px;top:34px;",
+		"font-family:'Galmuri14','NBGothic',돋움;font-weight:normal;font-size:14px;color:#7cf7a0;",
+		"animation:ss-pop .9s ease-out forwards;pointer-events:none;z-index:21;}",
+		"@keyframes ss-pop{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-22px)}}",
+
+		/* 모레미 숨기기: ss-active id가 있을 때만 */
+		"#ss-active .game-user-image,#ss-active .moremi{display:none !important;}",
+		"#ss-active .game-user-title{margin-left:0 !important;}"
 	].join('');
 	$('<style id="ss-style">').text(css).appendTo('head');
 }());
 
-// ── 내부 상태 ─────────────────────────────────────────
-$lib.Sansung._words  = {};
-$lib.Sansung._$wrap  = null;
-$lib.Sansung._$score = null;
+$lib.Sansung._words = {};
 
-// ── roundReady ────────────────────────────────────────
 $lib.Sansung.roundReady = function (data, spec) {
-	clearBoard();
+	clearBoard(); // ss-skin, ss-active 는 clearBoard 안에서 제거됨
 	$data._relay     = true;
 	$data._roundTime = $data.room.time * 1000;
 	$data._fastTime  = 10000;
-
 	$lib.Sansung._words = {};
 
-	// cw 클래스로 넓은 화면 사용
 	$('.jjoriping,.rounds,.game-body').addClass('cw');
-
-	// 모레미 숨기기용 id 마킹
+	$('.jjoriping').addClass('ss-skin');
 	$('.game-body').attr('id', 'ss-active');
 
 	$stage.game.items.hide();
@@ -2032,165 +1995,89 @@ $lib.Sansung.roundReady = function (data, spec) {
 	$stage.game.bb.hide();
 	$stage.game.here.hide();
 
-	// 캔버스 래퍼 생성 (display 안, CSS flex로 자동 가운데)
 	$stage.game.display.empty();
-	$lib.Sansung._$wrap  = $('<div id="ss-wrap">').appendTo($stage.game.display);
-	$lib.Sansung._$score = $('<div id="ss-score">점수: 0</div>')
-		.appendTo($lib.Sansung._$wrap);
+	$('<div id="ss-score">점수: 0</div>').appendTo($stage.game.display);
 
 	drawRound(data.round);
 	if (!spec) playSound('round_start');
 	clearInterval($data._tTime);
 };
 
-// ── turnStart ─────────────────────────────────────────
 $lib.Sansung.turnStart = function (data) {
 	clearInterval($data._tTime);
 	$data._roundTime = data.roundTime || ($data.room.time * 1000);
 	$data._tTime = addInterval(turnGoing, TICK);
-
-	// 게임 BGM: rain.mp3
 	playBGM('rain');
 };
 
-$lib.Sansung.turnGoing = function(){
-	var $rtb = $stage.game.roundBar;
-	var bRate;
-	var tt;
-	var speedLevel;
-
-	if(!$data.room) clearInterval($data._tTime);
-	$data._roundTime -= TICK;
-
-	tt = $data._spectate ? L['stat_spectate'] : ($data._roundTime*0.001).toFixed(1) + L['SECOND'];
-	$rtb
-		.width($data._roundTime/$data.room.time*0.1 + "%")
-		.html(tt);
-
-	// 단어 낙하 속도 동적 조정 (남은 시간 기준)
-	if($data._roundTime > 150000) speedLevel = 0;      // 느리게
-	else if($data._roundTime > 120000) speedLevel = 1; // 조금 느리게
-	else if($data._roundTime > 90000) speedLevel = 2;  // 진짜 조금 느리게
-	else if($data._roundTime > 60000) speedLevel = 3;  // 보통
-	else if($data._roundTime > 30000) speedLevel = 4;  // 좀 빠르게
-	else speedLevel = 5;                               // 겁나 빠르게 (10초 이하)
-
-	$data._rainSpeed = speedLevel;
-};
-
-// ── 단어 등장 (서버: sansung-word) ────────────────────
 $lib.Sansung.onWord = function (data) {
-	if (!$lib.Sansung._$wrap) return;
+	var laneX = Math.floor(Math.random() * 74) + 3;
+	var $word = $('<div>').addClass('ss-word').text(data.word)
+		.css({ left: laneX + '%', top: '-10%', transition: 'none' })
+		.appendTo($stage.game.display);
 
-	var wordId  = data.wordId;
-	var word    = data.word;
-	var timeout = data.fallDuration;
-	var laneX   = Math.floor(Math.random() * 70) + 5; // 5%~75%
-
-	// 속도 조정 (0~5 단계)
-	var speedLevel = $data._rainSpeed || 3;
-	var speedMult = [1.0, 0.85, 0.7, 1.0, 1.3, 1.6][speedLevel];
-	timeout = Math.floor(timeout / speedMult);
-
-	var $word = $('<div>')
-		.addClass('ss-word')
-		.text(word)
-		.css({ left: laneX + '%', top: '-8%', transition: 'none' })
-		.appendTo($lib.Sansung._$wrap);
-
-	// 1프레임 후 transition 시작
 	addTimeout(function () {
-		$word.css({
-			transition: 'top ' + timeout + 'ms linear',
-			top: '108%'
-		});
+		$word.css({ transition: 'top ' + data.fallDuration + 'ms linear', top: '110%' });
 	}, 20);
 
-	$lib.Sansung._words[wordId] = {
-		$el: $word, createdAt: Date.now(), timeout: timeout
-	};
-
-	// 단어 등장 시: mission.mp3
+	$lib.Sansung._words[data.wordId] = { $el: $word };
 	playSound('mission');
 };
 
-// ── turnEnd ───────────────────────────────────────────
 $lib.Sansung.turnEnd = function (id, data) {
-	var wObj, $el;
+	var wObj;
 
-	// 라운드 종료 (wordId 없음)
+	// 라운드 종료 신호 (wordId 없음) - 단어만 정리, ss-skin은 clearBoard가 처리
 	if (!data.ok && data.wordId === undefined) {
-		$data._relay = false;
 		clearInterval($data._tTime);
-		stopBGM();
-
-		// 남은 단어 전부 제거
 		$.each($lib.Sansung._words, function (wId, w) { if (w.$el) w.$el.remove(); });
 		$lib.Sansung._words = {};
-
-		// 래퍼 제거
-		if ($lib.Sansung._$wrap) {
-			$lib.Sansung._$wrap.remove();
-			$lib.Sansung._$wrap  = null;
-			$lib.Sansung._$score = null;
-		}
-
-		// 모레미 숨김 해제 (결과창에 캐릭터 다시 표시)
-		$('.game-body').removeAttr('id');
-
-		playSound('horr');
 		return;
 	}
 
 	wObj = $lib.Sansung._words[data.wordId];
 
-	// 바닥 도달 (놓침): fail.mp3, 점수 감점
+	// 바닥 도달(실패): fail.mp3
 	if (!data.ok) {
 		if (wObj) { wObj.$el.remove(); delete $lib.Sansung._words[data.wordId]; }
 		playSound('fail');
-
-		// 내 점수에서 감점
-		if (String(data.playerId) === String($data.id) && data.penalty) {
-			var currentScore = parseInt($lib.Sansung._$score.text().replace('점수: ', '')) || 0;
-			currentScore = Math.max(0, currentScore - data.penalty);
-			$lib.Sansung._$score.text('점수: ' + currentScore);
-		}
 		return;
 	}
 
 	// 정답: success.mp3
 	if (wObj) {
-		$el = wObj.$el;
+		var $el = wObj.$el;
 		$el.css({ transition: 'none', top: $el.position().top + 'px' });
 		$el.addClass('ss-hit');
-		addTimeout(function () { $el.remove(); }, 400);
+		addTimeout(function () { $el.remove(); }, 380);
 		delete $lib.Sansung._words[data.wordId];
 	}
 
 	if (data.scores) {
-		var myScore = data.scores[$data.id] || 0;
-		if ($lib.Sansung._$score) $lib.Sansung._$score.text('점수: ' + myScore);
-
-		// 내가 맞췄을 때만 팝업
-		if (String(data.playerId) === String($data.id) && $lib.Sansung._$wrap) {
+		$('#ss-score').text('점수: ' + (data.scores[$data.id] || 0));
+		if (String(data.playerId) === String($data.id)) {
 			var $p = $('<div>').addClass('ss-popup').text('+' + data.score)
-				.appendTo($lib.Sansung._$wrap);
+				.appendTo($stage.game.display);
 			addTimeout(function () { $p.remove(); }, 900);
 		}
-
-		// 점수판 반영
 		if (data.playerId) {
 			var o = $data.users[data.playerId] || $data.robots[data.playerId];
-			if (o) {
-				o.game.score = data.scores[data.playerId];
-				updateScore(data.playerId, o.game.score);
-			}
+			if (o) { o.game.score = data.scores[data.playerId]; updateScore(data.playerId, o.game.score); }
 		}
 		playSound('success');
 	}
 };
 
-$lib.Sansung.turnHint  = function () {};
+// rain BGM 안 끊는 turnGoing (Jaqwi 것은 10초 남으면 BGM 바꿔버림)
+$lib.Sansung.turnGoing = function () {
+	var $rtb = $stage.game.roundBar;
+	if (!$data.room) { clearInterval($data._tTime); return; }
+	$data._roundTime -= TICK;
+	var tt = $data._spectate ? L['stat_spectate'] : ($data._roundTime * 0.001).toFixed(1) + L['SECOND'];
+	$rtb.width($data._roundTime / $data.room.time * 0.1 + '%').html(tt);
+};
+
+$lib.Sansung.turnHint = function () {};
 /**
  * Rule the words! KKuTu Online
  * Copyright (C) 2017 JJoriping(op@jjo.kr)
@@ -4131,6 +4018,8 @@ function clearBoard(){
 	$stage.dialog.dress.hide();
 	$stage.dialog.charFactory.hide();
 	$(".jjoriping,.rounds,.game-body").removeClass("cw");
+	$(".jjoriping").removeClass("ss-skin");
+	$(".game-body").removeAttr("id");
 	$stage.game.display.empty();
 	$stage.game.chain.hide();
 	$stage.game.hints.empty().hide();
@@ -5112,7 +5001,6 @@ function yell(msg){
 		}, 3000);
 	}, 1000);
 }
-
 /**
  * Rule the words! KKuTu Online
  * Copyright (C) 2017 JJoriping(op@jjo.kr)
