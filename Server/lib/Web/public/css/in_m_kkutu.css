@@ -474,6 +474,10 @@ iframe{
 		}
 	.jjoriping{ width: 100%; }
 	.cw.jjoriping{ margin-top: -10px; }
+	.dg.jjoriping{
+		margin-left: 1.5em;
+		width: 325px;
+	}
 		.jjoObj{ position: relative; }
 		.jjoEyeL{ top: 11px; left: 0px; }
 		.jjoNose{ top: 9px; left: calc(50% - 70px); }
@@ -577,7 +581,12 @@ iframe{
 		text-align: center;
 		text-shadow: 0px 1px 1px #141414;
 	}
-	.cw.rounds{ margin-top: -380px; }
+	.cw.rounds{ margin-top: -415px; }
+	.dg.rounds{ margin-left: 0em !important; }
+	.painter.rounds{
+		margin-left: 0em !important;
+		margin-top: -55em !important;
+	}
 		.rounds label{ margin: 0px 3px; }
 		.rounds-current{ color: #FFFF3B; font-size: 16px; }
 	.history-holder{
@@ -664,6 +673,10 @@ iframe{
 		.game-user-current{
 			animation: CurrentBlink 2s linear infinite;
 			background-color: #DDFFDD;
+		}
+		.game-user-drawing{
+			animation: CurrentBlink 2s linear infinite;
+			background-color: #9fd1f1;
 		}
 		.game-user-bomb{ border-color: #FF6666; }
 			.game-user-image{ margin: 3px 5px; width: 100px; height: 100px; }
