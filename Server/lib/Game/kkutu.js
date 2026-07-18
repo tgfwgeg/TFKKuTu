@@ -1509,6 +1509,7 @@ function getRewards(mode, score, bonus, rank, all, ss){
 			break;
 		case 'EDG':
 			rw.score += score * 0.57;
+			break;
 		case 'KSB':
 			rw.score += score * 0.3;
 			break;

@@ -488,31 +488,31 @@ iframe{
 		margin: 5px 5px 5px 5px;
 	}
 	.button-color#color-red {
-		background: #DEB887 url('/img/kkutu/paint_red.png') no-repeat center;
+		background: #DEB887 url('../img/kkutu/paint_red.png') no-repeat center;
 	}
 	.button-color#color-orange {
-		background: #DEB887 url('/img/kkutu/paint_orange.png') no-repeat center;
+		background: #DEB887 url('../img/kkutu/paint_orange.png') no-repeat center;
 	}
 	.button-color#color-yellow {
-		background: #DEB887 url('/img/kkutu/paint_yellow.png') no-repeat center;
+		background: #DEB887 url('../img/kkutu/paint_yellow.png') no-repeat center;
 	}
 	.button-color#color-green {
-		background: #DEB887 url('/img/kkutu/paint_green.png') no-repeat center;
+		background: #DEB887 url('../img/kkutu/paint_green.png') no-repeat center;
 	}
 	.button-color#color-blue {
-		background: #DEB887 url('/img/kkutu/paint_blue.png') no-repeat center;
+		background: #DEB887 url('../img/kkutu/paint_blue.png') no-repeat center;
 	}
 	.button-color#color-indigo {
-		background: #DEB887 url('/img/kkutu/paint_indigo.png') no-repeat center;
+		background: #DEB887 url('../img/kkutu/paint_indigo.png') no-repeat center;
 	}
 	.button-color#color-violet {
-		background: #DEB887 url('/img/kkutu/paint_violet.png') no-repeat center;
+		background: #DEB887 url('../img/kkutu/paint_violet.png') no-repeat center;
 	}
 	.button-color#color-black {
-		background: #DEB887 url('/img/kkutu/paint_black.png') no-repeat center;
+		background: #DEB887 url('../img/kkutu/paint_black.png') no-repeat center;
 	}
 	.button-color#color-white {
-		background: #DEB887 url('/img/kkutu/paint_white.png') no-repeat center;
+		background: #DEB887 url('../img/kkutu/paint_white.png') no-repeat center;
 	}
 
 		.hint-item{

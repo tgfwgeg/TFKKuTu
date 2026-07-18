@@ -1,4 +1,3 @@
-
 /**
  * Rule the words! KKuTu Online
  * Copyright (C) 2017 JJoriping(op@jjo.kr)
@@ -30,7 +29,7 @@ exports.init = function(_DB, _DIC){
 exports.getTitle = function(){
 	const R = new Lizard.Tail();
 	const my = this;
-
+	
 	my.game.done = [];
 	setTimeout(function(){
 		R.go("①②③④⑤⑥⑦⑧⑨⑩");
@@ -44,7 +43,7 @@ exports.roundReady = function(){
 	function getRandomIntInclusive(min, max) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
-
+	
 	clearTimeout(my.game.qTimer);
 	clearTimeout(my.game.hintTimer);
 	clearTimeout(my.game.hintTimer2);
@@ -60,7 +59,7 @@ exports.roundReady = function(){
 		my.game.theme = my.opts.injpick[Math.floor(Math.random() * ijl)];
 		getAnswer.call(my, my.game.theme).then(function($ans){
 			if(!my.game.done) return;
-
+			
 			// $ans가 null이면 골치아프다...
 			my.game.late = false;
 			my.game.answer = $ans || {};
@@ -83,9 +82,9 @@ exports.roundReady = function(){
 exports.turnStart = function(){
 	const my = this;
 	let i;
-
+	
 	if(!my.game.answer) return;
-
+	
 	my.game.conso = getConsonants(my.game.answer._id, 1);
 	my.game.roundAt = (new Date()).getTime();
 	my.game.meaned = 0;
@@ -112,7 +111,7 @@ function turnHint(){
 }
 exports.turnEnd = function(){
 	const my = this;
-
+	
 	if(my.game.answer){
 		my.game.late = true;
 		my.byMaster('turnEnd', {
@@ -128,7 +127,7 @@ exports.submit = function(client, text){
 	let now = (new Date()).getTime();
 	let play = (my.game.seq ? my.game.seq.includes(client.id) : false) || client.robot;
 	let gu = my.game.giveup ? my.game.giveup.includes(client.id) : true;
-
+	
 	if(!my.game.winner) return;
 	if(my.game.winner.indexOf(client.id) == -1
 		&& text == $ans._id
@@ -190,7 +189,7 @@ function getConsonants(word, lucky){
 	let i, len = word.length;
 	let c;
 	let rv = [];
-
+	
 	lucky = lucky || 0;
 	while(lucky > 0){
 		c = Math.floor(Math.random() * len);
@@ -200,7 +199,7 @@ function getConsonants(word, lucky){
 	}
 	for(let i=0; i<len; i++){
 		c = /[가-힣a-zA-Z]/.test(word.charAt(i));
-
+		
 		if(!c || rv.includes(i)){
 			R += word.charAt(i);
 			continue;
@@ -219,7 +218,7 @@ function getHint($ans, theme){
 	let R = [];
 	let h1 = $ans.mean.replace(new RegExp($ans._id, "g"), "★");
 	let h2;
-
+	
 	R.push([theme]);
 	R.push(getConsonants($ans._id, Math.ceil($ans._id.length / 2)));
 
@@ -228,7 +227,7 @@ function getHint($ans, theme){
 		h2 = getConsonants($ans._id, Math.ceil($ans._id.length / 2));
 	}while(h1 == h2);
 	R.push(h2);
-
+	
 	return R;
 }
 function getAnswer(theme, nomean){
@@ -236,7 +235,7 @@ function getAnswer(theme, nomean){
 	const R = new Lizard.Tail();
 	if(my.rule.lang == 'ko') {
 		let args = [ [ '_id', { $nin: my.game.done } ] ];
-
+		
 		args.push([ 'theme', new RegExp("(,|^)(" + theme + ")(,|$)") ]);
 		args.push([ 'type', Const.KOR_GROUP ]);
 		args.push([ 'flag', { $lte: 7 } ]);
@@ -253,7 +252,7 @@ function getAnswer(theme, nomean){
 			if(!$res) return R.go(null);
 			let pick;
 			let len = $res.length;
-
+			
 			if (!len) return R.go(null);
 			do{
 				pick = Math.floor(Math.random() * len);
@@ -268,7 +267,7 @@ function getAnswer(theme, nomean){
 		return R;
 	} else if(my.rule.lang == 'en') {
 		let args = [ [ '_id', { $nin: my.game.done } ] ];
-
+		
 		args.push([ 'theme', new RegExp("(,|^)(" + theme + ")(,|$)") ]);
 		if (!my.opts.unlimited) {
 			if (!my.opts.short) {
@@ -283,7 +282,7 @@ function getAnswer(theme, nomean){
 			if(!$res) return R.go(null);
 			let pick;
 			let len = $res.length;
-
+			
 			if(!len) return R.go(null);
 			do{
 				pick = Math.floor(Math.random() * len);
