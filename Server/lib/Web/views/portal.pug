@@ -21,32 +21,79 @@ block Subject
 
 block CSS
 	link(rel='stylesheet', href='/css/in_game_kkutu.css')
+	link(rel='stylesheet', href='/css/portal_redesign.css')
 
 block Middle
-	+separator(5)
-	div(style='float: left; width: 100%;')
-		div(style='float: left; padding-left: 70px;')
-			h3#holder= L('title').replace(/\[.+?\]/g, "")
+	+separator(2)
+	div.kp-hero
+		div.kp-brand
+			- var titleText = L('title').replace(/\[.+?\]/g, "")
+			- var excl = titleText.indexOf('!')
+			if (excl !== -1)
+				h3#holder.kp-brand__title
+					= titleText.slice(0, excl + 1) + ' '
+					img.kp-title-logo(src="/img/kkutu/short_logo2.png", alt="티에프끄투")
+			else
+				h3#holder.kp-brand__title= titleText
 			img#logo(src='/img/kkutu/short_logo.png')
-		div#menu-bar(style='float: right; margin-top: 25px;')
-		div.jjoriping(style='margin-top: 40px;')
-			img.jjoObj.jjoEyeL(src='/img/jjoeyeL.png', style='left: -270px;')
-			img.jjoObj.jjoNose(src='/img/jjonose.png', style='left: -170px;')
-			img.jjoObj.jjoEyeR(src='/img/jjoeyeR.png', style='left: -70px;')
-			div.jjoDisplayBar(style='width: 325px; height: 85px;')
-				button#game-start.jjo-display= L('gameStart')
-	div(style='float: right; margin-top: -120px; width: 50%;')
-		div.server-list-box
-			h3.server-list-title
+			div.kp-brand__logo
+				span.kp-brand__logo-dot
+				span.kp-brand__version — 티에프끄투 v0.0.6
+			div#menu-bar
+			div.kp-cta
+				button#game-start.kp-cta__btn= L('gameStart')
+		div.server-list-box.kp-sidebar
+			h3.server-list-title.kp-sidebar__title
 				a#server-refresh
 					+FA('refresh')
 					+Expl(L('serverRefresh'))
 				label= L('serverList')
-				label#server-total(style='color: #AAA; font-size: 13px;')
+				label#server-total.kp-sidebar__total
 			div#server-list
-	div(style='float: left; width: calc(100% - 4px); border: 2px solid #CCC; margin-top: 10px; background-color: #EEE;')
-		iframe#kkutu-bulletin(width='100%', height='400px', src='/kkutu_bulletin.html')
-	+separator(10)
+	div.kp-bulletin
+		div.kp-bulletin__bar
+			span
+			span
+			span
+		div.kp-bulletin__body
+			iframe#kkutu-bulletin(width='100%', height='400px', src='/kkutu_bulletin.html')
+	+separator(4)
+	script.
+		document.addEventListener('kp-server-status', function(e){
+			var dot = document.querySelector('.kp-brand__logo-dot');
+			if(!dot) return;
+			if(e.detail && e.detail.online === false){
+				dot.classList.add('is-offline');
+			}else{
+				dot.classList.remove('is-offline');
+			}
+		});
+		(function(){
+			var list = document.getElementById('server-list');
+			if(!list) return;
+			var check = function(){
+				var offline = list.children.length === 0;
+				document.dispatchEvent(new CustomEvent('kp-server-status', {detail: {online: !offline}}));
+			};
+			check();
+			new MutationObserver(check).observe(list, {childList: true, subtree: true});
+		})();
+		(function(){
+			var legals = document.querySelectorAll('#Bottom > div.bottom-legal');
+			if(!legals.length) return;
+			var left = legals[0];
+			var right = document.querySelector('#Bottom > div.bottom-legal.kp-gpl');
+			[left].concat(Array.prototype.slice.call(left.querySelectorAll('*'))).forEach(function(el){
+				el.style.setProperty('text-align', 'left', 'important');
+			});
+			if(right){
+				[right].concat(Array.prototype.slice.call(right.querySelectorAll('*'))).forEach(function(el){
+					el.style.setProperty('text-align', 'right', 'important');
+				});
+			}
+		})();
 
 block Bottom
 	div.bottom-legal!= L('dictionarySupport')
+	div.bottom-legal
+		a.bottom-contact(href='mailto:op@jjo.kr', target='_blank') Contact op@jjo.kr

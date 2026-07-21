@@ -1,0 +1,520 @@
+/*
+	티에프끄투 포털 리디자인
+	팔레트: 초록 / 흰색 / 옅은 노랑 / 검정·회색
+	in_game_kkutu.css 뒤에 로드되어야 기존 스타일을 덮어씀
+*/
+:root{
+	--kp-green: #2E9E5B;
+	--kp-green-deep: #1E7A45;
+	--kp-green-pale: #EAF6EE;
+	--kp-yellow: #F2C94C;
+	--kp-yellow-pale: #FFF7DC;
+	--kp-white: #FFFFFF;
+	--kp-black: #1C1E1C;
+	--kp-gray-900: #2A2E2B;
+	--kp-gray-600: #6C726C;
+	--kp-gray-300: #DCDFDA;
+	--kp-gray-100: #F4F5F2;
+	--kp-mono: 'JetBrains Mono', 'D2Coding', ui-monospace, monospace;
+	--kp-sans: 'Pretendard', 'Noto Sans KR', -apple-system, sans-serif;
+}
+
+/* ===== 히어로 (제목 + 게임시작 + 서버목록) ===== */
+.kp-hero{
+	padding: 28px 40px 16px;
+	background:
+		radial-gradient(circle at 85% -10%, var(--kp-green-pale) 0%, transparent 55%),
+		var(--kp-white);
+	display: flex;
+	justify-content: space-between;
+	gap: 40px;
+	flex-wrap: wrap;
+}
+/* 원본 체크판은 body 배경이 아니라 layout.pug의 <img id="Background">임.
+   사이트 공용 요소라 layout.pug는 안 건드리고, 이 페이지(portal)에서만 숨김. */
+#Background{
+	display: none !important;
+}
+
+/* 원본 체크판 배경을 덮어씀 (혹시 다른 곳에 background-image가 걸려있는 경우 대비) */
+html, body{
+	background: var(--kp-white) !important;
+}
+
+/* #Middle은 JS가 margin-left를 인라인으로 계산해서 고정폭 박스를 가운데
+   정렬시키는 구조(layout.pug 참고). 화면 전체 폭으로 쓰기 위해 그 인라인
+   margin-left를 무시하도록 !important로 덮어씀.
+   (CSS !important는 인라인 style보다 우선순위가 높아서 JS가 나중에
+   다시 margin-left를 넣어도 이 규칙이 이김) */
+/* 페이지 전체를 세로 flex로 만들어서, 콘텐츠가 짧아도 하단 영역이
+   화면 맨 아래에 붙도록 함 (중간에 빈 공백이 남지 않게) */
+html, body{
+	min-height: 100vh;
+}
+body{
+	display: flex !important;
+	flex-direction: column;
+}
+#Middle{
+	width: 100% !important;
+	max-width: none !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	left: 0 !important;
+	box-sizing: border-box;
+	flex: 1 0 auto;
+}
+
+/* 기존 #logo 이미지는 JS/다른 페이지 호환을 위해 마크업엔 남겨두고
+   이 디자인에서는 텍스트 브랜딩(점 + 버전)으로 대체하므로 숨김 처리.
+   이미지를 다시 쓰고 싶으면 이 줄만 지우면 됨. */
+#logo{ display: none; }
+
+.kp-brand__title{
+	margin: 0;
+	font-family: var(--kp-sans);
+	font-size: 42px;
+	line-height: 1.05;
+	font-weight: 800;
+	color: var(--kp-black) !important;
+	white-space: pre-wrap !important;
+	display: inline-block !important;
+	text-shadow: none !important;
+	width: auto !important;
+	max-width: none !important;
+	overflow: visible !important;
+	visibility: visible !important;
+}
+#holder{
+	width: auto !important;
+	text-align: left !important;
+	text-shadow: none !important;
+	white-space: normal !important;
+	overflow: visible !important;
+	visibility: visible !important;
+}
+.kp-brand__title .kp-accent{
+	color: var(--kp-green) !important;
+	font-weight: 800 !important;
+	text-shadow: none !important;
+	display: inline !important;
+	visibility: visible !important;
+}
+.kp-brand__logo{
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-top: 8px;
+	height: auto;
+	position: relative;
+	z-index: 1;
+}
+.kp-brand__logo-dot{
+	width: 10px; height: 10px; border-radius: 50%;
+	background: var(--kp-green);
+	box-shadow: 0 0 0 4px var(--kp-green-pale);
+	display: inline-block;
+	transition: background .15s ease, box-shadow .15s ease;
+}
+/* 서버 꺼짐 상태 - .kp-brand__logo-dot에 is-offline 클래스를 붙이면 빨간색으로 전환 */
+.kp-brand__logo-dot.is-offline{
+	background: #E5484D;
+	box-shadow: 0 0 0 4px #FBE0E0;
+}
+.kp-brand__version{
+	font-family: var(--kp-mono);
+	font-size: 13px;
+	letter-spacing: 0.04em;
+	color: var(--kp-gray-600) !important;
+	margin-left: 6px;
+	font-style: normal;
+	display: inline-block !important;
+	opacity: 1 !important;
+	visibility: visible !important;
+	position: relative !important;
+	z-index: 2 !important;
+}
+
+.kp-title-logo{
+    height: 42px;          /* 기존 높이 유지 */
+    width: auto;
+    margin-left: 1px;
+    position: relative;
+    top: 8px;
+
+    transform: scale(2.5);
+    transform-origin: left center;
+}
+
+/* ===== 게임 시작 버튼 ===== */
+.kp-cta{ margin-top: 16px; }
+.kp-cta button,
+#game-start.kp-cta__btn{
+	font-family: var(--kp-sans);
+	background: var(--kp-green);
+	color: var(--kp-white);
+	border: none;
+	font-size: 28px;
+	font-weight: 800;
+	padding: 18px 56px;
+	border-radius: 14px;
+	cursor: pointer;
+	box-shadow: 0 5px 0 var(--kp-green-deep);
+	transition: transform .08s ease, filter .1s ease;
+}
+#game-start.kp-cta__btn:hover{ filter: brightness(1.04); }
+#game-start.kp-cta__btn:active{
+	transform: translateY(3px);
+	box-shadow: 0 2px 0 var(--kp-green-deep);
+}
+.kp-cta__sub{
+	margin-top: 8px;
+	font-size: 13px;
+	color: var(--kp-gray-600);
+	font-family: var(--kp-mono);
+}
+
+/* ===== 서버 목록 ===== */
+.kp-sidebar{
+	flex: 0 0 320px;
+	background: var(--kp-white);
+	border: 1px solid var(--kp-gray-300);
+	border-radius: 16px;
+	padding: 14px 18px;
+	margin-top: 54px !important;
+	height: fit-content;
+	align-self: flex-start;
+}
+.kp-sidebar__title{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	font-size: 14px;
+	font-weight: 800;
+	margin: 0 0 14px;
+	list-style: none;
+	/* 기존 .server-list-title 스타일(배경/패딩 등)이 남아있으면 강제로 리셋 */
+	background: none !important;
+	padding: 0 !important;
+	border: none !important;
+	color: var(--kp-black) !important;
+}
+.kp-sidebar__title label{
+	background: none !important;
+	color: var(--kp-black) !important;
+	font-weight: 800 !important;
+	padding: 0 !important;
+}
+.kp-sidebar__title #server-refresh{
+	color: var(--kp-gray-600);
+	cursor: pointer;
+	font-size: 13px;
+	text-decoration: none;
+	background: none !important;
+}
+.kp-sidebar__total{
+	color: var(--kp-gray-600) !important;
+	font-family: var(--kp-mono);
+	font-size: 13px;
+	font-weight: 400 !important;
+}
+/* 서버 목록 텍스트 정렬과 박스 높이 보정 */
+.server-list-box .server{
+	float: none !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: space-between !important;
+	width: 100% !important;
+	min-height: 34px !important;
+	padding: 4px 0 !important;
+	margin: 6px 0 !important;
+}
+.server-list-box .server > div{
+	float: none !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	vertical-align: middle !important;
+}
+.server-list-box .server-name{
+	width: auto !important;
+	flex: 1 0 auto !important;
+	font-size: 13px !important;
+	line-height: 1.2 !important;
+	color: var(--kp-black) !important;
+}
+.server-list-box .server-people{
+	width: auto !important;
+	flex: 0 1 170px !important;
+	min-width: 80px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	position: relative !important;
+	margin-right: 8px !important;
+	padding-right: 6px !important;
+}
+.server-list-box .server-people > label{
+	position: relative !important;
+	top: 0 !important;
+	font-size: 12px !important;
+	line-height: 1.2 !important;
+	color: var(--kp-black) !important;
+	margin: 0 !important;
+	display: block !important;
+	width: 100% !important;
+	text-align: center !important;
+}
+.server-list-box .server-people > label > *{
+	width: 100% !important;
+	max-width: 100% !important;
+	box-sizing: border-box !important;
+}
+.server-list-box .server-people input,
+.server-list-box .server-people meter,
+.server-list-box .server-people progress{
+	width: 100% !important;
+}
+.server-list-box .server-enter{
+	display: inline-flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	width: auto !important;
+	min-width: 60px !important;
+	padding: 6px 10px !important;
+	text-align: center !important;
+	font-size: 13px !important;
+	line-height: 1.2 !important;
+	color: var(--kp-black) !important;
+	background: var(--kp-gray-100) !important;
+	border: 1px solid var(--kp-gray-300) !important;
+	border-radius: 8px !important;
+	text-decoration: none !important;
+	margin-left: 8px !important;
+	transform: translateY(-1px) !important;
+	cursor: pointer !important;
+}
+/* 서버 목록 텍스트를 검은색으로 바꾸고 세로 정렬 */
+.server-list-box .server,
+.server-list-box .server > div,
+.server-list-box .server-name,
+.server-list-box .server-people > label,
+.server-list-box .server-enter{
+	color: var(--kp-black) !important;
+}
+.server-list-box .server{
+	height: auto !important;
+	min-height: 24px !important;
+}
+.server-list-box .server-name,
+.server-list-box .server-enter{
+	line-height: 24px !important;
+}
+.server-list-box .server-people > label{
+	top: -12px !important;
+	font-size: 12px !important;
+	line-height: 1 !important;
+}
+/* 서버 목록 안의 개별 행은 in_portal.min.js가 그리는 구조라
+   내부 마크업을 모르므로 여기선 배경을 강제하지 않음.
+   실제 렌더링된 #server-list 내부 HTML을 보내주면 정확히 맞춰드릴게요. */
+#server-list{
+	font-family: var(--kp-sans);
+}
+
+/* ===== 게시판 (터미널 창 스타일) ===== */
+.kp-bulletin{
+	margin: 4px 40px 12px;
+	border-radius: 14px;
+	overflow: hidden;
+	border: 1px solid var(--kp-gray-300);
+}
+.kp-bulletin__bar{
+	background: var(--kp-gray-900);
+	padding: 8px 16px;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+.kp-bulletin__bar span{
+	width: 9px; height: 9px; border-radius: 50%; display: inline-block;
+}
+.kp-bulletin__bar span:nth-child(1){ background: var(--kp-gray-600); }
+.kp-bulletin__bar span:nth-child(2){ background: var(--kp-yellow); }
+.kp-bulletin__bar span:nth-child(3){ background: var(--kp-green); }
+.kp-bulletin__body{ background: var(--kp-white); }
+/* 패치노트 목록이 길어서 전체 페이지를 늘리지 않도록, 이 안에서만
+   스크롤되게 높이를 제한. 페이지 자체는 스크롤 없이 한 화면에 들어옴 */
+/* 페이지 전체는 스크롤 없이 고정, 게시판 내부에서만 스크롤 처리 */
+#kkutu-bulletin{
+	border: none;
+	display: block;
+	height: 460px !important;
+}
+
+
+
+
+
+html, body{
+	overflow-x: hidden !important;
+}
+
+
+/* ===== 하단 (사전 정보 / Contact / 저작권) =====
+   #Bottom 안에는 .bottom-legal div가 3개 있음:
+   1) 사전 정보 제공 (portal.pug) - 왼쪽
+   2) Contact op@jjo.kr (layout.pug 공용) - 숨김
+   3) 저작권/GPL 문구 (layout.pug 공용) - 오른쪽
+   layout.pug는 안 건드리고 여기서 순서 기반으로 골라 처리 */
+#Bottom{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 0 !important;
+	padding: 10px 40px;
+	border-top: 1px solid var(--kp-gray-300);
+	margin-top: 8px;
+}
+/* 페이지 어디선가 폭 넘치는 요소가 있어도 가로 스크롤바 자체를 막음 */
+html, body{
+	overflow-x: hidden !important;
+}
+
+/* Contact op@jjo.kr 줄 통째로 숨김 */
+#Bottom > div.bottom-legal:has(a.bottom-contact){
+	display: none !important;
+}
+/* 사전 정보 제공 - 왼쪽 정렬 (원본 텍스트 안에 인라인 text-align이 있어도
+   이기도록 자손 요소까지 강제) */
+#Bottom > div.bottom-legal:first-of-type,
+#Bottom > div.bottom-legal:first-of-type *{
+	text-align: left !important;
+}
+#Bottom > div.bottom-legal:first-of-type{
+	flex: 1 1 320px;
+	max-width: 48%;
+}
+/* 저작권/GPL 문구 - 오른쪽 정렬 */
+#Bottom > div.bottom-legal.kp-gpl,
+#Bottom > div.bottom-legal.kp-gpl *{
+	text-align: right !important;
+}
+#Bottom > div.bottom-legal.kp-gpl{
+	flex: 1 1 48%;
+	max-width: 48%;
+	min-width: 0 !important;
+	text-align: right !important;
+	margin-left: auto !important;
+	box-sizing: border-box !important;
+}
+/* .bottom-legal이 아닌 나머지(예: +separator 같은 스페이서)는
+   레이아웃에 영향 안 주게 접어둠 */
+#Bottom > *:not(.bottom-legal){
+	flex-basis: 100%;
+	height: 0;
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+.bottom-legal{
+	color: var(--kp-gray-600);
+	font-size: 11px;
+	font-family: var(--kp-mono);
+	line-height: 1.6;
+	word-break: keep-all;
+	overflow-wrap: anywhere;
+}
+
+/* 바닥글: 좌/우 정렬은 first/last 규칙을 사용하고, 모든 .bottom-legal에
+   줄바꿈/오버플로우 방지 규칙을 적용합니다 (텍스트가 화면을 벗어나지 않음) */
+#Bottom > div.bottom-legal,
+#Bottom > div.bottom-legal *{
+	min-width: 0 !important;
+	word-break: break-word !important;
+	overflow-wrap: anywhere !important;
+	white-space: normal !important;
+}
+/* 각 줄(원본에서 br로 구분된 문장들) 사이 간격을 스샷처럼 촘촘하게 */
+.bottom-legal br{
+	line-height: 1.9;
+}
+
+/* 포탈 페이지 바닥글(사전 정보) - 오른쪽 정렬 강제 */
+.kp-footer-dict,
+.kp-footer-dict *{
+	text-align: right !important;
+}
+.kp-footer-dict{
+	margin-left: auto !important;
+	text-align: right !important;
+}
+
+/* =========================================================
+   모바일 (m_portal.pug 전용, .kp-mobile 래퍼 아래에서만 적용)
+   ========================================================= */
+.kp-mobile .kp-hero{
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	padding: 40px 20px 24px;
+}
+.kp-mobile .kp-brand__title{ font-size: 36px; }
+.kp-mobile .kp-brand__logo{ justify-content: center; }
+.kp-mobile .kp-cta{ margin-top: 26px; width: 100%; }
+.kp-mobile #game-start.kp-cta__btn{
+	width: 100%;
+	max-width: 360px;
+	font-size: 28px;
+	padding: 24px 0;
+	border-radius: 14px;
+	box-shadow: 0 6px 0 var(--kp-green-deep);
+}
+.kp-mobile #game-start.kp-cta__btn:active{
+	box-shadow: 0 3px 0 var(--kp-green-deep);
+}
+.kp-mobile .kp-cta__sub{ font-size: 14px; }
+.kp-mobile .kp-sidebar{
+	margin-top: 24px;
+	width: 100%;
+	max-width: 360px;
+	flex: none;
+}
+.kp-mobile .kp-bulletin{ margin: 8px 16px 32px; }
+
+@media (max-width: 768px){
+
+	.kp-mobile .kp-brand__title{
+		font-size:28px;
+		line-height:1.2;
+	}
+
+	.kp-mobile .kp-title-logo{
+		transform:scale(1.8);
+		top:5px;
+		margin-left:2px;
+	}
+
+	.kp-mobile .kp-brand__logo{
+		justify-content:center;
+		margin-top:14px;
+	}
+
+	.kp-mobile .kp-sidebar{
+		margin-top:20px;
+		width:100%;
+		max-width:none;
+	}
+
+	.kp-mobile #kkutu-bulletin{
+		height:250px !important;
+	}
+
+	.kp-mobile #Bottom{
+		padding:12px;
+	}
+
+	.kp-mobile .bottom-legal{
+		font-size:10px;
+	}
+}

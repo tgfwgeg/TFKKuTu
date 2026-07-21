@@ -22,6 +22,7 @@ block Subject
 block CSS
 	link(rel='stylesheet', href='/css/in_game_kkutu.css')
 	link(rel='stylesheet', href='/css/in_portal.css')
+	link(rel='stylesheet', href='/css/portal_redesign.css')
 
 block JS
 	script(type='text/javascript', src='/js/in_portal.min.js')
@@ -30,30 +31,76 @@ block JS
 		script (adsbygoogle = window.adsbygoogle || []).push({google_ad_client: "ca-pub-3784210391085906", enable_page_level_ads: true});
 
 block Middle
-	+separator(5)
-	div(style='margin-left: calc(50% - 170px);')
-		div(style='float: left; padding-left: 70px;')
-			h3#holder= L('title')
-			img#logo(src='/img/kkutu/short_logo.png')
-		div.jjoriping(style='margin-top: 10px;')
-			img.jjoObj.jjoEyeL(src='/img/jjoeyeL.png', style='top: 40px; left: -270px;')
-			img.jjoObj.jjoNose(src='/img/jjonose.png', style='top: 42px; left: -170px;')
-			img.jjoObj.jjoEyeR(src='/img/jjoeyeR.png', style='top: 40px; left: -70px;')
-			div.jjoDisplayBar(style='float: left; margin-top: -30px; width: 325px; height: 85px;')
-				button#game-start.jjo-display= L('gameStart')
-	div#menu-bar(style='float: left; margin: 10px 0px 10px calc(50% - 136px); width: 100%;')
-	div(style='float: left; margin-left: calc(50% - 160px);')
-		div.server-list-box
-			h3.server-list-title
-				a#server-refresh
-					+FA('refresh')
-					+Expl(L('serverRefresh'))
-				label= L('serverList')
-				label#server-total(style='color: #AAA; font-size: 13px;')
-			div#server-list
-	div(style='float: left; width: calc(100% - 4px); border: 2px solid #CCC; margin-top: 10px; background-color: #EEE;')
-		iframe#kkutu-bulletin(width='100%', height='400px', src='/kkutu_bulletin.html')
-	+separator(10)
+	+separator(2)
+	div.kp-mobile
+		div.kp-hero
+			div.kp-brand
+				h3#holder.kp-brand__title= L('title')
+				img#logo(src='/img/kkutu/short_logo.png')
+				div.kp-brand__logo
+					span.kp-brand__logo-dot
+					span.kp-brand__version tfkkutu.site
+				div#menu-bar
+				div.kp-cta
+					button#game-start.kp-cta__btn= L('gameStart')
+			div.server-list-box.kp-sidebar
+				h3.server-list-title.kp-sidebar__title
+					a#server-refresh
+						+FA('refresh')
+						+Expl(L('serverRefresh'))
+					label= L('serverList')
+					label#server-total.kp-sidebar__total
+				div#server-list
+		div.kp-bulletin
+			div.kp-bulletin__bar
+				span
+				span
+				span
+			div.kp-bulletin__body
+				iframe#kkutu-bulletin(width='100%', height='400px', src='/kkutu_bulletin.html')
+	+separator(4)
+	script.
+		(function(){
+			var holder = document.getElementById('holder');
+			if(!holder) return;
+			var text = holder.textContent;
+			var idx = text.indexOf('!');
+			if(idx !== -1){
+				var before = text.slice(0, idx + 1);
+				var after = text.slice(idx + 1).trim();
+				holder.innerHTML = before + ' <span class="kp-accent">' + after + '</span>';
+			}
+		})();
+		document.addEventListener('kp-server-status', function(e){
+			var dot = document.querySelector('.kp-brand__logo-dot');
+			if(!dot) return;
+			if(e.detail && e.detail.online === false){
+				dot.classList.add('is-offline');
+			}else{
+				dot.classList.remove('is-offline');
+			}
+		});
+		(function(){
+			var list = document.getElementById('server-list');
+			if(!list) return;
+			var check = function(){
+				var offline = list.children.length === 0;
+				document.dispatchEvent(new CustomEvent('kp-server-status', {detail: {online: !offline}}));
+			};
+			check();
+			new MutationObserver(check).observe(list, {childList: true, subtree: true});
+		})();
+		(function(){
+			var legals = document.querySelectorAll('#Bottom > div.bottom-legal');
+			if(!legals.length) return;
+			var left = legals[0], right = legals[legals.length - 1];
+			[left].concat(Array.prototype.slice.call(left.querySelectorAll('*'))).forEach(function(el){
+				el.style.setProperty('text-align', 'left', 'important');
+			});
+			[right].concat(Array.prototype.slice.call(right.querySelectorAll('*'))).forEach(function(el){
+				el.style.setProperty('text-align', 'right', 'important');
+			});
+		})();
 
 block Bottom
 	div.bottom-legal!= L('dictionarySupport')
