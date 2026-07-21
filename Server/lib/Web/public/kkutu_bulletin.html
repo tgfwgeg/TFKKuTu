@@ -21,7 +21,7 @@ html, body{
 		"Noto Sans KR",
 		"Malgun Gothic",
 		sans-serif;
-	background: #f5f6fa;
+	background: linear-gradient(180deg,#eefaf1,#f7fcf8);
 }
 
 .notice-container{
@@ -58,13 +58,13 @@ html, body{
 .notice-card:hover{
 	transform: translateY(-4px);
 	box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-	border-color: #c8d6ff;
+	border-color:#6fcf97;
 }
 
 .notice-title{
 	margin: 0 0 10px;
 	font-size: 18px;
-	color: #2f77d9;
+	color:#228b5a;
 }
 
 .notice-card ul{
@@ -78,7 +78,7 @@ html, body{
 }
 
 .notice-card a{
-	color: #2f77d9;
+	color:#228b5a;
 	text-decoration: none;
 }
 
@@ -97,13 +97,13 @@ html, body{
 	padding: 12px 12px 0;
 	gap: 4px;
 
-	background: #f5f6fa;
+	background: linear-gradient(180deg,#eefaf1,#f7fcf8);
 }
 
 .notice-tabs button{
 	border: none;
-	background: #e7e7e7;
-	color: #555;
+	background:#dff4e5;
+	color:#2d6a4f;
 	padding: 12px 20px;
 	cursor: pointer;
 	font-size: 14px;
@@ -114,13 +114,13 @@ html, body{
 }
 
 .notice-tabs button:hover{
-	background: #444;
-	color: #eee;
+	background:#4caf6a;
+	color:#fff;
 	transform: translateY(-2px);
 }
 
 .notice-tabs button.active{
-	background: #111;
+	background:linear-gradient(135deg,#3cb371,#2e8b57);
 	color: #fff;
 }
 .toc-btn{
@@ -163,8 +163,26 @@ html, body{
 }
 
 .toc-item:hover{
-	background:#f5f5f5;
+	background:#e8f8ee;
 }
+
+.notice-card{
+    position:relative;
+    overflow:hidden;
+}
+.notice-card::before{
+ content:"";
+ position:absolute;
+ left:0;top:0;width:5px;height:100%;
+ background:linear-gradient(180deg,#58d68d,#239b56);
+}
+.notice-tabs{
+ border-bottom:1px solid #cfead8;
+}
+.notice-card a:hover{
+ color:#1f6f46;
+}
+
 </style>
 </head>
 
@@ -182,17 +200,26 @@ html, body{
 <div id="patch" class="notice-container tab-content active">
 
 	<div class="notice-card">
+		<h3 class="notice-title">0.0.7 [260721]</h3>
+		<ul>
+			<li>portal.pug 대규모교체</li>
+			<li>[by <a href="https://github.com/dalbodeule" target="_blank">dalbodeule</a>] 게임서버랑연결이끊기면3번다시연결해용</li>
+			<li>[by <a href="https://github.com/dalbodeule" target="_blank">dalbodeule</a>] 그림 퀴즈 추가</li>
+			<li>[by <a href="https://github.com/kdhkr" target="_blank">kdhkr</a>] 게임불러오는중단계에서비상적으로깨지는현상수정</li>
+		</ul>
+	</div>
+
+	<div class="notice-card">
 		<h3 class="notice-title">0.0.6 [260610]</h3>
 		<ul>
-			<li>볼륨조절구현성공</li>
-			<li>[THANK ATTOTATTOA JEONG희JEONG?] 랭킹에사람들이미공개로뜨는거닉네임보이게바꿈</li>
+			<li>[by <a href="https://github.com/jhj1228" target="_blank">jhj1228</a>] 랭킹에사람들이미공개로뜨는거닉네임보이게바꿈</li>
 		</ul>
 	</div>
 
 	<div class="notice-card">
 		<h3 class="notice-title">0.0.5 [260607]</h3>
 		<ul>
-			<li>볼륨조절구현성공</li>
+			<li>[by <a href="https://github.com/Ishqqytiger" target="_blank">Ishqqytiger</a>] 볼륨조절구현</li>
 			<li>kkutu_bulletin.html손보는거미루다가이제함</li>
 		</ul>
 	</div>
@@ -207,10 +234,8 @@ html, body{
 	<div class="notice-card">
 		<h3 class="notice-title">0.0.3 [260605]</h3>
 		<ul>
-			<li>grunt버리고Webpack씀</li>
-			<li>볼륨조절구현했느데실패</li>
-			<li>리눅스로돌리는게너무불편해서서버여는프로그램만듦</li>
-			<li>WAF씀</li>
+			<li>[by <a href="https://github.com/Ishqqytiger" target="_blank">Ishqqytiger</a>] grunt버리고Webpack씀</li>
+			<li>[by <a href="https://github.com/Ishqqytiger" target="_blank">Ishqqytiger</a>] WAF씀</li>
 		</ul>
 	</div>
 
@@ -226,7 +251,7 @@ html, body{
 		<h3 class="notice-title">0.0.1 [260531]</h3>
 		<ul>
 			<li>티에프끄투 파일이 2번째싹다날아가서코드다시작성함,</li>
-			<li>닉네임버녀경구현함,.</li>
+			<li>[by <a href="https://github.com/Ishqqytiger" target="_blank">Ishqqytiger</a>] 닉네임버녀경구현함,.</li>
 		</ul>
 	</div>
 
@@ -333,12 +358,21 @@ function buildToc(){
 		<h3 class="notice-title">고칠 것</h3>
 		<ul>
 			<li>d아브금ㅁ만들어야하ㅡㄴㄴ데</li>
+			<li>우리말샘을죽이고신표국으로교체하기</li>
 		</ul>
 	</div>
 
 </div>
 
 <div id="devlog" class="notice-container tab-content" style="display:none;">
+
+	<div class="notice-card">
+		<h3 class="notice-title">2026년 7월 21일</h3>
+		<ul>
+			<li>오늘부터하루마다씁니다</li>
+			<li>portal.pug랑kkutu_bulletin.html을많이만졌다재밌다</li>
+		</ul>
+	</div>
 
 	<div class="notice-card">
 		<h3 class="notice-title">2026년 6월 7일</h3>
@@ -350,7 +384,7 @@ function buildToc(){
 	<div class="notice-card">
 		<h3 class="notice-title">2026년 5월 31일</h3>
 		<ul>
-			<li>내티에프끄투파일이2번째날아갔다씨발개좆같다ㅗㅗㅗㅗㅗㅗㅗㅗㅗㅗㅗㅗㅗㅗ</li>
+			<li>내티에프끄투파일이2번째날아갔다아주재미있다ｗｗｗｗｗｗｗ</li>
 		</ul>
 	</div>
 </div>
