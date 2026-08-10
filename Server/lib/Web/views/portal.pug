@@ -32,7 +32,7 @@ block Middle
 			if (excl !== -1)
 				h3#holder.kp-brand__title
 					= titleText.slice(0, excl + 1) + ' '
-					img.kp-title-logo(src="/img/kkutu/short_logo2.png", alt="티에프끄투")
+					img.kp-title-logo(src="/img/kkutu/short_logo.png", alt="티에프끄투")
 			else
 				h3#holder.kp-brand__title= titleText
 			img#logo(src='/img/kkutu/short_logo.png')
@@ -52,9 +52,8 @@ block Middle
 			div#server-list
 	div.kp-bulletin
 		div.kp-bulletin__bar
-			span
-			span
-			span
+			span.kp-bulletin__bar-icon 📢
+			span.kp-bulletin__bar-label 공지사항
 		div.kp-bulletin__body
 			iframe#kkutu-bulletin(width='100%', height='400px', src='/kkutu_bulletin.html')
 	+separator(4)

@@ -115,6 +115,11 @@ block Middle
 			+SettingOption('only-waiting', L('onlyWaiting'), "width: 200px;")
 			h4
 			+SettingOption('only-unlock', L('onlyUnlock'), "width: 200px;")
+		div.dialog-bar
+			h4 Theme
+			select#theme-select(style='width: 100%;')
+				option(value='default') Default
+				option(value='black') Black
 		div.dialog-bar.tail-button
 			button#setting-ok= L('save')
 			button#setting-server= L('changeServer')

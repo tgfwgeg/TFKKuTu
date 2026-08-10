@@ -16,7 +16,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-const SETTINGS = require("/home/tgfwgeg/Desktop/TFKKuTu/settings.json");
+const SETTINGS = require("../../../settings.json");
 var Cluster = require("cluster");
 var CPU = Number(process.argv[2]); //require("os").cpus().length;
 

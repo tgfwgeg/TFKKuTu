@@ -76,7 +76,9 @@ function applyOptions(opt){
 	$("#sort-user").attr('checked', $data.opts.su);
 	$("#only-waiting").attr('checked', $data.opts.ow);
 	$("#only-unlock").attr('checked', $data.opts.ou);
-	
+	$("#theme-select").val($data.opts.theme || 'default');
+	setTheme($data.opts.theme || 'default');
+
 	if($data.bgm){
 		if($data.BGMVolume){
 			$data.bgm.volume = $data.BGMVolume;
@@ -100,6 +102,19 @@ function checkInput(){
 		}
 	}
 	$data._kd = v;*/
+}
+function setTheme(theme){
+	if(!theme || theme === 'default'){
+		$("#KKuTuThemeStyle").remove();
+		return;
+	}
+	var href = mobile ? '/css/in_m_kkutu_black.css' : '/css/in_kkutu_black.css';
+	var $link = $("#KKuTuThemeStyle");
+	if($link.length){
+		$link.attr('href', href);
+	}else{
+		$('<link>', { id: 'KKuTuThemeStyle', rel: 'stylesheet', type: 'text/css', href: href }).appendTo('head');
+	}
 }
 function addInterval(cb, v, a1, a2, a3, a4, a5){
 	var R = _setInterval(cb, v, a1, a2, a3, a4, a5);
@@ -2663,7 +2678,7 @@ function playSound(key, loop){
 	}else{
 		if(sound.readyState) sound.audio.currentTime = 0;
 		sound.audio.loop = loop || false;
-		sound.audio.volume = mute ? 0 : ((loop ? $data.BGMVolume : $data.EffectVolume) || 0.5);
+		sound.audio.volume = (bgmMuted || effectMuted) ? 0 : ((loop ? $data.BGMVolume : $data.EffectVolume) || 0.5);
 		src = sound;
 	}
 	if($_sound[key]) $_sound[key].stop();

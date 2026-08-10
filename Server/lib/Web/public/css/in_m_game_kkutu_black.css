@@ -1,0 +1,306 @@
+/**
+ * KKuTu Mobile Game Black Theme
+ * Override styles for mobile game UI.
+ */
+
+body,
+#Jungle,
+#Middle,
+#Bottom,
+.Product,
+.RoomBox,
+.GameBox,
+.ChatBox,
+.ADBox,
+.UserListBox,
+.RoomListBox,
+.MeBox,
+.ShopBox {
+  background-color: #0f131d !important;
+  color: #e4e9f5 !important;
+}
+
+#Intro,
+#Loading {
+  background-color: rgba(9, 11, 16, 0.95) !important;
+}
+
+#Top {
+  background-color: #111928 !important;
+  border-bottom: 1px solid #1f3250;
+}
+
+#Top .menu-btn {
+  background-color: #17273c;
+  color: #e7ecf5;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.23);
+}
+
+#Top .menu-btn:hover {
+  filter: brightness(1.1);
+}
+
+#Top .menu-sub-btn {
+  color: #bcc8e7;
+}
+
+#Yell {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.kkutu-menu {
+  background-color: #121b2f;
+  border-bottom: 1px solid #1f3353;
+}
+
+.kkutu-menu button {
+  background-color: #17283f;
+  color: #e9eef8;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.25);
+}
+
+.kkutu-menu button:hover {
+  background-color: #254a78;
+}
+
+.kkutu-menu .toggled {
+  background-color: #2e4568 !important;
+  color: #f3f8ff;
+}
+
+.dialog {
+  background-color: #151e31;
+  color: #edf2fb;
+  border: 1px solid #233950;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.55);
+}
+
+.dialog-head {
+  background-color: #1d2f48;
+  border-bottom: 1px solid #2a4362;
+  color: #d8e3f2;
+}
+
+.dialog-bar input,
+.dialog-bar select {
+  background-color: #16243c;
+  color: #e9eff8;
+  border: 1px solid #283a5b;
+}
+
+.product-body {
+  background-color: #121a2d;
+  color: #e6eef7;
+}
+
+.Product,
+.RoomBox,
+.ShopBox,
+.UserListBox,
+.RoomListBox,
+.MeBox {
+  background-color: #131b2d;
+  border: 1px solid #243a5b;
+}
+
+.RoomListBox .rooms-item,
+.RoomBox .room-user,
+.RoomBox .team-button,
+.RoomBox .rooms-create,
+#ResultDiag .result-board-item,
+#ResultDiag .result-me,
+.ChatBox .chat-item {
+  background-color: #17253f;
+  border: 1px solid #2b405d;
+}
+
+.RoomListBox .rooms-item:hover,
+.RoomBox .room-user:hover,
+.RoomBox .rooms-create:hover {
+  background-color: #1e3860;
+}
+
+.rooms-gaming {
+  background-color: #2e465f;
+}
+
+.rooms-gaming:hover {
+  background-color: #384f70;
+}
+
+.room-user {
+  background-color: #17253f;
+}
+
+.room-user-title,
+.room-user-name,
+.room-user-stat {
+  color: #e9eff8;
+}
+
+.game-user,
+.game-user-current,
+.game-user-bomb,
+.game-user-drawing {
+  background-color: #17273f;
+  border: 1px solid #2a3f5f;
+  color: #eef4fb;
+}
+
+.game-user-current {
+  background-color: #1f3f6a;
+}
+
+.game-user-bomb {
+  background-color: #4a2f32;
+}
+
+.game-user-drawing {
+  background-color: #223b5a;
+}
+
+.GameBox {
+  background-color: rgba(10, 14, 24, 0.96);
+  border: 1px solid #21374e;
+}
+
+.GameBox .product-body,
+.GameBox .hints,
+.GameBox .tools,
+.GameBox .game-user {
+  background-color: #141d30;
+}
+
+.GameBox .tools {
+  border-color: #283a58;
+}
+
+#themeis,
+#themeis-title,
+.history-item,
+.word-theme,
+.cw-q-body,
+.cw-bar,
+.cw-cell,
+.sock-char,
+.bb-word,
+.bb-char,
+.chain,
+.rounds,
+.game-input,
+.chat-balloon,
+.chat-head,
+.chat-body,
+.chat-notice,
+.chat-stamp,
+.chat-item {
+  color: #e6ecf8;
+}
+
+#themeis,
+#themeis-title,
+.history-item {
+  background-color: #16203a;
+  border: 1px solid #233456;
+}
+
+.chat-item {
+  background-color: rgba(10, 14, 22, 0.9);
+  border-bottom: 1px solid #1f324e;
+}
+
+.chat-head {
+  color: #b8c5e7;
+}
+
+.chat-body {
+  color: #edf2fb;
+}
+
+#ResultDiag .result-board-item,
+#ResultDiag .result-me {
+  background-color: #17223d;
+  border: 1px solid #2b3f61;
+}
+
+.result-board-rank,
+.result-board-level,
+.result-board-name,
+.result-board-score,
+.result-board-reward,
+.result-board-lvup,
+.result-me-score,
+.result-me-money,
+.result-me-level-body,
+.result-me-gauge,
+.result-me-score-text {
+  color: #ecf2fb;
+}
+
+#KickVoteDiag {
+  background-color: #131d31;
+  border: 1px solid #233556;
+}
+
+#cf-dict,
+#cf-reward,
+#cf-cost,
+.cf-tray-selected,
+.category-filter.selected,
+.dress-item,
+.dress-equipped {
+  background-color: #17253f;
+  color: #e7eef8;
+  border: 1px solid #273a5d;
+}
+
+#cf-cost {
+  background-color: #1d2f4d;
+}
+
+.purchase-not-enough {
+  color: #fb8484;
+}
+
+.MeBox {
+  background-color: #151d30;
+  border: 1px solid #243a58;
+}
+
+.my-stat,
+.my-level,
+.my-gauge,
+.my-okg,
+.my-okg .graph-bar,
+.my-gauge .graph-bar,
+.my-gauge-text {
+  color: #e9eff8;
+}
+
+.my-okg {
+  background-color: #1b2f4f;
+}
+
+.my-gauge {
+  background-color: #0f1728;
+}
+
+#canvas {
+  background-color: #0b101a;
+}
+
+button,
+input,
+select,
+textarea {
+  color: #f0f5ff;
+}
+
+button {
+  background-color: #1d2d48;
+  border: 1px solid #304b77;
+}
+
+button:hover {
+  background-color: #2c4e82;
+}

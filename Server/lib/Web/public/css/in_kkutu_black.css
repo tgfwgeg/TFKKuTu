@@ -93,16 +93,11 @@ iframe{
 	color: #2255FF;
 	font-weight: bold;
 	text-align: center;
-	text-shadow: 0px 1px 1px #000033;
+	text-shadow: 0px 1px 2px #000033;
 	animation: ScoreGoing 2s ease 1;
 }
 	.bonus{ color: #6666FF; }
 	.lost{ color: #F59E9E; }
-.kkutu-menu{
-	float: left;
-	width: 1010px;
-	height: 30px;
-}
 .kkutu-menu {
     float: left;
     width: 1010px;
@@ -248,6 +243,17 @@ iframe{
 }
 .product-title i{ color: #111111; }
 .dialog-front{ z-index: 3; }
+#comm-friends div{ float: left; }
+	.cf-item{ margin: 2px 0px; width: 100%; }
+		.cfi-status{ border-radius: 7px; margin-right: 2px; width: 12px; height: 12px; }
+			.cfi-stat-on{ background-color: green; }
+			.cfi-stat-off{ background-color: gray; }
+		.cfi-server{ width: 46px; text-align: center; }
+		.cfi-name{ width: 60px; }
+		.cfi-memo{ width: calc(100% - 150px); }
+		.cfi-menu{ width: 30px; }
+			.cfi-menu>i{ margin-right: 3px; cursor: pointer; }
+			.cfi-menu>i:hover{ background-color: #FFF; }
 #ProfileDiag .dialog-body div{ float: left; }
 	.profile-moremi{ margin-right: 3px; width: 80px; height: 80px; }
 	.profile-head-item{ margin: 3px 2px; width: 213px; }
@@ -411,6 +417,86 @@ iframe{
 		width: 225px;
 		height: 110px;
 	}
+	.tools{
+		margin: 00px 10px 0px 10px;
+		width: 225px;
+		display: none;
+		background-color: #eeeeee;
+		border: 1px solid #000;
+		border-radius: 10px;
+		padding: 20px;
+		box-shadow: 0px 1px 1px #141414;
+	}
+	#drawing {
+		font-size: 14px;
+		margin-bottom: 10px;
+		display: block;
+	}
+	#drawing-title {
+		font-size: 14px;
+		margin-bottom: 10px;
+		display: block;
+		overflow-x: scroll;
+		height: 34px;
+		white-space: nowrap;
+	}
+	#themeis {
+		font-size: 14px;
+		margin-bottom: 10px;
+		display: block;
+	}
+	#themeis-title {
+		font-size: 14px;
+		margin-bottom: 10px;
+		display: block;
+	}
+	.button-color {
+		border: none;
+		width: 50px;
+		height: 30px;
+	}
+	.palette {
+		background-color: #DEB887;
+		border: 1px solid #000;
+		border-radius: 10px;
+		box-shadow: 0px 1px 1px #141414;
+		padding: 5px 5px 5px 5px;
+		margin-top: 0px;
+		margin-bottom: 10px;
+	}
+	.palette div {
+		float: left;
+		width: 60px;
+		margin: 5px 5px 5px 5px;
+	}
+	.button-color#color-red {
+		background: #DEB887 url('../img/kkutu/paint_red.png') no-repeat center;
+	}
+	.button-color#color-orange {
+		background: #DEB887 url('../img/kkutu/paint_orange.png') no-repeat center;
+	}
+	.button-color#color-yellow {
+		background: #DEB887 url('../img/kkutu/paint_yellow.png') no-repeat center;
+	}
+	.button-color#color-green {
+		background: #DEB887 url('../img/kkutu/paint_green.png') no-repeat center;
+	}
+	.button-color#color-blue {
+		background: #DEB887 url('../img/kkutu/paint_blue.png') no-repeat center;
+	}
+	.button-color#color-indigo {
+		background: #DEB887 url('../img/kkutu/paint_indigo.png') no-repeat center;
+	}
+	.button-color#color-violet {
+		background: #DEB887 url('../img/kkutu/paint_violet.png') no-repeat center;
+	}
+	.button-color#color-black {
+		background: #DEB887 url('../img/kkutu/paint_black.png') no-repeat center;
+	}
+	.button-color#color-white {
+		background: #DEB887 url('../img/kkutu/paint_white.png') no-repeat center;
+	}
+
 		.hint-item{
 			padding: 5px;
 			border-radius: 5px;
@@ -429,7 +515,7 @@ iframe{
 	}
 		.bb-word{
 			width: 50%;
-			color: #AAAAAA;
+			color: #EEEEEE;
 		}
 		.bb-char{
 			padding: 2px;
@@ -468,6 +554,7 @@ iframe{
 	}
 	.jjoriping{ width: 500px; }
 	.cw.jjoriping{ margin-top: -10px; width: 322px; }
+	.dg.jjoriping{ margin-left: -25.8em }
 		.jjoObj{ position: relative; }
 		.jjoEyeL{ top: 11px; left: 0px; }
 		.jjoNose{ top: 9px; left: 181px; }
@@ -558,15 +645,19 @@ iframe{
 	.rounds{
 		margin-top: -130px;
 		width: 990px;
-		margin: auto;
 		color: #FFFFFF;
 		text-align: center;
 		text-shadow: 0px 1px 1px #141414;
 	}
 	.cw.rounds{ margin-top: -380px; }
-	.painter.rounds{ margin-left: -1.5em !important;}
+	.dg.rounds{
+		margin-left: -5.0em;
+		width: 100% !important;
+		margin-top: -380px;
+	}
 		.rounds label{ margin: 0px 3px; }
 		.cw.rounds label{ cursor: pointer; }
+		.dg.rounds label{ cursor: default !important; }
 		.rounds-current{ color: #FFFF3B; font-size: 16px; }
 		.round-effect{ animation: RoundEffect 0.8s ease 1; }
 	.history-holder{
@@ -664,6 +755,12 @@ iframe{
 			margin-top: 0px;
 			height: 177px;
 			background-color: #DDFFDD;
+		}
+		.game-user-drawing{
+			animation: CurrentBlink 2s linear infinite;
+			margin-top: 0px;
+			height: 177px;
+			background-color: #9fd1f1;
 		}
 		.game-user-bomb{ border-color: #FF6666; }
 			.game-user-image{ margin: 3px 5px; width: 100px; height: 100px; }
@@ -960,12 +1057,473 @@ iframe{
 }
 @keyframes ScoreGoing{
 	0%		{ margin-top: -80px; font-size: 24px; opacity: 1; }
-	10%		{ margin-top: -90px; font-size: 30px; opacity: 0.9; }
+	10%		{ margin-top: -95px; font-size: 36px; opacity: 0.95; }
 	100%	{ margin-top: -25px; font-size: 20px; opacity: 0.1; }
+}
+#canvas {
+	background-color: #fff;
+}
+
+body,
+#Jungle,
+#Middle,
+#Bottom {
+  background-color: #0d1117 !important;
+  color: #e6e9f0 !important;
+}
+
+#Intro,
+#Loading {
+  background-color: rgba(8, 10, 16, 0.96) !important;
+  color: #e6e9f0 !important;
+}
+
+::selection {
+  background-color: #2c3f5c;
+  color: #ffffff;
+}
+
+* {
+  scrollbar-color: #37455c #141a24;
+  scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #141a24;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #37455c;
+  border-radius: 5px;
+  border: 2px solid #141a24;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #47597a;
+}
+
+#Top {
+  background-color: #0f1420 !important;
+  border-bottom: 1px solid #232d3d;
+}
+
+#Top .menu-btn {
+  background-color: #1b2330;
+  color: #dfe4ee;
+  box-shadow: none;
+  border-radius: 4px;
+}
+#Top .menu-btn:hover {
+  background-color: #232d3d;
+}
+#Top .menu-sub-btn {
+  color: #9aa4b8;
+}
+
+#Yell {
+  background-color: rgba(0, 0, 0, 0.82);
+  text-shadow: 0 1px 2px #000;
+}
+
+.kkutu-menu {
+  background-color: #0f1420;
+  border-bottom: 1px solid #232d3d;
+}
+
+.kkutu-menu button {
+  color: #eef1f8 !important;
+  box-shadow: none !important;
+  border-radius: 4px;
+  transition: filter 150ms ease, background-color 150ms ease;
+}
+.kkutu-menu button:hover {
+  filter: brightness(1.18);
+}
+.kkutu-menu .toggled {
+  color: #ffffff !important;
+  background-color: #33507a !important;
+  box-shadow: inset 0 0 0 1px #5c86c2 !important;
+}
+.kkutu-menu button::after {
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.12),
+    transparent
+  );
+}
+
+#HelpBtn        { background-color: #3a4152 !important; }
+#SettingBtn     { background-color: #414a5e !important; }
+#CommunityBtn   { background-color: #6a4f96 !important; }
+#SpectateBtn    { background-color: #61478c !important; }
+#SetRoomBtn     { background-color: #345a82 !important; }
+#NewRoomBtn     { background-color: #2f6fa8 !important; }
+#QuickRoomBtn   { background-color: #345a82 !important; }
+#ShopBtn        { background-color: #327a55 !important; }
+#DictionaryBtn  { background-color: #2f8f5e !important; }
+#InviteBtn      { background-color: #5a8f3a !important; }
+#PracticeBtn    { background-color: #8a7c3c !important; }
+#ReadyBtn       { background-color: #a8703a !important; }
+#StartBtn       { background-color: #b87a3a !important; }
+#ExitBtn        { background-color: #a8434a !important; }
+#ReplayBtn      { background-color: #6f8f3a !important; }
+#LeaderboardBtn { background-color: #a8557a !important; }
+
+.dialog {
+  background-color: #141a24;
+  color: #e6e9f0;
+  box-shadow: 0 0 0 1px #2a3547, 0 8px 24px rgba(0, 0, 0, 0.55);
+}
+
+.dialog-head {
+  background-color: #1b2330;
+  border-bottom: 1px solid #2a3547;
+}
+
+.dialog-bar label,
+.dialog-body {
+  color: #c3cbdb;
+}
+
+.dialog-bar input,
+.dialog-bar select {
+  background-color: #1b2330;
+  color: #e6e9f0;
+  border: 1px solid #2f3c52;
+}
+.dialog-bar input:focus,
+.dialog-bar select:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px #4f8cff;
+}
+
+.dialog .closeBtn {
+  background-color: #a8434a;
+}
+.dialog .closeBtn:hover {
+  background-color: #c15059;
 }
 
 #SettingDiag {
-	height: auto !important;
-	max-height: 90vh;
-	overflow-y: auto;
+  height: auto !important;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.Product,
+.RoomBox,
+.ChatBox,
+.ADBox,
+.UserListBox,
+.RoomListBox,
+.MeBox,
+.ShopBox {
+  background-color: #141a24 !important;
+  color: #e6e9f0 !important;
+  box-shadow: inset 0 0 0 1px #232d3d;
+}
+
+.product-title {
+  background-color: #1b2330;
+  color: #d7dce8;
+}
+.product-title i {
+  color: #dfe4ee;
+}
+
+.product-body {
+  background-color: #141a24;
+  color: #e6e9f0;
+}
+
+.users-item,
+.RoomListBox .rooms-item,
+.RoomBox .room-user,
+.RoomBox .rooms-create,
+#ResultDiag .result-board-item,
+.ChatBox .chat-item,
+.RoomBox .product-title,
+.GameBox .product-title {
+  background-color: #1b2330;
+  box-shadow: inset 0 0 0 1px #2a3547;
+}
+
+.users-item:hover,
+.RoomListBox .rooms-item:hover,
+.RoomBox .room-user:hover,
+.RoomBox .rooms-create:hover {
+  background-color: #232d3d;
+  transition: background-color 150ms ease;
+}
+
+.rooms-create {
+  background-color: #161d29 !important;
+}
+
+.rooms-number,
+.rooms-limit,
+.rooms-mode,
+.rooms-info,
+.rooms-lock {
+  color: #b7c0d3;
+}
+
+.rooms-gaming {
+  background-color: #3a2f45 !important;
+}
+.rooms-gaming:hover {
+  background-color: #473a55 !important;
+}
+
+.channel-1 { background-color: #a85050; }
+.channel-2 { background-color: #a8a850; }
+.channel-3 { background-color: #4a9a4a; }
+.channel-4 { background-color: #4a6ea8; }
+
+.team-0 { background-color: #2a3142 !important; }
+.team-1 { background-color: #a8434a !important; }
+.team-2 { background-color: #b8863a !important; }
+.team-3 { background-color: #5a8f3a !important; }
+.team-4 { background-color: #2f6fa8 !important; }
+.team-unable div { background-color: #2a3142 !important; }
+
+.room-user-title,
+.room-user-name,
+.room-user-stat,
+.room-user-ready,
+.room-user-team,
+.room-user-level {
+  color: #dfe4ee;
+}
+
+.GameBox {
+  background-image: none !important;
+  background-color: #10141d !important;
+  box-shadow: inset 0 0 0 1px #232d3d;
+}
+
+.GameBox .game-body,
+.GameBox .hints,
+.GameBox .game-user {
+  background-color: #161d29;
+}
+
+.GameBox .tools,
+.tools {
+  background-color: #161d29 !important;
+  border-color: #2a3547 !important;
+  box-shadow: none !important;
+}
+.palette {
+  background-color: #1b2330 !important;
+  border-color: #2a3547 !important;
+  box-shadow: none !important;
+}
+
+.game-user {
+  border-color: #2a3547 !important;
+  background-color: #1b2330;
+  color: #ecf1fa;
+}
+.game-user-current {
+  border-color: #4f8cff !important;
+  background-color: #1c3253;
+}
+.game-user-drawing {
+  border-color: #4f8cff !important;
+  background-color: #1c3253;
+}
+.game-user-bomb {
+  border-color: #d9636b !important;
+  background-color: #402328;
+}
+
+#themeis,
+#themeis-title,
+.history-item {
+  background-color: #1b2330;
+  box-shadow: inset 0 0 0 1px #2a3547;
+  color: #e6e9f0;
+}
+
+.history-theme,
+.word-theme,
+.word-m1-head,
+.word-m2-head,
+.word-m3-head,
+.cw-q-body,
+.cw-bar,
+.cw-cell,
+.sock-char,
+.bb-word,
+.bb-char,
+.chain,
+.rounds,
+.game-input,
+.chat-balloon,
+.chat-head,
+.chat-body,
+.chat-notice,
+.chat-stamp {
+  color: #e6e9f0;
+}
+
+.cw-bar:hover {
+  background-color: #232d3d;
+}
+.cw-bar.cw-open {
+  background-color: #2a3142;
+}
+
+.chat-item {
+  background-color: transparent;
+  border-bottom: 1px solid #1e2634;
+}
+.chat-notice {
+  background-color: #1b2330 !important;
+}
+.chat-notice .chat-head {
+  color: #6fa8ff !important;
+}
+.chat-head {
+  color: #8ea3c9 !important;
+}
+.chat-head:hover {
+  background-color: #1b2330;
+}
+
+.chat-body {
+  color: #e6e9f0 !important;
+}
+
+.chat-balloon h4 {
+  background-color: #1b2330;
+  color: #e6e9f0 !important;
+  border-color: #2a3547;
+}
+
+#ResultDiag .result-me,
+#ResultDiag .result-board-me {
+  background-color: #1b2330;
+  border-color: #2a3547 !important;
+}
+
+.result-board-rank,
+.result-board-level,
+.result-board-name,
+.result-board-score,
+.result-board-reward,
+.result-board-lvup,
+.result-me-score,
+.result-me-money,
+.result-me-level-body,
+.result-me-gauge,
+.result-me-score-text {
+  color: #e6e9f0;
+}
+
+#ranking thead {
+  background-color: #1b2330 !important;
+  color: #dfe4ee;
+}
+.ranking-me {
+  background-color: #232d3d !important;
+}
+.ranking-1 td:first-child { background-color: #4a3f1f !important; color: #f5da8a; }
+.ranking-2 td:first-child { background-color: #3a3f47 !important; color: #dfe4ee; }
+.ranking-3 td:first-child { background-color: #4a3220 !important; color: #e3ad84; }
+
+#KickVoteDiag {
+  background-color: #141a24;
+}
+
+#cf-dict,
+#cf-reward,
+#cf-cost,
+.category-filter.selected {
+  background-color: #1b2330;
+  color: #e4eaf4;
+  box-shadow: inset 0 0 0 1px #2a3547;
+}
+.dress-item {
+  background-color: #1b2330;
+  border-color: #2a3547 !important;
+}
+.dress-equipped {
+  border-color: #d9a34f !important;
+}
+.cf-tray-selected {
+  border-color: #4f8cff !important;
+}
+.category-filter:hover {
+  background-color: #232d3d;
+}
+#cf-dict {
+  color: #9aa4b8;
+}
+#cf-tray div {
+  background-color: #1b2330;
+}
+#cf-reward .cf-rew-item {
+  border-bottom: 1px dashed #2a3547;
+}
+.cf-composable {
+  background-color: #8a5e1f !important;
+}
+.purchase-not-enough {
+  color: #ff8d8d;
+}
+
+.MeBox {
+  background-color: #141a24 !important;
+}
+.my-stat,
+.my-level,
+.my-gauge,
+.my-okg,
+.my-okg .graph-bar,
+.my-gauge .graph-bar,
+.my-gauge-text {
+  color: #e7edf6;
+}
+.my-okg {
+  background-color: #1b2330;
+}
+.my-gauge {
+  background-color: #0f1420;
+}
+
+#canvas {
+  background-color: #0b0e14;
+}
+
+button,
+input,
+select,
+textarea {
+  color: #eef1f8;
+}
+
+input[type="text"],
+input[type="password"],
+input:not([type]),
+textarea {
+  background-color: #1b2330;
+  border: 1px solid #2f3c52;
+}
+input[type="text"]::placeholder,
+input:not([type])::placeholder,
+textarea::placeholder {
+  color: #6b7686;
+}
+
+button {
+  background-color: #1b2330;
+  box-shadow: inset 0 0 0 1px #2f3c52;
+  transition: background-color 150ms ease;
+}
+button:hover {
+  background-color: #263248;
 }

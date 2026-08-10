@@ -48,6 +48,11 @@ DB.ready = function(){
 			var j, o, s, t;
 			var res = [];
 			
+			if(!data){
+				// 모양을 채우지 못해 포기한 시도: 바로 다음 시도로 넘어간다.
+				setTimeout(doMining, 500);
+				return;
+			}
 			console.log(data.map.name, "\n  0 1 2 3 4 5 6 7");
 			for(i=0; i<8; i++){
 				s = i + " ";
@@ -60,7 +65,7 @@ DB.ready = function(){
 				}
 				console.log(s);
 			}
-			console.log("\007");
+			console.log("\x07");
 			for(i in data.map.queue){
 				s = data.map.queue[i];
 				t = data.board[`${s[0]},${s[1]}`];
@@ -71,13 +76,9 @@ DB.ready = function(){
 				res.push([ s[0], s[1], s[2], s[3], o.word ]);
 			}
 			console.log(res);
-			Prompt.get([ 'flush' ], function(err, _res){
-				if(_res.flush == "y"){
-					MC[data.map.name]++;
-					DB.kkutu_cw[LANG].insert([ 'map', data.map.name ], [ 'data', res.map(function(item){ return item.join(','); }).join('|') ]).on();
-				}
-				setTimeout(doMining, 500);
-			});
+			MC[data.map.name]++;
+			DB.kkutu_cw[LANG].insert([ 'map', data.map.name ], [ 'data', res.map(function(item){ return item.join(','); }).join('|') ]).on();
+			setTimeout(doMining, 500);
 		});
 	}
 };
@@ -183,25 +184,37 @@ var MAPS = [
 		queue: "1003 3102 6102 1304 6302 0402 3404 0602 3602 4703 0413 1012 1312 3012 3314 4114 4612 6312 6612 7113"
 	}
 ];
-var words = [ "성교", "음경", "지랄", "불알", "자위", "자지", "보지", "보장지", "개새끼", "성관계", "고자", "창녀" ];
+var words = [  ];
+
+var MAX_ATTEMPTS = 20; // 한 칸에 대해 이만큼 실패하면 포기
+var BAR_WIDTH = 30;
 
 function random(a, b){
 	// [a ~ b) 범위 정수
 	return a + Math.floor(Math.random() * (b - a));
 }
+function progressBar(cur, total){
+	var filled = Math.max(0, Math.min(BAR_WIDTH, Math.round(BAR_WIDTH * cur / total)));
+	var bar = "#".repeat(filled) + "-".repeat(BAR_WIDTH - filled);
+	return `[${bar}] ${cur}/${total}`;
+}
 function getMap(){
 	/* 희소 행렬 표기법
 		[ x, y, 세로?, 길이 ]
 	*/
-	var i, li, lv = 99999999;
+	var i, lv = 99999999;
+	var candidates = [];
 	
 	for(i in MAPS){
 		if(lv > MC[MAPS[i].name]){
-			li = i;
 			lv = MC[MAPS[i].name];
+			candidates = [ i ];
+		}else if(lv == MC[MAPS[i].name]){
+			candidates.push(i);
 		}
 	}
-	return MAPS[li];
+	// 카운트가 가장 낮은 맵들 중에서 무작위로 하나를 고른다 (같은 맵만 계속 뽑히는 것을 방지)
+	return MAPS[candidates[random(0, candidates.length)]];
 }
 function getBoard(lang){
 	var R = new Lizard.Tail();
@@ -212,6 +225,8 @@ function getBoard(lang){
 	var map = getMap();
 	var queue = map.queue.slice(0);
 	var regCache = {};
+	var totalSlots = map.queue.length;
+	var placedCount = 0;
 	
 	function process(){
 		var i, m = queue.shift();
@@ -269,7 +284,16 @@ function getBoard(lang){
 					p[m[2]]++;
 				}
 				words.push(obj.word);
+				placedCount++;
+				console.log(progressBar(placedCount, totalSlots));
 			}else{
+				m.attempts = (m.attempts || 0) + 1;
+				if(m.attempts > MAX_ATTEMPTS){
+					console.log(`[WARN] ${map.name} 모양을 채우지 못해 포기합니다.`);
+					console.log(progressBar(placedCount, totalSlots));
+					R.go(null);
+					return;
+				}
 				queue.push(m);
 				for(j in arg){
 					for(n in arg[j]){
@@ -283,6 +307,7 @@ function getBoard(lang){
 							p[m[2]]++;
 						}
 						words.splice(words.indexOf(n), 1);
+						placedCount = Math.max(0, placedCount - 1);
 					}
 				}
 			}

@@ -329,18 +329,23 @@ body{
 	border: 1px solid var(--kp-gray-300);
 }
 .kp-bulletin__bar{
-	background: var(--kp-gray-900);
-	padding: 8px 16px;
+	background: linear-gradient(90deg, var(--kp-green-deep), var(--kp-green));
+	padding: 10px 16px;
 	display: flex;
 	align-items: center;
-	gap: 6px;
+	gap: 8px;
 }
-.kp-bulletin__bar span{
-	width: 9px; height: 9px; border-radius: 50%; display: inline-block;
+.kp-bulletin__bar-icon{
+	font-size: 14px;
+	line-height: 1;
 }
-.kp-bulletin__bar span:nth-child(1){ background: var(--kp-gray-600); }
-.kp-bulletin__bar span:nth-child(2){ background: var(--kp-yellow); }
-.kp-bulletin__bar span:nth-child(3){ background: var(--kp-green); }
+.kp-bulletin__bar-label{
+	font-family: var(--kp-sans);
+	font-size: 13px;
+	font-weight: 700;
+	letter-spacing: 0.02em;
+	color: var(--kp-white);
+}
 .kp-bulletin__body{ background: var(--kp-white); }
 /* 패치노트 목록이 길어서 전체 페이지를 늘리지 않도록, 이 안에서만
    스크롤되게 높이를 제한. 페이지 자체는 스크롤 없이 한 화면에 들어옴 */

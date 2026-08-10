@@ -118,6 +118,11 @@ block Middle
 			+SettingOption('only-waiting', L('onlyWaiting'), "width: 200px;")
 			h4
 			+SettingOption('only-unlock', L('onlyUnlock'), "width: 200px;")
+		div.dialog-bar
+			h4 테마
+			select#theme-select(style='width: 100%;')
+				option(value='default') 티에프끄투 테마
+				option(value='black') 블랙 테마
 		div.dialog-bar.tail-button
 			button#setting-ok= L('save')
 			button#setting-server= L('changeServer')
